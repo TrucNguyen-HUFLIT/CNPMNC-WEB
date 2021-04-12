@@ -10524,7 +10524,7 @@ button,
     position: relative;
     flex: 0 0 280px;
     margin-top: -60px;
-    transition: all .2s
+    transition: all .2s;
 }
 
 
@@ -10791,7 +10791,7 @@ button,
 }
 
 .app-sidebar.sidebar-text-light .app-header__logo .logo-src {
-    background: url(assets/images/logo.png)
+    background: url(assets/img/logo.png)
 }
 
 .app-sidebar.sidebar-text-light .app-header__logo .hamburger-inner,
