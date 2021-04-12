@@ -26,7 +26,7 @@ namespace Web_BanXeMoTo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Data Source=QLMoTo.dbo"));
+            services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Server=DESKTOP-I7EOLFR\\SQLEXPRESS;Database=QLMoTo;Trusted_Connection=True;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +38,7 @@ namespace Web_BanXeMoTo
             }
             else
             {
-                app.UseExceptionHandler("/Manager");
+                app.UseExceptionHandler("/MauXe");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -53,7 +53,7 @@ namespace Web_BanXeMoTo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Manager}/{action=Index}/{id?}");
+                    pattern: "{controller=MauXe}/{action=Index}/{id?}");
             });
         }
     }
