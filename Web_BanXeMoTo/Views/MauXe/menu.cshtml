@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="app-sidebar sidebar-shadow">
+    <div class="scrollbar-sidebar">
+        <div class="app-sidebar__inner">
+            <ul class="vertical-nav-menu">
+                <li class="app-sidebar__heading">Dashboards</li>
+                <li>
+                    <p class="btn-active"> @Html.ActionLink("Dashboards", "Index")</p>
+
+                </li>
+                <li class="app-sidebar__heading">Quản lý</li>
+                <li>
+                    @Html.ActionLink("Quản lý Mẫu xe", "Create")
+                </li>
+                <li>
+                    @Html.ActionLink("Quản lý Hãng xe", "MauXe")
+                </li>
+                <li>
+                    @Html.ActionLink("Quản lý Giá", "MauXe")
+                </li>
+                <li>
+                    @Html.ActionLink("Quản lý Hóa đơn", "MauXe")
+                </li>
+                <li>
+                    @Html.ActionLink("Quản lý Nhân viên", "MauXe")
+                </li>
+                <li>
+                    @Html.ActionLink("Quản lý Bán hàng", "MauXe")
+                </li>
+                <li class="app-sidebar__heading">Danh sách</li>
+                <li>
+                    @Html.ActionLink("Danh sách Xe", "MauXe")
+                </li>
+                <li>
+                    @Html.ActionLink("Danh sách Khách hàng", "MauXe")
+                </li>
+                <li class="app-sidebar__heading">
+                    Thống kê
+                    <p class="btn-active">@Html.ActionLink("Thống kê doanh số", "MauXe")</p>
+</li>
+
+            </ul>
+        </div>
+    </div>
+</div>
