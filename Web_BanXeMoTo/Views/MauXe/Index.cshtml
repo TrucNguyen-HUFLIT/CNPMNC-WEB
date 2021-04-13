@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     Layout = "~/Views/Shared/_LayoutManager.cshtml";
 }
 @model Web_BanXeMoTo.Controllers.MauXeViewModel
@@ -18,11 +18,10 @@
     </div>
     <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
         <li class="nav-item">
-            <a asp-action="Index" class="nav-link active">
+            <a asp-action="Index" class="nav-link active ">
                 <span>Mẫu xe</span>
             </a>
         </li>
-
         <li class="nav-item">
             <a asp-action="Create" class="nav-link ">
                 <span>Thêm mẫu xe</span>
@@ -36,40 +35,104 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Controls Types</h5>
-                    <form asp-action="MauXe">
-                        <div class="position-relative form-group">
-                            <label for="exampleSelect" class="">Hãng xe</label>
-                            <select name="select" id="exampleSelect" class="form-control">
-                                @foreach (var item in Model.ListHang)
-                                {
-                                    <option>@item.TenHang</option>
-                                }
-                            </select>
-                        </div>
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label asp-for="mauXe.Idmau" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="khuyenMai.GiaTri" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="hang.TenHang" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="mauXe.TenXe" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="mauXe.GiaBan" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="mauXe.BaoHanh" class="control-label"></label>
+                                </th>
+                                @*<th>
+                                        <label asp-for="mauXe.MoTa" class="control-label"></label>
+                                    </th>*@
+                                <th>
+                                    <label asp-for="mauXe.HinhAnh1" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="mauXe.HinhAnh1" class="control-label"></label>
+                                </th>
+                                @*<th>
+                                        <label asp-for="mauXe.HinhAnh3" class="control-label"></label>
+                                    </th>*@
 
-                        <div class="form-group">
-                            <label asp-for="mauXe.GiaBan" class="control-label"></label>
-                            <input asp-for="mauXe.GiaBan" class="form-control" />
-                            <span asp-validation-for="mauXe.GiaBan" class="text-danger"></span>
-                        </div>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ListMauXe)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Idmau
+                                    </td>
+                                    <td>
+                                        @foreach (var khuyenmai in Model.ListKhuyenMai)
+                                        {
+                                            if (khuyenmai.Idkm == item.Idkm)
+                                            {
+                                                @khuyenmai.GiaTri
+                                                break;
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var hang in Model.ListHang)
+                                        {
+                                            if (hang.Idhang == item.Idhang)
+                                            {
+                                                @hang.TenHang
+                                                break;
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @item.TenXe
+                                    </td>
+                                    <td>
+                                        @item.GiaBan
+                                    </td>
+                                    <td>
+                                        @item.BaoHanh
+                                    </td>
+                                    @*<td>
+                                            @item.MoTa
+                                        </td>*@
+                                    <td>
+                                        <img src="@Url.Content(item.HinhAnh1)" width="50" height="30" />
+                                    </td>
+                                    <td>
+                                        <img src="@("~/img/" + @item.HinhAnh1)" asp-append-version="true" width="50" height="30" />
+                                    </td>
+                                    @*<td>
+                                            <img src="@("/img/" + @item.HinhAnh1)" width="50" height="30" />
+                                        </td>*@
 
-                        <div class="form-group">
-                            <label asp-for="mauXe.BaoHanh" class="control-label"></label>
-                            <input asp-for="mauXe.BaoHanh" class="form-control" />
-                            <span asp-validation-for="mauXe.BaoHanh" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="mauXe.MoTa" class="control-label"></label>
-                            <input asp-for="mauXe.MoTa" class="form-control" />
-                            <span asp-validation-for="mauXe.MoTa" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-primary" />
-                        </div>
-                    </form>
-
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Details</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <a asp-action="Edit" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Edit</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

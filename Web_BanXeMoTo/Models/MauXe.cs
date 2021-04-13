@@ -45,6 +45,7 @@ namespace Web_BanXeMoTo.Models
 
         [Display(Name = "Bảo hành")]
         [Required(ErrorMessage = "Không được bỏ trống")]
+        [Range(1,36)]
         public int BaoHanh { get; set; }
 
         [Display(Name = "Mô tả")]
@@ -55,10 +56,13 @@ namespace Web_BanXeMoTo.Models
         public virtual ICollection<DatLich> DatLiches { get; set; }
         public virtual ICollection<Xe> Xes { get; set; }
         [NotMapped]
+        [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UploadHinh1 { get; set; }
         [NotMapped]
+        [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UploadHinh2 { get; set; }
         [NotMapped]
+        [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UploadHinh3 { get; set; }
 
 
