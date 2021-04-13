@@ -38,7 +38,6 @@ namespace Web_BanXeMoTo.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MauXe mauXe)
         {
             if (ModelState.IsValid)
@@ -83,7 +82,6 @@ namespace Web_BanXeMoTo.Controllers
             return View(mauXe);
         }
 
-
         public MauXeViewModel Models()
         {
             var model = new MauXeViewModel();
@@ -95,10 +93,11 @@ namespace Web_BanXeMoTo.Controllers
     }
     public class MauXeViewModel
     {
+        public Hang hang { get; set; }
+        public KhuyenMai khuyenMai { get; set; }
         public MauXe mauXe { get; set; }
         public MauXe[] ListMauXe { get; set; }
         public Hang[] ListHang { get; set; }
-
         public KhuyenMai[] ListKhuyenMai { get; set; }
     }
 
