@@ -1,13 +1,9 @@
 ﻿@model Web_BanXeMoTo.Controllers.ViewModel
 
-
-
 @{
-    ViewData["Title"] = "Create";
-
+    ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_LayoutManager.cshtml";
 }
-
 
 <div class="app-main__inner">
     <div class="app-page-title">
@@ -27,28 +23,20 @@
                 <span>Mẫu xe</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a asp-action="Create" class="nav-link active">
-                <span>Thêm mẫu xe</span>
-            </a>
-
-
-        </li>
     </ul>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form asp-action="Create" enctype="multipart/form-data">
-                        <partial name="_FormEdit" model="Model" />
-                        <div class="form-group">
-                            <input type="submit" value="Thêm" class="btn btn-primary" />
-                        </div>
-                    </form>
-
+                    <div>
+                        <partial name="_ListDetails" model="Model"/>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <a asp-action="Edit" asp-route-id="@Model.mauXe.Idmau" class="btn btn-sm btn-outline-warning">Sửa</a>
+                        <a asp-action="Index" class="btn btn-sm btn-outline-secondary">Trở về</a>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
-

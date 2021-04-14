@@ -6,4 +6,3 @@
         document.getElementById("tab-content-1").style.display = 'none';
     }
 }
-
