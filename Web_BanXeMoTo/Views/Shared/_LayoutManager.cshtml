@@ -1,5 +1,4 @@
-﻿@model Web_BanXeMoTo.Controllers.ViewModel
-
+﻿
 <!doctype html>
 <html lang="en">
 <head>
@@ -104,15 +103,16 @@
                         <ul class="vertical-nav-menu">
                             <li class="app-sidebar__heading">Dashboards</li>
                             <li>
-                                <p class="btn-active"> @Html.ActionLink("Dashboards", "Index")</p>
+                                <p class="btn-active"> @Html.ActionLink("Dashboards", "Index", "MauXe")</p>
 
                             </li>
                             <li class="app-sidebar__heading">Quản lý</li>
                             <li>
-                                @Html.ActionLink("Quản lý Mẫu xe", "Index")
+
+                                @Html.ActionLink("Quản lý Mẫu xe", "Index", "MauXe")
                             </li>
                             <li>
-                                @Html.ActionLink("Quản lý Hãng xe", "MauXe")
+                                @Html.ActionLink("Quản lý Hãng xe", "Index", "Hang")
                             </li>
                             <li>
                                 @Html.ActionLink("Quản lý Giá", "MauXe")
@@ -121,17 +121,20 @@
                                 @Html.ActionLink("Quản lý Hóa đơn", "MauXe")
                             </li>
                             <li>
-                                @Html.ActionLink("Quản lý Nhân viên", "MauXe")
+                                @Html.ActionLink("Quản lý Nhân viên", "Index", "NhanVien")
                             </li>
                             <li>
                                 @Html.ActionLink("Quản lý Bán hàng", "MauXe")
                             </li>
+                            <li>
+                                @Html.ActionLink("Quản lý Đặt Lịch", "Index", "DatLiches")
+                            </li>
                             <li class="app-sidebar__heading">Danh sách</li>
                             <li>
-                                @Html.ActionLink("Danh sách Xe", "MauXe")
+                                @Html.ActionLink("Danh sách xe", "Index", "Xe")
                             </li>
                             <li>
-                                @Html.ActionLink("Danh sách Khách hàng", "MauXe")
+                                @Html.ActionLink("Danh sách Khách hàng", "Index", "Customer")
                             </li>
                             <li class="app-sidebar__heading">
                                 Thống kê
@@ -152,10 +155,7 @@
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
     <script type="text/javascript" src="~/js/main.js"></script>
+
 </body>
 
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
 

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Web_BanXeMoTo.Models;
 
 #nullable disable
 
@@ -27,12 +25,12 @@ namespace Web_BanXeMoTo.Models
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<KhuyenMai> KhuyenMais { get; set; }
         public virtual DbSet<LoaiKh> LoaiKhs { get; set; }
-        public virtual DbSet<Manager> Managers { get; set; }
+        //public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<MauXe> MauXes { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         public virtual DbSet<Xe> Xes { get; set; }
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -41,7 +39,6 @@ namespace Web_BanXeMoTo.Models
                 optionsBuilder.UseSqlServer("Server=DESKTOP-I7EOLFR\\SQLEXPRESS;Database=QLMoTo;Trusted_Connection=True;");
             }
         }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -279,45 +276,45 @@ namespace Web_BanXeMoTo.Models
                     .HasConstraintName("FK_LoaiKH_KhuyenMai");
             });
 
-            modelBuilder.Entity<Manager>(entity =>
-            {
-                entity.HasKey(e => e.Idad);
+            //modelBuilder.Entity<Manager>(entity =>
+            //{
+            //    entity.HasKey(e => e.Idad);
 
-                entity.ToTable("Manager");
+            //    entity.ToTable("Manager");
 
-                entity.Property(e => e.Idad)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDAd");
+            //    entity.Property(e => e.Idad)
+            //        .HasMaxLength(50)
+            //        .IsUnicode(false)
+            //        .HasColumnName("IDAd");
 
-                entity.Property(e => e.Cmnd)
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("CMND");
+            //    entity.Property(e => e.Cmnd)
+            //        .HasMaxLength(20)
+            //        .IsUnicode(false)
+            //        .HasColumnName("CMND");
 
-                entity.Property(e => e.DiaChi).HasMaxLength(100);
+            //    entity.Property(e => e.DiaChi).HasMaxLength(100);
 
-                entity.Property(e => e.DienThoai)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+            //    entity.Property(e => e.DienThoai)
+            //        .IsRequired()
+            //        .HasMaxLength(20)
+            //        .IsUnicode(false);
 
-                entity.Property(e => e.Idtk)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDTK");
+            //    entity.Property(e => e.Idtk)
+            //        .IsRequired()
+            //        .HasMaxLength(50)
+            //        .IsUnicode(false)
+            //        .HasColumnName("IDTK");
 
-                entity.Property(e => e.TenAd)
-                    .IsRequired()
-                    .HasMaxLength(100);
+            //    entity.Property(e => e.TenAd)
+            //        .IsRequired()
+            //        .HasMaxLength(100);
 
-                entity.HasOne(d => d.IdtkNavigation)
-                    .WithMany(p => p.Managers)
-                    .HasForeignKey(d => d.Idtk)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Manager_TaiKhoan");
-            });
+            //    entity.HasOne(d => d.IdtkNavigation)
+            //        .WithMany(p => p.Managers)
+            //        .HasForeignKey(d => d.Idtk)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK_Manager_TaiKhoan");
+            //});
 
             modelBuilder.Entity<MauXe>(entity =>
             {

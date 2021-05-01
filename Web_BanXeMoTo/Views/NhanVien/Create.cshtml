@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Web_BanXeMoTo.Controllers.ViewModelNV
+@{
+    ViewData["Title"] = "Create";
+
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý nhân viên
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link  ">
+                <span>Danh sách nhân viên</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link active ">
+                <span>Thêm nhân viên </span>
+            </a>
+
+
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="card-img ">
+                                <img src="@(Model.tknv.Avatar != null? Url.Content(Model.tknv.Avatar) :"/img/icon.png")" height="200" width="200" id="previewImg" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />
+                                @*<img src="@(Model.tknv.Avatar != null? Url.Content(Model.tknv.Avatar) :"/img/icon.png")"  id="output" height="200" width="200" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />*@
+                            </div>
+                            @*<img src="@("/img/"+Model.tknv.Avatar != null? Url.Content("/img/"+Model.tknv.Avatar) :"/img/icon.png")" height="200px" width="200px" id="previewImg" />*@
+                            @*@{ var src = Model.tknv?.Avatar != null ? Url.Content(Model.tknv.Avatar) : "icon.png";
+                src = "/img/" + src;
+                <img src="@src" asp-append-version="true" height="200" width="200" id="previewImg" />
+            }*@
+                        </div>
+                        @*<input asp-for="tknv.UpLoadAvt" accept="image/*"  onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])"/>*@
+
+                        <input asp-for="tknv.UpLoadAvt" accept="image/*" onchange="ChangeImage(this,'#previewImg')" />
+                        <div class="form-group">
+
+                            <label asp-for="tknv.Idnv" class="control-label"></label>
+                            <input asp-for="tknv.Idnv" class="form-control" />
+                            <span asp-validation-for="tknv.Idnv" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="tknv.Idtk" class="control-label"></label>
+                            <input asp-for="tknv.Idtk" class="form-control" />
+                            <span asp-validation-for="tknv.Idtk" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="tknv.Email" class="control-label"></label>
+                            <input asp-for="tknv.Email" class="form-control" />
+                            <span asp-validation-for="tknv.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="tknv.Pass" class="control-label"></label>
+                            <input asp-for="tknv.Pass" class="form-control" />
+                            <span asp-validation-for="tknv.Pass" class="text-danger"></span>
+                        </div>
+                        <partial name="_FormEdit" model="Model" />
+                        <div class="form-group">
+                            <input type="submit" value="Thêm" class="btn btn-primary" />
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/script.js"></script>

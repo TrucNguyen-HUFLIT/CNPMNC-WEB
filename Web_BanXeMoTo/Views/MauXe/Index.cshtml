@@ -36,34 +36,40 @@
                 <div class="card-body">
                     <table class="table table-hover table-sm">
                         <thead>
-                            <tr>
+                            <tr >
                                 <th>
                                     <label asp-for="mauXe.Idmau" class="control-label"></label>
                                 </th>
                                 <th>
-                                    <label asp-for="khuyenMai.GiaTri" class="control-label"></label>
-                                </th>
-                                <th>
-                                    <label asp-for="hang.TenHang" class="control-label"></label>
+                                    <label class="control-label">Hình</label>
                                 </th>
                                 <th>
                                     <label asp-for="mauXe.TenXe" class="control-label"></label>
                                 </th>
+
+                                <th>
+                                    <label asp-for="hang.TenHang" class="control-label"></label>
+                                </th>
+
                                 <th>
                                     <label asp-for="mauXe.GiaBan" class="control-label"></label>
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     <label asp-for="mauXe.BaoHanh" class="control-label"></label>
                                 </th>
-                                @*<th>
-                                        <label asp-for="mauXe.MoTa" class="control-label"></label>
-                                    </th>*@
-                                <th>
-                                    <label  class="control-label">Hình</label>
+                                <th class="text-center">
+                                    <label class="control-label">Khuyến mãi</label>
+                                </th>
+                                <th class="text-center">
+                                    <label class="control-label">Số lượng</label>
                                 </th>
                                 @*<th>
-                                        <label asp-for="mauXe.HinhAnh3" class="control-label"></label>
-                                    </th>*@
+            <label asp-for="mauXe.MoTa" class="control-label"></label>
+        </th>*@
+
+                                @*<th>
+            <label asp-for="mauXe.HinhAnh3" class="control-label"></label>
+        </th>*@
 
                                 <th></th>
                             </tr>
@@ -71,56 +77,62 @@
                         <tbody>
                             @foreach (var item in Model.ListMauXe)
                             {
-                                <tr>
-                                    <td>
-                                        @item.Idmau
-                                    </td>
-                                    <td>
-                                        @foreach (var khuyenmai in Model.ListKhuyenMai)
+                            <tr>
+                                <td>
+                                    @item.Idmau
+                                </td>
+                                <td>
+                                    <img src="@("/img/" + @item.HinhAnh1)" width="120" height="90" />
+                                </td>
+                                <td>
+                                    @item.TenXe
+                                </td>
+                                <td>
+                                    @foreach (var hang in Model.ListHang)
+                                    {
+                                        if (hang.Idhang == item.Idhang)
                                         {
-                                            if (khuyenmai.Idkm == item.Idkm)
+                                            @hang.TenHang
+                                            break;
+                                        }
+                                    }
+                                </td>
+
+                                <td >
+                                    @((int)@item.GiaBan) VNĐ
+                                </td>
+                                <td class="text-center">
+                                    @item.BaoHanh
+                                </td>
+                                <td class="text-center">
+                                    @foreach (var khuyenmai in Model.ListKhuyenMai)
+                                    {
+                                        if (khuyenmai.Idkm == item.Idkm)
+                                        {
+                                            @khuyenmai.GiaTri
+                                            break;
+                                        }
+                                    }%
+                                </td>
+                                <td class="text-center">
+                                    @*@{
+                                        int amount = 0;
+                                        @foreach (var mauxe in Model.ListXe)
+                                        {
+                                            if (mauxe.Idmau == item.Idmau)
                                             {
-                                                @khuyenmai.GiaTri
-                                                break;
+                                                amount++;
                                             }
                                         }
-                                    </td>
-                                    <td>
-                                        @foreach (var hang in Model.ListHang)
-                                        {
-                                            if (hang.Idhang == item.Idhang)
-                                            {
-                                                @hang.TenHang
-                                                break;
-                                            }
-                                        }
-                                    </td>
-                                    <td>
-                                        @item.TenXe
-                                    </td>
-                                    <td>
-                                        @item.GiaBan
-                                    </td>
-                                    <td>
-                                        @item.BaoHanh
-                                    </td>
-                                    @*<td>
-                                            @item.MoTa
-                                        </td>*@
-
-                                    @*<td>
-                                        <img src="@("~/img/" + @item.HinhAnh1)" asp-append-version="true" width="120" height="90" />
-                                    </td>*@
-                                    <td>
-                                            <img src="@("/img/" + @item.HinhAnh1)"  width="120" height="90" />
-                                        </td>
-
-                                    <td>
-                                        <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>
-                                        <a asp-action="Delete" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-danger">Xóa</a>
-                                        <a asp-action="Edit" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Sửa</a>
-                                    </td>
-                                </tr>
+                                        @amount
+                                    }*@
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-danger" hidden>Xóa</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Sửa</a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
@@ -130,3 +142,4 @@
     </div>
 
 </div>
+

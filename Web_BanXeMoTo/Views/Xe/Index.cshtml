@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Web_BanXeMoTo.Models.MauXe>
+
+@{
+
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="search" value="@ViewData["search"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Idmau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idkm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idhang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenXe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaBan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhAnh1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhAnh2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhAnh3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BaoHanh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idmau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idkm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idhang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenXe)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.GiaBan)*@
+
+                @((int)@item.GiaBan)
+            </td>
+            <td>
+                <p> <img src="@Url.Content("~/img/" + item.HinhAnh1)" height="100" width="100" /> </p>
+            </td>
+            <td>
+                <p> <img src="@Url.Content("~/img/" + item.HinhAnh2)" height="100" width="100" /> </p>
+            </td>
+            <td>
+                <p> <img src="@Url.Content("~/img/" + item.HinhAnh3)" height="100" width="100" /> </p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BaoHanh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

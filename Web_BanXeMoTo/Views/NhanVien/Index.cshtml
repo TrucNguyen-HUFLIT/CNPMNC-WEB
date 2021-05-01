@@ -1,0 +1,135 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+@model Web_BanXeMoTo.Controllers.ViewModelNV
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                    Quản lý nhân viên
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link active ">
+                <span>Danh sách nhân viên</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link ">
+                <span>Thêm nhân viên </span>
+            </a>
+
+
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label asp-for="nhanVien.Idnv" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="nhanVien.TenNv" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="nhanVien.DienThoai" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="nhanVien.DiaChi" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="nhanVien.Cmnd" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="taiKhoan.Email" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="taiKhoan.Type" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label class="control-label">Hình</label>
+                                </th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var nhanvien in Model.ListNhanVien)
+                            {
+                                <tr>
+                                    <td>
+                                        @nhanvien.Idnv
+                                    </td>
+                                    <td>
+                                        @nhanvien.TenNv
+                                    </td>
+                                    <td>
+                                        @nhanvien.DienThoai
+                                    </td>
+                                    <td>
+                                        @nhanvien.DiaChi
+                                    </td>
+                                    <td>
+                                        @nhanvien.Cmnd
+                                    </td>
+
+                                    <td>
+                                        @foreach (var taikhoan in Model.ListTaiKhoan)
+                                        {
+                                            if (taikhoan.Idtk == nhanvien.Idtk)
+                                            {
+                                                @taikhoan.Email
+
+                                                break;
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var taikhoan in Model.ListTaiKhoan)
+                                        {
+                                            if (taikhoan.Idtk == nhanvien.Idtk)
+                                            {
+                                                @taikhoan.Type
+
+                                                break;
+                                            }
+                                        }
+                                    </td>
+
+                                    @*<td>
+                                            <img src="@("~/img/" + @item.HinhAnh1)" asp-append-version="true" width="120" height="90" />
+                                        </td>*@
+                                    <td>
+                                        <img src="@("/img/"+ @nhanvien.Avatar)" width="80px" height="80px" style="border-radius:50%" />
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Detail" asp-route-id="@nhanvien.Idnv" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                                        <a asp-action="Edit"   asp-route-id="@nhanvien.Idnv" class="btn btn-sm btn-outline-warning">Sửa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

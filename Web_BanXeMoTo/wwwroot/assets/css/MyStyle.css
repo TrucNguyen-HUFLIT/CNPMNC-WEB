@@ -1,0 +1,210 @@
+﻿/**
+    ====================================================
+            Ghi đè code style.css của template
+    ====================================================
+*/
+
+.about-us {
+    min-height: 800px;
+}
+
+.productDetail__banner {
+    min-height: 500px;
+    background-image: url("../../img/Background/ProductDetailBG.png");
+}
+
+.discount-offer .dicount-offer-content h2 {
+    font-size: 60px;
+}
+
+.discount-offer .dicount-offer-content .campaign-timer p {
+    color: #fff;
+}
+
+.filtr-container .filtr-item {
+    box-shadow: 0 0 20px #00000020;
+    height:300px;
+}
+
+.blog__img {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.blog__img img{
+    width:100%;
+    line-height: 200px;
+    height: 100px;
+    margin: 40px 0;
+}
+
+.blog__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: #00d8ff;
+    opacity: 0.6;
+    transform: skewX(50deg) translateX(-140%);
+    transition: 0.5s;
+}
+.thumbnail{
+}
+
+.thumbnail:hover .blog__play {
+    opacity: 1;
+    transition-delay: 0.3s;
+}
+
+.thumbnail:hover .blog__overlay {
+    transform: skewX(30deg) translateX(-30%);
+}
+
+.single-package-item{
+    height:500px;
+}
+
+.single-package-item img{
+    height:200px;
+}
+/**
+    ====================================================
+            Style about product
+    ====================================================
+*/
+/************    ABOUT IMG & PRICE     **************/
+.about__imgPrice {
+    padding: 50px 0;
+}
+
+.about__imgPrice .imgPrice__container {
+    padding: 50px;
+    border: 3px solid #a94442;
+    border-radius: 10px;
+}
+
+.about__img{
+    box-shadow: 0 0 40px #00000020;
+    border-radius: 40px;
+    overflow: hidden;
+    height: 350px;
+    margin: 70px 25px;
+}
+
+.about__price {
+    overflow: hidden;
+/*    height: 350px;
+*/    margin: 50px;
+}
+
+.about__price .about__name{
+    padding-bottom: 30px;
+    font-weight: 700;
+    font-size: 50px;
+    text-align: left;
+    position: relative;
+    transition: all 0.6s linear;
+}
+
+.book-btn{
+    font-size: 20px;
+}
+
+.about__price button{
+    border: 3px solid #a94442;
+    background-color: #a94442;
+    border-color: #a94442;
+}
+
+.about__price button:hover{
+    border: 3px solid #a94442;
+    border-color: #a94442;
+    color: #a94442;
+}
+
+
+.about__price .line::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #a94442;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+}
+
+
+.about__price span{
+    font-size: 40px;
+    font-weight: 500;
+    color: #a94442;
+    display: block;
+    margin: 20px 0;
+}
+
+
+/**************    ABOUT DETAIL    *************/
+.about__detail{
+    margin:50px 0;
+    padding: 100px 0;
+    background: url(../../img/Background/ProductDetailBG02.png) no-repeat center fixed;
+    background-size: cover;
+}
+
+.about__detailDesc {
+    color: #fff;
+    padding: 50px;
+    text-align: center;
+    border: 5px solid #00d8ff;
+    border-radius: 10px;
+    background-color: rgba(77,78,84,1);
+}
+
+.about__detail h1{
+    padding-bottom: 50px;
+    color: #00d8ff;
+}
+
+.about__detail p{
+    color: #fff;
+    font-size: 24px;
+}
+
+/************    MORE IMG       ****************/
+.about__moreImg h3{
+    text-align: center;
+    font-size: 36px;
+    color: #00d8ff;
+}
+
+.about__moreImgPrice{
+    height: 250px;
+    text-align: center;
+    margin: 20px;
+    border: 3px solid #a94442;
+    border-radius: 10px;
+}
+
+.about__moreImgPrice h1{
+    font-size: 30px;
+    padding:30px 0;
+}
+.about__moreImgPrice span{
+    font-size:40px;
+    font-weight: 700;
+    display: block;
+    padding: 10px;
+}
+.about__moreImgPrice button:hover{
+    border: 3px solid #a94442;
+    border-color: #a94442;
+    color: #a94442;
+}
+.about__moreImgPrice button{
+    border: 3px solid #a94442;
+    background-color:#a94442;
+    border-color: #a94442;
+}

@@ -1,0 +1,88 @@
+﻿@model Web_BanXeMoTo.Models.KhachHang
+
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+
+}
+<div class="app-main__inner">
+    <h1>Edit</h1>
+
+    <h4>KhachHang</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Idkh" class="control-label"></label>
+                    <input asp-for="Idkh" class="form-control" />
+                    <span asp-validation-for="Idkh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Idtk" class="control-label"></label>
+                    <input asp-for="Idtk" class="form-control" />
+                    <span asp-validation-for="Idtk" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TenKh" class="control-label"></label>
+                    <input asp-for="TenKh" class="form-control" />
+                    <span asp-validation-for="TenKh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiaChi" class="control-label"></label>
+                    <input asp-for="DiaChi" class="form-control" />
+                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DienThoai" class="control-label"></label>
+                    <input asp-for="DienThoai" class="form-control" />
+                    <span asp-validation-for="DienThoai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdloaiKh" class="custom-control-label"></label>
+                    <select asp-for="IdloaiKh" class="form-control" asp-items="ViewBag.IdloaiKh">
+                        <option value="">Select</option>
+                    </select>
+                 </div>
+
+                @*</div>*@
+                @*<div class="form-group">
+                        <label asp-for="Image" class="control-label" id="previewImg"> </label>
+                        <input asp-for="Image" class="form-control" id="previewImg" />
+                        <img src="@Model.Avatar" alt="Alternate Text" id="previewImg" />
+                        <span asp-validation-for="Avatar" class="text-danger"></span>
+                    </div>*@
+                @*<div class="form-group" colspan="2">
+                        <input type="file" name="Image" onchange="ChangeImgage(this, document.getElementById('previewImg'))" />
+                    </div>*@
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input asp-for="Image" class="custom-file-input ">
+                        <label class="custom-file-label control-label">Choose file .... </label>
+                    </div>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+        <script>
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next(".custom-file-label").html(fileName);
+            });
+        </script>
+    
+
+</div>
