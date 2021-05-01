@@ -1,0 +1,79 @@
+﻿@model Web_BanXeMoTo.Models.MauXe
+@using Web_BanXeMoTo.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<!--about-us start -->
+<section id="home" class="about-us productDetail__banner">
+</section><!--/.about-us-->
+<!--about-us end -->
+
+<section class="about__imgPrice">
+    <div class="container imgPrice__container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="about__img">
+                    <img src="@("/img/" + Model.HinhAnh1)" alt="@Model.TenXe" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about__price">
+                    <h1 class="text-danger about__name line"> @Html.DisplayFor(model => model.Idhang)<br /> @Html.DisplayFor(model => model.TenXe)</h1>
+                    <h2>Giá bán chỉ từ: </h2>
+                    <span>@((int)Model.GiaBan) VNĐ</span>
+                    <button class="book-btn">Đặt lịch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about__detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="about__detailDesc">
+                    <h1>Đặc điểm: </h1>
+                    <p>
+                        @Html.DisplayFor(model => model.MoTa)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="about__moreImg">
+    <div class="container">
+        <h3>Các hình ảnh và màu sắc khác của xe: </h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="about__img">
+                    <img src="@("/img/" + Model.HinhAnh2)" alt="@Model.TenXe" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about__img">
+                    <img src="@("/img/" + Model.HinhAnh3)" alt="@Model.TenXe" />
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="about__moreImgPrice">
+                    <h1>Giá bán lẻ đề xuất: </h1>
+                    <span class="text-danger">@((int)Model.GiaBan) VNĐ</span>
+                    <button class="book-btn">Đặt lịch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

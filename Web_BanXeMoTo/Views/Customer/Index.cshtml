@@ -1,0 +1,105 @@
+﻿@*@model IEnumerable<Web_BanXeMoTo.Models.KhachHang>*@
+@model PaggingList<Web_BanXeMoTo.Models.KhachHang>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+
+<div class="app-main__inner">
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by name and Id: <input type="text" name="search" value="@ViewData["search"]" />
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["IDKH"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">ID Khach Hang </a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["IDTK"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">ID TAI KHOAN </a>
+                </th>
+                <th>
+                    Loai Khach Hang
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["Name"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name</a>
+                </th>
+                <th>
+                    Dia chi
+                </th>
+                <th>
+                    DienThoai
+                </th>
+                <th>
+                    Avat
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Idkh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Idtk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdloaiKhNavigation.TenLoaiKh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenKh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DienThoai)
+                    </td>
+                    <td>
+                        <img src="@Url.Content("~/img/"+item.Avatar)" alt="Alternate Text" />
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Idkh">Edit</a> |
+                        <a asp-action="Detail" asp-route-id="@item.Idkh">Detail</a>
+                        @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn-icon btn-icon-only btn btn-primary @prevDisabled">
+        Previous @(Model.PageIndex-1)
+    </a>
+    <label>@Model.PageIndex</label>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn-icon btn-icon-only btn btn-primary @nextDisabled">
+        Next @(Model.PageIndex+1)
+    </a>
+    <label>Total page: @Model.TotalPages</label>
+
+</div>
+
+
