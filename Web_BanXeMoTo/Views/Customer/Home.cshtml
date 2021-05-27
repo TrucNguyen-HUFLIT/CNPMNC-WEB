@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+
+@model Web_BanXeMoTo.Controllers.ViewModelKH
+<!-- Start slider -->
+<section id="aa-slider">
+    <div class="aa-slider-area">
+        <div id="sequence" class="seq">
+            <div class="seq-screen">
+                <ul class="seq-canvas">
+                    <!-- single slide item -->
+                    <li>
+                        <div class="seq-model">
+                            <img data-seq src="~/customer/images/slideShow/slideShow_home1.jpg" />
+                        </div>
+                    </li>
+                    <!-- single slide item -->
+                    <li>
+                        <div class="seq-model">
+                            <img data-seq src="~/customer/images/slideShow/slideShow_home2.jpg" />
+                        </div>
+                    </li>
+                    <!-- single slide item -->
+                    <li>
+                        <div class="seq-model">
+                            <img data-seq src="~/customer/images/slideShow/slideShow_home3.jpg" />
+                        </div>
+                    </li>
+                    <!-- single slide item -->
+                    <li>
+                        <div class="seq-model">
+                            <img data-seq src="~/customer/images/slideShow/slideShow_home4.jpg" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- slider navigation btn -->
+            <fieldset class="seq-nav" aria-controls="sequence" aria-label="Slider buttons">
+                <a type="button" class="seq-prev" aria-label="Previous"><span class="fa fa-angle-left"></span></a>
+                <a type="button" class="seq-next" aria-label="Next"><span class="fa fa-angle-right"></span></a>
+            </fieldset>
+        </div>
+    </div>
+</section>
+<!-- / slider -->
+<!-- Start Promo section -->
+<section id="aa-promo">
+    <div class="container">
+        <div class="aa-promo-area">
+            <div class="row">
+                <div class="aa-promo-right">
+                    @{
+                        int countHang = 0;
+
+                        @foreach (var hang in Model.ListHang)
+                        {
+                            if (countHang == 3)
+                                break;
+                            @foreach (var mau in Model.ListMauXe)
+                            {
+                                if (mau.Idhang == hang.Idhang)
+                                {
+                                    <div class="aa-single-promo-right">
+                                        <div class="aa-promo-banner img-rounded">
+                                            <img src="@("/img/" + mau.HinhAnh1)" alt="img">
+                                            <div class="aa-prom-content">
+                                                @*<span>Bán chạy</span>*@
+                                                <h4><a href="product.html">@Html.DisplayFor(model => hang.TenHang)</a></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    countHang++;
+                                    break;
+                                }
+                            }}
+                    }
+
+                    <div class="aa-single-promo-right">
+                        <div class="aa-promo-banner img-rounded">
+                            <img src="~/customer/images/brands/suzuki_GSX-R1000.jpg" alt="img">
+                            <div class="aa-prom-content">
+                                -->
+                                @*<span>Giảm 15%</span>*@
+                                <h4><a href="product.html">Xem thêm</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</section>
+<!-- / Promo section -->
+<!-- Products section -->
+<section id="aa-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="aa-product-area">
+                        <div class="aa-product-inner">
+                            <!-- start prduct navigation -->
+                            <h2 style="text-align: center; margin-bottom: 3px; margin-top: 5px;">Một vài sản phẩm</a></h2>
+                            <!-- Start men product category -->
+                            <div class="tab-pane fade in active" id="men">
+                                <ul class="aa-product-catg">
+                                    @{
+                                        int countMauXe = 0;
+                                        @foreach (var mau in Model.ListMauXe)
+                                        {
+                                            if (countMauXe == 5)
+                                                break;
+                                            <li>
+                                                <figure>
+                                                    <a class="aa-product-img" href="#"><img src="@("/img/" + mau.HinhAnh1)" width="350" height="250"></a>
+                                                    <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
+                                                    <figcaption>
+                                                        <h4 class="aa-product-title"><a href="#">@Html.DisplayFor(model => mau.TenXe)</a></h4>
+                                                        <span class="aa-product-price">@string.Format("{0:N0}", ((int)mau.GiaBan)) VNĐ</span>
+                                                        @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
+                                                    </figcaption>
+                                                </figure>
+                                                <!-- product badge -->
+                                                @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
+                                            </li>
+                                            countMauXe++;
+                                        }
+                                    }
+
+                                    <!-- start single product item -->
+                                <li>
+                                    <figure style="height: 300px">
+                                        <a class="aa-product-img" href="#"><img src="~/img/CB1000R_02.png" width="350" height="250"></a>
+                                        <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>Xem thêm</a>
+                                        <figcaption>
+                                            <h4 class="aa-product-title"><a href="#"></a></h4>
+                                            <span class="aa-product-price"></span>
+                                            @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
+                                        </figcaption>
+                                    </figure>
+                                    <!-- product badge -->
+                                    @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Products section -->
+<!-- Client Brand -->
+<section id="aa-client-brand">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-client-brand-area">
+                    <ul class="aa-client-brand-slider">
+                        <li><a href="#"><img src="~/customer/images/logo/logo_honda.jpg"></a></li>
+                        <li><a href="#"><img src="~/customer/images/logo/logo_yamaha.jpg"></a></li>
+                        <li><a href="#"><img src="~/customer/images/logo/logo_suzuki.jpg"></a></li>
+                        <li><a href="#"><img src="~/customer/images/logo/logo_ducati.jpg"></a></li>
+                        <li><a href="#"><img src="~/customer/images/logo/logo_KTM.jpg"></a></li>
+                        <li><a href="#"><img src="~/customer/images/logo/logo_kawasaki.jpg"></a></li>
+                        <li><a href="#"><img src="~/customer/images/logo/logo_BMW.jpg"></a></li>
+                        <li><a href="#"><img src="~/customer/images/logo/logo_goPro.jpg"></a></li>
+                        <li><a href="#"><img src="~/customer/images/logo/logo_motul.jpg"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Client Brand -->

@@ -55,10 +55,10 @@
                                     <label asp-for="nhanVien.Cmnd" class="control-label"></label>
                                 </th>
                                 <th>
-                                    <label asp-for="taiKhoan.Email" class="control-label"></label>
+                                    <label asp-for="nhanVien.Email" class="control-label"></label>
                                 </th>
                                 <th>
-                                    <label asp-for="taiKhoan.Type" class="control-label"></label>
+                                    <label asp-for="nhanVien.Idtype" class="control-label"></label>
                                 </th>
                                 <th>
                                     <label class="control-label">Hình</label>
@@ -88,22 +88,14 @@
                                     </td>
 
                                     <td>
-                                        @foreach (var taikhoan in Model.ListTaiKhoan)
-                                        {
-                                            if (taikhoan.Idtk == nhanvien.Idtk)
-                                            {
-                                                @taikhoan.Email
-
-                                                break;
-                                            }
-                                        }
+                                       @nhanvien.Email
                                     </td>
                                     <td>
-                                        @foreach (var taikhoan in Model.ListTaiKhoan)
+                                        @foreach (var nv in Model.ListType)
                                         {
-                                            if (taikhoan.Idtk == nhanvien.Idtk)
+                                            if (nv.Idtype == nhanvien.Idtype)
                                             {
-                                                @taikhoan.Type
+                                                @nv.Name
 
                                                 break;
                                             }
@@ -119,7 +111,8 @@
 
                                     <td>
                                         <a asp-action="Detail" asp-route-id="@nhanvien.Idnv" class="btn btn-sm btn-outline-info">Chi tiết</a>
-                                        <a asp-action="Edit"   asp-route-id="@nhanvien.Idnv" class="btn btn-sm btn-outline-warning">Sửa</a>
+                                        <a asp-action="Edit" asp-route-id="@nhanvien.Idnv" class="btn btn-sm btn-outline-warning">Sửa</a>
+                                        <a asp-action="Delete" asp-route-id="@nhanvien.Idnv" class="btn btn-sm btn-outline-danger">Xóa</a>
                                     </td>
                                 </tr>
                             }

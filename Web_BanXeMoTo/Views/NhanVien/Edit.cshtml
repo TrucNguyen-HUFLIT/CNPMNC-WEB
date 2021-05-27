@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
+﻿
 @model Web_BanXeMoTo.Controllers.ViewModelNV
 @{
     ViewData["Title"] = "Edit";
@@ -36,44 +33,62 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <div class="card-img ">
-                                @*<img src="@(Model.tknv.Avatar != null? Url.Content("/img/" +Model.tknv.Avatar) :"/img/icon.png")" height="200" width="200" id="previewImg" />*@
-                                @if (Model.tknv != null)
-                                {
-                                    <img src="@("~/img/" + Model.tknv.Avatar)" asp-append-version="true" height="200" width="200" id="previewImg" />
-                                }
-                                @*else
-                                {
-                                    <img src="/img/icon.png" asp-append-version="true" height="200" width="200" id="previewImg" />
-
-                                }*@
+                                @*<img src="@(Model.nhanVien.Avt != null? Url.Content(Model.nhanVien.Avt) :"/img/icon.png")" height="200" width="200" id="previewImg" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />*@
+                                <img src="@(Model.nhanVien != null? Url.Content("/img/"+Model.nhanVien.Avatar) :"/img/icon.png")" id="output" height="200" width="200" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />
                             </div>
+                        </div>
 
-                            @*<img src="@("/img/"+Model.tknv.Avatar != null? Url.Content("/img/"+Model.tknv.Avatar) :"/img/icon.png")" height="200px" width="200px" id="previewImg" />*@
-                            @*@{ var src = Model.tknv?.Avatar != null ? Url.Content(Model.tknv.Avatar) : "icon.png";
-            src = "/img/" + src;
-            <img src="@src" asp-append-version="true" height="200" width="200" id="previewImg" />
-        }*@
+
+                        <div class="form-group" >
+                            <label asp-for="nhanVien.Idnv" class="control-label"></label>
+                            <input asp-for="nhanVien.Idnv" class="form-control" readonly />
+                            <span asp-validation-for="nhanVien.Idnv" class="text-danger"></span>
                         </div>
-                        <input asp-for="tknv.UpLoadAvt" accept="image/*" onchange="ChangeImage(this,'#previewImg')" />
+
+
                         <div class="form-group">
-                            <label asp-for="tknv.Idnv" class="control-label"></label>
-                            <input asp-for="tknv.Idnv" class="form-control" readonly />
-                            <span asp-validation-for="tknv.Idnv" class="text-danger"></span>
+                            <label asp-for="nhanVien.Email" class="control-label"></label>
+                            <input asp-for="nhanVien.Email" class="form-control" />
+                            <span asp-validation-for="nhanVien.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="nhanVien.Pass" class="control-label"></label>
+                            <input asp-for="nhanVien.Pass" class="form-control" />
+                            <span asp-validation-for="nhanVien.Pass" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="nhanVien.TenNv" class="control-label"></label>
+                            <input asp-for="nhanVien.TenNv" class="form-control" />
+                            <span asp-validation-for="nhanVien.TenNv" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="nhanVien.DienThoai" class="control-label"></label>
+                            <input asp-for="nhanVien.DienThoai" class="form-control" />
+                            <span asp-validation-for="nhanVien.DienThoai" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="tknv.Idtk" class="control-label"></label>
-                            <input asp-for="tknv.Idtk" class="form-control" readonly />
-                            <span asp-validation-for="tknv.Idtk" class="text-danger"></span>
+                            <label asp-for="nhanVien.DiaChi" class="control-label"></label>
+                            <input asp-for="nhanVien.DiaChi" class="form-control" />
+                            <span asp-validation-for="nhanVien.DiaChi" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="tknv.Email" class="control-label"></label>
-                            <input asp-for="tknv.Email" class="form-control" readonly />
-                            <span asp-validation-for="tknv.Email" class="text-danger"></span>
+                            <label asp-for="nhanVien.Cmnd" class="control-label"></label>
+                            <input asp-for="nhanVien.Cmnd" class="form-control" />
+                            <span asp-validation-for="nhanVien.Cmnd" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <input asp-for="tknv.Pass" class="form-control" readonly hidden />
+                        <div class="position-relative form-group">
+                            <label asp-for="nhanVien.Idtype" class="control-label"></label>
+                            <select asp-for="nhanVien.Idtype" class="form-control">
+                                @foreach (var item in Model.ListType)
+                                {
+                                  <option value="@item.Idtype">@item.Name </option>
+                                }
+                            </select>
                         </div>
-                        <partial name="_FormEdit" model="Model" />
+                        @*<input asp-for="nhanVien.UpLoadAvt" accept="image/*" onchange="ChangeImage(this,'#previewImg')" />*@
+                        <input asp-for="nhanVien.UpLoadAvt" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" />
                         <div class="form-group">
                             <input type="submit" value="Lưu" class="btn btn-sm btn-outline-primary" />
 
@@ -87,4 +102,4 @@
         </div>
     </div>
 </div>
-<script src="~/js/script.js"></script>
+<script src="~/js/Script.js"></script>

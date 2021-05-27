@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Web_BanXeMoTo.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Web_BanXeMoTo
 {
@@ -26,8 +27,19 @@ namespace Web_BanXeMoTo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Server=DESKTOP-I7EOLFR\\SQLEXPRESS;Database=QLMoTo;Trusted_Connection=True;"));
+            services.AddDbContext<QLMTContext>(options => options.UseSqlServer("Server=DESKTOP-1N34MNR;Database=QLMT;Trusted_Connection=True;"));
             services.AddMvc();
+            services.AddSession();
+  
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+             .AddCookie(opt =>
+             {
+                 opt.LoginPath = "/";
+                 opt.AccessDeniedPath = "/login";
+                 opt.ReturnUrlParameter = "returnUrl";
+                 opt.LogoutPath = "/logout";
+                 opt.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,22 +51,24 @@ namespace Web_BanXeMoTo
             }
             else
             {
-                app.UseExceptionHandler("/MauXe");
+                app.UseExceptionHandler("");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=MauXe}/{action=Index}/{id?}");
+                    pattern: "{controller=Customer}/{action=Home}/{id?}");
             });
         }
     }

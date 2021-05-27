@@ -9,9 +9,9 @@ namespace Web_BanXeMoTo.Controllers
 {
     public class HangController : Controller
     {
-        private readonly QLMoToContext database;
+        private readonly QLMTContext database;
 
-        public HangController(QLMoToContext db)
+        public HangController(QLMTContext db)
         {
             database = db;
         }

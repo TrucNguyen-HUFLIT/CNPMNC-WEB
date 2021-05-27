@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+@model ReflectionIT.Mvc.Paging.PagingList<Web_BanXeMoTo.Models.KhachHang>
+@using ReflectionIT.Mvc.Paging
+
+
+   <link href="~/css/style.css" rel="stylesheet">
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+
+                   Quản lý khách hàng
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="Index" class="nav-link active ">
+                <span>Danh sách khách hàng</span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <form method="get" class="form-inline" style="float:right; margin-bottom:10px" >
+                        <input name="filter" class="form-control" placeholder="Search..."
+                               value="@Model.RouteValue["Filter"]" />
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+                        </button>
+                    </form>
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Idkh)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.TenKh)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DienThoai)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DiaChi)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Idtype)
+                                </th>
+                                <th>
+                                    <label class="control-label">Hình</label>
+                                </th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var khachhang in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.Idkh)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.TenKh)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.DienThoai)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.DiaChi)
+                                    </td>
+                                   
+
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(khachHang => khachhang.IdtypeNavigation.Name)
+                                    </td>
+
+                                    @*<td>
+                            <img src="@("~/img/" + @item.HinhAnh1)" asp-append-version="true" width="120" height="90" />
+                        </td>*@
+                                    <td>
+                                        <img src="@("/img/"+ @khachhang.Avatar)" width="80px" height="80px" style="border-radius:50%" />
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Detail" asp-route-id="@khachhang.Idkh" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                                        <a asp-action="Edit" asp-route-id="@khachhang.Idkh" class="btn btn-sm btn-outline-warning">Sửa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <nav aria-label="Suppliers navigation example" style="justify-content:center">
+                        @await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })
+                    </nav>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

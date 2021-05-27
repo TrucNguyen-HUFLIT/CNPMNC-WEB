@@ -11,10 +11,10 @@ namespace Web_BanXeMoTo.Controllers
 {
     public class MauXeController : Controller
     {
-        private readonly QLMoToContext database;
+        private readonly QLMTContext database;
         private readonly IWebHostEnvironment hostEnvironment;
         
-        public MauXeController(QLMoToContext db, IWebHostEnvironment hostEnvironment)
+        public MauXeController(QLMTContext db, IWebHostEnvironment hostEnvironment)
         {
             database = db;
             this.hostEnvironment = hostEnvironment;
@@ -22,6 +22,7 @@ namespace Web_BanXeMoTo.Controllers
         public IActionResult Index()
         {
             var model = new ViewModel();
+            model.ListLoaiXe = database.LoaiXes.ToArray();
             model.ListHang = database.Hangs.ToArray();
             model.ListMauXe = database.MauXes.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
@@ -31,6 +32,7 @@ namespace Web_BanXeMoTo.Controllers
         public IActionResult Create()
         {
             var model = new ViewModel();
+            model.ListLoaiXe = database.LoaiXes.ToArray();
             model.ListHang = database.Hangs.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
             return View(model);
@@ -41,6 +43,7 @@ namespace Web_BanXeMoTo.Controllers
         public async Task<IActionResult> Create(MauXe mauXe)
         {
             var model = new ViewModel();
+            model.ListLoaiXe = database.LoaiXes.ToArray();
             model.ListHang = database.Hangs.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
             if (ModelState.IsValid)
@@ -88,6 +91,7 @@ namespace Web_BanXeMoTo.Controllers
         public IActionResult Details(string id)
         {
             var model = new ViewModel();
+            model.ListLoaiXe = database.LoaiXes.ToArray();
             model.ListHang = database.Hangs.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
             model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
@@ -97,6 +101,7 @@ namespace Web_BanXeMoTo.Controllers
         public IActionResult Delete(string id)
         {
             var model = new ViewModel();
+            model.ListLoaiXe = database.LoaiXes.ToArray();
             model.ListHang = database.Hangs.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
             model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
@@ -115,6 +120,7 @@ namespace Web_BanXeMoTo.Controllers
         public IActionResult Edit(string id)
         {
             var model = new ViewModel();
+            model.ListLoaiXe = database.LoaiXes.ToArray();
             model.ListHang = database.Hangs.ToArray();
             model.ListMauXe = database.MauXes.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
@@ -194,6 +200,10 @@ namespace Web_BanXeMoTo.Controllers
         public Hang hang { get; set; }
         public KhuyenMai khuyenMai { get; set; }
         public MauXe mauXe { get; set; }
+
+        public LoaiXe loaiXe { get; set; }
+        public LoaiXe[] ListLoaiXe { get; set; }
+
         public MauXe[] ListMauXe { get; set; }
         public Hang[] ListHang { get; set; }
         public KhuyenMai[] ListKhuyenMai { get; set; }

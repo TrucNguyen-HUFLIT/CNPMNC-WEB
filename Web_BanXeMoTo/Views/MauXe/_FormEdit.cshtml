@@ -25,7 +25,15 @@
         }
     </select>
 </div>
-
+<div class="position-relative form-group">
+    <label asp-for="mauXe.IdloaiXe" class="control-label"></label>
+    <select asp-for="mauXe.IdloaiXe" class="form-control">
+        @foreach (var item in Model.ListLoaiXe)
+        {
+            <option value="@item.IdloaiXe">@item.TenLoaiXe</option>
+        }
+    </select>
+</div>
 <div class="form-group">
     <label asp-for="mauXe.GiaBan" class="control-label"></label>
     <input asp-for="mauXe.GiaBan" class="form-control" />
