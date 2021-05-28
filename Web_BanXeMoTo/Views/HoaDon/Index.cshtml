@@ -29,8 +29,6 @@
             <a asp-action="Create" class="nav-link ">
                 <span>Tạo hóa đơn</span>
             </a>
-
-
         </li>
     </ul>
     <div class="row">
@@ -86,14 +84,15 @@
 
                                                 if (item.Idhd == cthd.Idhd)
                                                 {
-                                                    amount += ((int)cthd.GiaBan * (int)((cthd.KhuyenMai != 0) ? cthd.KhuyenMai : 1) / 100);
+                                                    amount += (int)cthd.GiaBan * ((int)((cthd.KhuyenMai != 0) ? cthd.KhuyenMai / 100 : 1) );
                                                 }
                                             }
-                                            @amount
+                                            @string.Format("{0:N0}", ((Int64)@amount)) 
+
                                         } VNĐ
                                     </td>
                                     <td>
-                                        <a asp-action="Details"  asp-route-id="@item.Idhd" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                                        <a asp-action="Details" asp-route-id="@item.Idhd" class="btn btn-sm btn-outline-info">Chi tiết</a>
                                     </td>
                                 </tr>
                             }

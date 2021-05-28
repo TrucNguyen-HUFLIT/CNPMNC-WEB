@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7cHFZH8bzbCQUBNnxghtAigJYAT14SQPsjPqdq+gN8IpSmRwMZKj1j8VCFZzjQyoLIciCM3fkePfgyCmOyX/6Q==",
+  "dgSpecHash": "D6b04Y7iZIi5WfVUjRBK5Z7vf7TwacKLqXLACxnIKs2tMDcgCcFmj8TuBKnkxSBGSi+zL6m9IFyVX5sAnMIYzQ==",
   "success": true,
-  "projectFilePath": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
+  "projectFilePath": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\CNPM\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dell\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\mailkit\\2.11.1\\mailkit.2.11.1.nupkg.sha512",

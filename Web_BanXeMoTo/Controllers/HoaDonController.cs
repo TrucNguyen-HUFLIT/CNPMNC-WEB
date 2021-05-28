@@ -65,8 +65,6 @@ namespace Web_BanXeMoTo.Controllers
             var model = new HoaDonViewModel
             {
                 ChiTietHd = new ChiTietHd { Idhd = ID },
-                ListKhachHang = database.KhachHangs.ToArray(),
-                ListKhuyenMai = database.KhuyenMais.ToArray(),
                 ListMauXe = database.MauXes.ToArray(),
                 ListXe = database.Xes.ToArray(),
             };
@@ -74,19 +72,39 @@ namespace Web_BanXeMoTo.Controllers
             {
                 mauxe.IdhangNavigation = await database.Hangs.Where(x => x.Idhang == mauxe.Idhang).FirstOrDefaultAsync();
             }
-            foreach (var xe in model.ListXe)
-            {
-                xe.IdmauNavigation = await database.MauXes.Where(x => x.Idmau == xe.Idmau).FirstOrDefaultAsync();
-                xe.IdmauNavigation.IdkmNavigation = await database.KhuyenMais.Where(x => x.Idkm == xe.IdmauNavigation.Idkm).FirstOrDefaultAsync();
-            }
-
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult CTHD(ChiTietDg chiTietDg)
+        public async Task<IActionResult> CTHD(ChiTietHd chiTietHd)
         {
-            return View(chiTietDg);
+            try
+            {
+                var IdMau = await database.Xes.Where(x => x.Idxe == chiTietHd.Idxe).Select(x => x.Idmau).FirstOrDefaultAsync();
+                var MauXe = await database.MauXes.Where(x => x.Idmau == IdMau).Select(x => new { x.GiaBan, x.Idkm }).FirstOrDefaultAsync();
+                var KhuyenMai = await database.KhuyenMais.Where(x => x.Idkm == MauXe.Idkm).Select(x => x.GiaTri).FirstOrDefaultAsync();
+
+                chiTietHd.KhuyenMai = KhuyenMai;
+                chiTietHd.GiaBan = MauXe.GiaBan;
+                database.ChiTietHds.Add(chiTietHd);
+                await database.SaveChangesAsync();
+                return RedirectToAction("Details", new { ID = chiTietHd.Idhd });
+            }
+            catch
+            {
+                ViewBag.Error = "Xe đã có trong hóa đơn!";
+                var model = new HoaDonViewModel
+                {
+                    ChiTietHd = chiTietHd,
+                    ListMauXe = database.MauXes.ToArray(),
+                    ListXe = database.Xes.ToArray(),
+                };
+                foreach (var mauxe in model.ListMauXe)
+                {
+                    mauxe.IdhangNavigation = await database.Hangs.Where(x => x.Idhang == mauxe.Idhang).FirstOrDefaultAsync();
+                }
+                return View(model);
+            }
         }
 
         public string GetIDHD()
