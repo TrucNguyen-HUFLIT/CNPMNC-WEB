@@ -78,13 +78,13 @@
                                     </td>
                                     <td>
                                         @{
-                                            int amount = 0;
+                                            Int64 amount = 0;
                                             @foreach (var cthd in Model.ListChiTietHd)
                                             {
 
                                                 if (item.Idhd == cthd.Idhd)
                                                 {
-                                                    amount += (int)cthd.GiaBan * ((int)((cthd.KhuyenMai != 0) ? cthd.KhuyenMai / 100 : 1) );
+                                                    amount += (Int64)cthd.GiaBan * ((int)((cthd.KhuyenMai != 0) ? cthd.KhuyenMai / 100 : 1) );
                                                 }
                                             }
                                             @string.Format("{0:N0}", ((Int64)@amount)) 
