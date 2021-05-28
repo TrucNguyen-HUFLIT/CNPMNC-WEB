@@ -11,7 +11,7 @@ namespace Web_BanXeMoTo.Controllers
     public class XeController : Controller
     {
 
-        QLMoToContext db = new QLMoToContext();
+        QLMTContext db = new QLMTContext();
 
         //public  IActionResult Index()
         //{

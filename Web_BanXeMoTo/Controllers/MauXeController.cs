@@ -11,28 +11,35 @@ namespace Web_BanXeMoTo.Controllers
 {
     public class MauXeController : Controller
     {
-        private readonly QLMoToContext database;
+        private readonly QLMTContext database;
         private readonly IWebHostEnvironment hostEnvironment;
         
-        public MauXeController(QLMoToContext db, IWebHostEnvironment hostEnvironment)
+        public MauXeController(QLMTContext db, IWebHostEnvironment hostEnvironment)
         {
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
         public IActionResult Index()
         {
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListMauXe = database.MauXes.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
+            var model = new ViewModel
+            {
+                ListXe = database.Xes.ToArray(),
+                ListLoaiXe = database.LoaiXes.ToArray(),
+                ListHang = database.Hangs.ToArray(),
+                ListMauXe = database.MauXes.ToArray(),
+                ListKhuyenMai = database.KhuyenMais.ToArray()
+            };
             return View(model);
         }
 
         public IActionResult Create()
         {
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
+            var model = new ViewModel
+            {
+                ListLoaiXe = database.LoaiXes.ToArray(),
+                ListHang = database.Hangs.ToArray(),
+                ListKhuyenMai = database.KhuyenMais.ToArray()
+            };
             return View(model);
         }
 
@@ -40,9 +47,12 @@ namespace Web_BanXeMoTo.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(MauXe mauXe)
         {
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
+            var model = new ViewModel
+            {
+                ListLoaiXe = database.LoaiXes.ToArray(),
+                ListHang = database.Hangs.ToArray(),
+                ListKhuyenMai = database.KhuyenMais.ToArray()
+            };
             if (ModelState.IsValid)
             {
                 #region Save Image from wwwroot/img
@@ -55,9 +65,9 @@ namespace Web_BanXeMoTo.Controllers
                 string extension2 = Path.GetExtension(mauXe.UploadHinh2.FileName);
                 string extension3 = Path.GetExtension(mauXe.UploadHinh3.FileName);
 
-                mauXe.HinhAnh1 = fileName1 += extension1;
-                mauXe.HinhAnh2 = fileName2 += extension2;
-                mauXe.HinhAnh3 = fileName3 += extension3;
+                mauXe.HinhAnh1 = "/img/" + fileName1 + extension1;
+                mauXe.HinhAnh2 = "/img/" + fileName2 + extension2;
+                mauXe.HinhAnh3 = "/img/" + fileName3 + extension3;
 
                 string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
                 string path2 = Path.Combine(wwwRootPath + "/img/", fileName2);
@@ -87,19 +97,25 @@ namespace Web_BanXeMoTo.Controllers
 
         public IActionResult Details(string id)
         {
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
+            var model = new ViewModel
+            {
+                ListLoaiXe = database.LoaiXes.ToArray(),
+                ListHang = database.Hangs.ToArray(),
+                ListKhuyenMai = database.KhuyenMais.ToArray(),
+                mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault()
+            };
             return View(model);
         }
 
         public IActionResult Delete(string id)
         {
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
+            var model = new ViewModel
+            {
+                ListLoaiXe = database.LoaiXes.ToArray(),
+                ListHang = database.Hangs.ToArray(),
+                ListKhuyenMai = database.KhuyenMais.ToArray(),
+                mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault()
+            };
             return View(model);
         }
 
@@ -114,22 +130,27 @@ namespace Web_BanXeMoTo.Controllers
 
         public IActionResult Edit(string id)
         {
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListMauXe = database.MauXes.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
+            var model = new ViewModel
+            {
+                ListLoaiXe = database.LoaiXes.ToArray(),
+                ListHang = database.Hangs.ToArray(),
+                ListMauXe = database.MauXes.ToArray(),
+                ListKhuyenMai = database.KhuyenMais.ToArray(),
+                mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault()
+            };
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(string id,MauXe mauXe)
         {
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
-            if(mauXe.TenXe != null && mauXe.MoTa != null && mauXe.BaoHanh > 0 && mauXe.GiaBan >= 1000)
+            var model = new ViewModel
+            {
+                ListHang = database.Hangs.ToArray(),
+                ListKhuyenMai = database.KhuyenMais.ToArray(),
+                mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault()
+            };
+            if (mauXe.TenXe != null && mauXe.MoTa != null && mauXe.BaoHanh > 0 && mauXe.GiaBan >= 1000)
             {
                 model.mauXe.TenXe = mauXe.TenXe;
                 model.mauXe.Idhang = mauXe.Idhang;
@@ -147,7 +168,7 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     fileName1 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh1.FileName);
                     extension1 = Path.GetExtension(mauXe.UploadHinh1.FileName);
-                    model.mauXe.HinhAnh1 = fileName1 += extension1;
+                    model.mauXe.HinhAnh1 = "/img/" + fileName1 + extension1;
                     string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
                     using (var fileStream = new FileStream(path1, FileMode.Create))
                     {
@@ -158,7 +179,7 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     fileName2 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh2.FileName);
                     extension2 = Path.GetExtension(mauXe.UploadHinh2.FileName);
-                    model.mauXe.HinhAnh2 = fileName2 += extension2;
+                    model.mauXe.HinhAnh2 = "/img/" + fileName2 + extension2;
                     string path2 = Path.Combine(wwwRootPath + "/img/", fileName2);
                     using (var fileStream = new FileStream(path2, FileMode.Create))
                     {
@@ -170,7 +191,7 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     fileName3 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh3.FileName);
                     extension3 = Path.GetExtension(mauXe.UploadHinh3.FileName);
-                    model.mauXe.HinhAnh3 = fileName3 += extension3;
+                    model.mauXe.HinhAnh3 = "/img/" + fileName3 + extension3;
                     string path3 = Path.Combine(wwwRootPath + "/img/", fileName3);
                     using (var fileStream = new FileStream(path3, FileMode.Create))
                     {
@@ -194,6 +215,11 @@ namespace Web_BanXeMoTo.Controllers
         public Hang hang { get; set; }
         public KhuyenMai khuyenMai { get; set; }
         public MauXe mauXe { get; set; }
+
+        public LoaiXe loaiXe { get; set; }
+        public LoaiXe[] ListLoaiXe { get; set; }
+        public Xe[] ListXe { get; set; }
+
         public MauXe[] ListMauXe { get; set; }
         public Hang[] ListHang { get; set; }
         public KhuyenMai[] ListKhuyenMai { get; set; }

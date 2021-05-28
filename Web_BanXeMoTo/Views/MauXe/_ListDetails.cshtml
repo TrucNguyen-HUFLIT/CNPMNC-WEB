@@ -45,7 +45,7 @@
         <label asp-for="mauXe.GiaBan" class="control-label"></label>
     </dt>
     <dd class="col-sm-10">
-        @((int)@Model.mauXe.GiaBan) VNĐ
+        @string.Format("{0:N0}", ((int)@Model.mauXe.GiaBan)) VNĐ 
     </dd>
     <dt class="col-sm-2">
         <label asp-for="mauXe.BaoHanh" class="control-label"></label>
@@ -63,18 +63,18 @@
         <label asp-for="mauXe.HinhAnh1" class="control-label"></label>
     </dt>
     <dd class="col-sm-10">
-        <img src="@("~/img/" + Model.mauXe.HinhAnh1)" asp-append-version="true" width="200" height="150" />
+        <img src="@Model.mauXe.HinhAnh1" asp-append-version="true" width="200" height="150" />
     </dd>
     <dt class="col-sm-2">
         <label asp-for="mauXe.HinhAnh2" class="control-label"></label>
     </dt>
     <dd class="col-sm-10">
-        <img src="@("~/img/" + Model.mauXe.HinhAnh2)" asp-append-version="true" width="200" height="150" />
+        <img src="@Model.mauXe.HinhAnh2" asp-append-version="true" width="200" height="150" />
     </dd>
     <dt class="col-sm-2">
         <label asp-for="mauXe.HinhAnh3" class="control-label"></label>
     </dt>
     <dd class="col-sm-10">
-        <img src="@("~/img/" + Model.mauXe.HinhAnh3)" asp-append-version="true" width="200" height="150" />
+        <img src="@Model.mauXe.HinhAnh3" asp-append-version="true" width="200" height="150" />
     </dd>
 </dl>

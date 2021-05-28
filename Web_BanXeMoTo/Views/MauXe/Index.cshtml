@@ -82,7 +82,7 @@
                                     @item.Idmau
                                 </td>
                                 <td>
-                                    <img src="@("/img/" + @item.HinhAnh1)" width="120" height="90" />
+                                    <img src="@item.HinhAnh1" width="120" height="90" />
                                 </td>
                                 <td>
                                     @item.TenXe
@@ -115,7 +115,7 @@
                                     }%
                                 </td>
                                 <td class="text-center">
-                                    @*@{
+                                    @{
                                         int amount = 0;
                                         @foreach (var mauxe in Model.ListXe)
                                         {
@@ -125,7 +125,7 @@
                                             }
                                         }
                                         @amount
-                                    }*@
+                                    }
                                 </td>
                                 <td>
                                     <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>

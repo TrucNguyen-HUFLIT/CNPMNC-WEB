@@ -22,6 +22,8 @@ namespace Web_BanXeMoTo.Models
         [Display(Name = "Hãng")]
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string TenHang { get; set; }
+        [Display(Name ="Trạng thái ")]
+        public bool? TrangThai { get; set; }
 
         public virtual ICollection<MauXe> MauXes { get; set; }
 

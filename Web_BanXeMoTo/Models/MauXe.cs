@@ -12,7 +12,7 @@ namespace Web_BanXeMoTo.Models
     {
         public MauXe()
         {
-            DatLiches = new HashSet<DatLich>();
+            ChiTietDgs = new HashSet<ChiTietDg>();
             Xes = new HashSet<Xe>();
         }
 
@@ -25,6 +25,9 @@ namespace Web_BanXeMoTo.Models
 
         [Display(Name = "Hãng xe")]
         public string Idhang { get; set; }
+
+        [Display(Name = "Loại Xe")]
+        public string IdloaiXe { get; set; }
 
         [Display(Name = "Tên xe")]
         [Required(ErrorMessage = "Không được bỏ trống")]
@@ -52,10 +55,14 @@ namespace Web_BanXeMoTo.Models
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string MoTa { get; set; }
 
+        public bool? TrangThai { get; set; }
+
         public virtual Hang IdhangNavigation { get; set; }
         public virtual KhuyenMai IdkmNavigation { get; set; }
-        public virtual ICollection<DatLich> DatLiches { get; set; }
+        public virtual LoaiXe IdloaiXeNavigation { get; set; }
+        public virtual ICollection<ChiTietDg> ChiTietDgs { get; set; }
         public virtual ICollection<Xe> Xes { get; set; }
+
         [NotMapped]
         [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UploadHinh1 { get; set; }

@@ -9,14 +9,11 @@ namespace Web_BanXeMoTo.Models
     {
         public KhuyenMai()
         {
-            LoaiKhs = new HashSet<LoaiKh>();
             MauXes = new HashSet<MauXe>();
         }
 
         public string Idkm { get; set; }
         public int GiaTri { get; set; }
-
-        public virtual ICollection<LoaiKh> LoaiKhs { get; set; }
         public virtual ICollection<MauXe> MauXes { get; set; }
     }
 }

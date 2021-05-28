@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -12,12 +13,20 @@ namespace Web_BanXeMoTo.Models
             ChiTietHds = new HashSet<ChiTietHd>();
         }
 
+        [Display(Name = "ID hóa đơn")]
         public string Idhd { get; set; }
-        public string Idkh { get; set; }
+
+        [Display(Name = "ID khách hàng")]
+        public int Idkh { get; set; }
+
+        [Display(Name = "Ngày đặt")]
         public DateTime NgayDat { get; set; }
-        public decimal TongTien { get; set; }
+        [Display(Name = "Trạng thái")]
+        public string TrangThai { get; set; }
 
         public virtual KhachHang IdkhNavigation { get; set; }
+
+        [Display(Name = "Chi tiết hóa đơn")]
         public virtual ICollection<ChiTietHd> ChiTietHds { get; set; }
     }
 }
