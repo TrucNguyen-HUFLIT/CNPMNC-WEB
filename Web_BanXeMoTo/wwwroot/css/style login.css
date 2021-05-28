@@ -1,7 +1,7 @@
 .bg-gradient-primary {
     background-color: #4e73df;
     /* background-image: linear-gradient( 180deg,#66ff99 10%,#66ff99 100%);*/
-    background-image: url(/img/hinh-nen-moto-ducati.jpg);
+    background-image: url(/img/Background/login-background.png.jpg);
     background-size: cover;
 }
 .btn-primary {

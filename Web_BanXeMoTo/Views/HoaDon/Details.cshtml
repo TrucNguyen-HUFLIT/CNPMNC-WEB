@@ -19,13 +19,18 @@
     </div>
     <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
         <li class="nav-item">
-            <a asp-action="Index" class="nav-link active ">
+            <a asp-action="Index" class="nav-link active">
                 <span>Danh sách hóa đơn</span>
             </a>
         </li>
         <li class="nav-item">
             <a asp-action="Create" class="nav-link ">
                 <span>Tạo hóa đơn</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="CTHD" class="nav-link " asp-route-id="@Model.ChiTietHd.Idhd">
+                <span>Thêm xe</span>
             </a>
         </li>
     </ul>
@@ -63,10 +68,10 @@
                                         @Html.DisplayFor(modelItem => item.KhuyenMai)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.GiaBan)
+                                        @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                        @Html.ActionLink("Edit", "HoaDon", new { /* id=item.PrimaryKey */ })
                                     </td>
                                 </tr>
                             }
