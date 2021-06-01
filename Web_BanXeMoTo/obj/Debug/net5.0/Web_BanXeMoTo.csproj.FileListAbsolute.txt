@@ -2432,3 +2432,11 @@ F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.Views.pdb
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.csproj.CopyComplete
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.genruntimeconfig.cache
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\Products.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\ProductDetails.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\ProductsCart.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\JetBrains.Annotations.dll
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\X.PagedList.dll
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\X.PagedList.Mvc.Core.dll
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Login\Reset.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Xe\Create.cshtml.g.cs

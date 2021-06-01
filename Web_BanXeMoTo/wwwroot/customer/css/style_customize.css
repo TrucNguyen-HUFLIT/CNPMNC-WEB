@@ -1,0 +1,28 @@
+﻿#demo-1 > .simpleLens-container > .simpleLens-big-image-container > a > img {
+    width: 400px;
+    height: 250px;
+}
+#demo-1 > .simpleLens-container > .simpleLens-big-image-container > a > .simpleLens-mouse-cursor {
+    height: 15px !important;
+    width: 0px !important;
+}
+/*#demo-1 > .simpleLens-container > .simpleLens-big-image-container > .simpleLens-lens-element > image {
+    width: 200% !important;
+    height: 200% !important;
+    top: 0px !important;
+    left: 0px !important;
+}
+*/
+#searchString {
+    width: 250px;
+    height: 35px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+    background-color: white;
+    background-image: url(searchicon.png);
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 2px 4px 2px 8px;
+}

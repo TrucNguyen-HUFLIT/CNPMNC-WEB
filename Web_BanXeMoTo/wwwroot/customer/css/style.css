@@ -1117,9 +1117,9 @@ img {
 .aa-product-catg li {
   display: block;
   float: left;
-  height: 380px;
+  height: 330px;
   text-align: center;
-  margin: 0 0 20px 55px;
+  margin: 0 0 10px 55px;
   width: auto;
   position: relative;
   overflow: hidden;

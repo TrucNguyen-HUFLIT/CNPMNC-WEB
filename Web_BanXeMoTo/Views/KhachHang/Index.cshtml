@@ -1,19 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutManager.cshtml";
-}
-@model ReflectionIT.Mvc.Paging.PagingList<Web_BanXeMoTo.Models.KhachHang>
-@using ReflectionIT.Mvc.Paging
+﻿@{ ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
+
+@model Web_BanXeMoTo.Controllers.ViewModel
+
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
 
 
-   <link href="~/css/style.css" rel="stylesheet">
+
+<link href="~/css/style.css" rel="stylesheet">
 <div class="app-main__inner">
     <div class="app-page-title">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div>
 
-                   Quản lý khách hàng
+                    Quản lý khách hàng
 
                 </div>
             </div>
@@ -30,49 +32,45 @@
         <div class="col-md-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form method="get" class="form-inline" style="float:right; margin-bottom:10px" >
-                        <input name="filter" class="form-control" placeholder="Search..."
-                               value="@Model.RouteValue["Filter"]" />
-                        <button type="submit" class="btn btn-sm btn-primary">
-                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
-                        </button>
-                    </form>
+                    @using (Html.BeginForm("Index", "KhachHang", FormMethod.Get, new { @style = "float: right; width: 40%" }))
+                    {
+                        <input type="text" id="searchString" name="searchString" placeholder="Find by id or name">
+                        <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />}
+                    <br />
                     <table class="table table-hover table-sm">
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Idkh)
+                                    <label class="control-label">@Html.ActionLink("ID Khách hàng", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
                                 </th>
 
                                 <th>
-                                    @Html.DisplayNameFor(model => model.TenKh)
+                                    <label asp-for="khachHang.TenKh" class="control-label"></label>
                                 </th>
+
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DienThoai)
+                                    <label asp-for="khachHang.DienThoai" class="control-label"></label>
                                 </th>
+
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DiaChi)
+                                    <label asp-for="khachHang.DiaChi" class="control-label"></label>
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Email)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Idtype)
+                                <th class="text-center">
+                                    <label asp-for="khachHang.Email" class="control-label"></label>
                                 </th>
                                 <th>
                                     <label class="control-label">Hình</label>
                                 </th>
-
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var khachhang in Model)
+                            @foreach (var khachhang in Model.ListKhachHangs)
                             {
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(khachHang => khachhang.Idkh)
                                     </td>
+
                                     <td>
                                         @Html.DisplayFor(khachHang => khachhang.TenKh)
                                     </td>
@@ -82,34 +80,20 @@
                                     <td>
                                         @Html.DisplayFor(khachHang => khachhang.DiaChi)
                                     </td>
-                                   
-
                                     <td>
-                                        @Html.DisplayFor(khachHang => khachhang.Email)
+                                        @khachhang.Email
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(khachHang => khachhang.IdtypeNavigation.Name)
-                                    </td>
-
-                                    @*<td>
-                            <img src="@("~/img/" + @item.HinhAnh1)" asp-append-version="true" width="120" height="90" />
-                        </td>*@
-                                    <td>
-                                        <img src="@khachhang.Avatar" width="80px" height="80px" style="border-radius:50%" />
-                                    </td>
-
-                                    <td>
-                                        <a asp-action="Detail" asp-route-id="@khachhang.Idkh" class="btn btn-sm btn-outline-info">Chi tiết</a>
-                                        <a asp-action="Edit" asp-route-id="@khachhang.Idkh" class="btn btn-sm btn-outline-warning">Sửa</a>
+                                        <img src="@khachhang.Avatar" width="120" height="90" />
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+
+                    @Html.PagedListPager(Model.ListKhachHangs, page => Url.Action("Index",
+                                                           new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
                 </div>
-                <nav aria-label="Suppliers navigation example" style="justify-content:center">
-                        @await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })
-                    </nav>
             </div>
         </div>
     </div>

@@ -65,6 +65,10 @@
             "ReflectionIT.Mvc.Paging": {
               "target": "Package",
               "version": "[5.1.1, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[8.1.0, )"
             }
           },
           "imports": [
