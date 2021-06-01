@@ -47,11 +47,11 @@
                                     <br /> <br />    <br /> 
 
                                     <span class="text-danger" style="font-size:20px">@ViewBag.error</span>
-                                    <form class="user" asp-action="Login" enctype="multipart/form-data">
+                                    <form class="user" asp-action="Register" enctype="multipart/form-data">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <div class="form-group">
                                             <input asp-for="Email" class="form-control form-control-user"
-                                                   placeholder="Email.....">
+                                                   placeholder="Email">
                                             <span asp-validation-for="Email" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
@@ -69,7 +69,7 @@
                                         <hr>
                                     </form>
                                     <div class="text-center">
-                                        <a class="small" asp-controller="Login" asp-action="Login">Đăng nhập!</a>
+                                        <a class="small" asp-controller="Login" asp-action="Login">Bạn đã có tài khoản? Đăng nhập!</a>
                                     </div>
                                 </div>
                             </div>

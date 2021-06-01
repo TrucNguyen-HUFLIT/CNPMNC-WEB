@@ -1,7 +1,10 @@
 ﻿@{
+    ViewData["Title"] = "Danh sách mẫu xe";
     Layout = "~/Views/Shared/_LayoutManager.cshtml";
 }
 @model Web_BanXeMoTo.Controllers.ViewModel
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
 
 
 <div class="app-main__inner">
@@ -34,11 +37,17 @@
         <div class="col-md-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
+                    @using (Html.BeginForm("Index", "MauXe", FormMethod.Get, new { @style = "float: right; width: 40%" }))
+                    {
+                        <input type="text" id="searchString" name="searchString" placeholder="Find by name or email">
+                        <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />
+                        }
+                    <br />
                     <table class="table table-hover table-sm">
                         <thead>
-                            <tr >
+                            <tr>
                                 <th>
-                                    <label asp-for="mauXe.Idmau" class="control-label"></label>
+                                    <label class="control-label">@Html.ActionLink("ID Mẫu", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
                                 </th>
                                 <th>
                                     <label class="control-label">Hình</label>
@@ -63,79 +72,77 @@
                                 <th class="text-center">
                                     <label class="control-label">Số lượng</label>
                                 </th>
-                                @*<th>
-            <label asp-for="mauXe.MoTa" class="control-label"></label>
-        </th>*@
-
-                                @*<th>
-            <label asp-for="mauXe.HinhAnh3" class="control-label"></label>
-        </th>*@
-
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.ListMauXe)
+                            @foreach (var item in Model.ListMauXes)
                             {
-                            <tr>
-                                <td>
-                                    @item.Idmau
-                                </td>
-                                <td>
-                                    <img src="@item.HinhAnh1" width="120" height="90" />
-                                </td>
-                                <td>
-                                    @item.TenXe
-                                </td>
-                                <td>
-                                    @foreach (var hang in Model.ListHang)
-                                    {
-                                        if (hang.Idhang == item.Idhang)
+                                <tr>
+                                    <td>
+                                        @item.Idmau
+                                    </td>
+                                    <td>
+                                        <img src="@item.HinhAnh1" width="120" height="90" />
+                                    </td>
+                                    <td>
+                                        @item.TenXe
+                                    </td>
+                                    <td>
+                                        @foreach (var hang in Model.ListHang)
                                         {
-                                            @hang.TenHang
-                                            break;
-                                        }
-                                    }
-                                </td>
-
-                                <td>
-                                    @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ
-                                </td>
-                                <td class="text-center">
-                                    @item.BaoHanh
-                                </td>
-                                <td class="text-center">
-                                    @foreach (var khuyenmai in Model.ListKhuyenMai)
-                                    {
-                                        if (khuyenmai.Idkm == item.Idkm)
-                                        {
-                                            @khuyenmai.GiaTri
-                                            break;
-                                        }
-                                    }%
-                                </td>
-                                <td class="text-center">
-                                    @{
-                                        int amount = 0;
-                                        @foreach (var mauxe in Model.ListXe)
-                                        {
-                                            if (mauxe.Idmau == item.Idmau)
+                                            if (hang.Idhang == item.Idhang)
                                             {
-                                                amount++;
+                                                @hang.TenHang
+                                                break;
                                             }
                                         }
-                                        @amount
-                                    }
-                                </td>
-                                <td>
-                                    <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>
-                                    <a asp-action="Delete" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-danger" hidden>Xóa</a>
-                                    <a asp-action="Edit" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Sửa</a>
-                                </td>
-                            </tr>
+                                    </td>
+
+                                    <td>
+                                        @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ
+                                    </td>
+                                    <td class="text-center">
+                                        @item.BaoHanh
+                                    </td>
+                                    <td class="text-center">
+                                        @foreach (var khuyenmai in Model.ListKhuyenMai)
+                                        {
+                                            if (khuyenmai.Idkm == item.Idkm)
+                                            {
+                                                @khuyenmai.GiaTri
+                                                break;
+                                            }
+                                        }%
+                                    </td>
+                                    <td class="text-center">
+                                        @{
+                                            int amount = 0;
+                                            @foreach (var mauxe in Model.ListXe)
+                                            {
+                                                if (mauxe.Idmau == item.Idmau)
+                                                {
+                                                    amount++;
+                                                }
+                                            }
+                                            @amount
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-danger" hidden>Xóa</a>
+                                        <a asp-action="Edit" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Sửa</a>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
+                    <div style="margin-left: auto; margin-right: auto">
+                        @*Page @(Model.ListMauXes.PageCount < Model.ListMauXes.PageNumber ? 0 : Model.ListMauXes.PageNumber) of @Model.ListMauXes.PageCount*@
+
+                        @Html.PagedListPager(Model.ListMauXes, page => Url.Action("Index",
+                                                          new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                    </div>
                 </div>
             </div>
         </div>

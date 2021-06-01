@@ -1,0 +1,139 @@
+﻿@model Web_BanXeMoTo.Controllers.CustomerViewModel
+
+@{
+    ViewData["Title"] = "Thông tin xe " /*+ Model.MauXe.TenXe*/;
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<!-- product category -->
+<section id="aa-product-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-product-details-area">
+                    <div class="aa-product-details-content">
+                        <div class="row">
+                            <!-- Modal view slider -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="aa-product-view-slider">
+                                    <div id="demo-1" class="simpleLens-gallery-container">
+                                        <div class="simpleLens-container">
+                                            <div class="simpleLens-big-image-container">
+                                                <a data-lens-image="@Model.MauXe.HinhAnh1" class="simpleLens-lens-image">
+                                                    <img src="@Model.MauXe.HinhAnh1" class="simpleLens-big-image">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="simpleLens-thumbnails-container">
+                                            <a data-big-image="@Model.MauXe.HinhAnh1" data-lens-image="@Model.MauXe.HinhAnh1" class="simpleLens-thumbnail-wrapper" href="#">
+                                                <img src="@Model.MauXe.HinhAnh1" width="80" height="50">
+                                            </a>
+                                            <a data-big-image="@Model.MauXe.HinhAnh2" data-lens-image="@Model.MauXe.HinhAnh2" class="simpleLens-thumbnail-wrapper" href="#">
+                                                <img src="@Model.MauXe.HinhAnh2" width="80" height="50">
+                                            </a>
+                                            <a data-big-image="@Model.MauXe.HinhAnh3" data-lens-image="@Model.MauXe.HinhAnh3" class="simpleLens-thumbnail-wrapper" href="#">
+                                                <img src="@Model.MauXe.HinhAnh3" width="80" height="50">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal view content -->
+                            @if (Model.ListXe.Length == 0)
+                            {
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="aa-product-view-content" style="margin-left: 100px">
+                                        <h1>@Model.MauXe.TenXe</h1>
+                                        <br>
+                                        <div class="aa-price-block">
+                                            <span class="aa-product-view-price" style="color: red;">
+                                                @string.Format("{0:N0}", ((Int64)Model.MauXe.GiaBan)) VNĐ
+                                            </span>
+                                            <p class="aa-product-avilability">
+                                                Trạng thái: <span>Hết hàng</span>
+                                            </p>
+                                        </div>
+                                        <div class="aa-prod-view-bottom">
+                                            <a class="aa-add-to-cart-btn"><del>Đặt hàng</del></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="aa-product-view-content" style="margin-left: 100px">
+                                        <h1>@Model.MauXe.TenXe</h1>
+                                        <br>
+                                        <div class="aa-price-block">
+                                            <span class="aa-product-view-price" style="color: red;">
+                                                @string.Format("{0:N0}", ((Int64)Model.MauXe.GiaBan)) VNĐ
+                                            </span>
+                                            <p class="aa-product-avilability">
+                                                Trạng thái: <span>Còn hàng</span>
+                                            </p>
+                                        </div>
+                                        <div class="aa-prod-view-bottom">
+                                            <a class="aa-add-to-cart-btn" href="cart.html">Đặt hàng</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="aa-product-details-bottom">
+                        <h3><b>Thông tin sản phẩm</b></h3>
+                        @Model.MauXe.MoTa
+                    </div>
+                    @*<div class="aa-product-details-bottom">
+                            <h3><b>Thông tin sản phẩm</b></h3>
+                            <b>CBR1000RR SP2 chuẩn Phanh gấp, tăng tốc phản lực</b>
+                            <br>
+                            Tăng tốc nhanh và phanh gấp đây là tất cả những gì quan trọng và cần thiết nhất một khi bạn muốn đi nhanh trên đường đua. Honda Fireblade CBR1000RR SP và CBR1000RR SP2, được trang bị hệ thống điều khiển điện tử (S-EC) và các thiết bị điện tử tiên tiến được thiết kế cho mục đích đua thắng các giải Moto GP: Với động cơ 4 xi lanh thẳng hàng tuyệt vời cho ra một âm thanh hét lên kinh tơn và được treo vào một bộ khung hợp kim nhôm siêu nhẹ
+                            <br>
+                            <b>CBR1000RR SP2: Một động cơ hiệu suất cao được thiết kế để sử dụng trên đường đua.</b>
+                            <br>
+                            Dòng động cơ DOHC 4 xi-lanh của SP chia sẻ với mô-men xoắn CBR1000RR SP2 Fireblade và công suất tối đa, tương ứng 192 mã lực và 114 Nm, ngoài các thành phần magiê, ly hợp chống trượt và giảm thanh titan. Ngoài ra, nó còn được trang bị Quickshifter tiêu chuẩn để thay đổi bánh răng và hệ thống Downshift Hỗ trợ, cho phép bạn chuyển xuống bánh răng mà không ma sát nhờ chức năng autoblipper.
+                            QUẢN LÝ ĐIỆN NĂNG
+                            Đây là cách hệ thống lựa chọn chế độ chạy hành trình hoạt động trên SP và SP2. Cung cấp chương trình chạy cho động cơ, phản ứng khung gầm và hệ thống treo Öhlins được điều khiển điện tử và liên tục thích ứng trong khi lái xe. Hệ thống lựa chọn chế độ lái xe có 3 tùy chọn cài sẵn: Thể thao, tiết kiệm và An toàn, có thể lựa chọn thông qua một công tắc trên tay cầm bên trái.
+                        </div>*@
+                    <!-- Related product -->
+                    <div class="aa-product-related-item">
+                        <h3>Các sản phẩm nổi bật khác</h3>
+                        <ul class="aa-product-catg ">
+                            <!-- start single product item -->
+
+                            @{
+                                Random rnd = new Random();
+                                HashSet<int> numbers = new HashSet<int>();
+                                while (numbers.Count < 4)
+                                {
+                                    numbers.Add(rnd.Next(0, Model.ListMauXe.Length));
+                                }
+                                @foreach (var i in numbers)
+                                {
+                                    <li style="height:250px">
+                                        <figure>
+                                            <a class="aa-product-img" href="@Url.ActionLink("ProductDetails","Customer", new {id = Model.ListMauXe[i].Idmau })"><img src="@Model.ListMauXe[i].HinhAnh1" width="242" height="170"></a>
+                                            <a class="aa-add-card-btn" href="@Url.ActionLink("ProductDetails","Customer", new {id =  Model.ListMauXe[i].Idmau })"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
+                                            <figcaption>
+                                                <h4 class="aa-product-title"><a href="@Url.ActionLink("ProductDetails","Customer", new {id =  Model.ListMauXe[i].Idmau })">@Html.DisplayFor(model => Model.ListMauXe[i].TenXe)</a></h4>
+                                                <span class="aa-product-price">@string.Format("{0:N0}", ((Int64)Model.ListMauXe[i].GiaBan)) VNĐ</span>
+                                                @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
+                                            </figcaption>
+                                        </figure>
+                                        <!-- product badge -->
+                                        @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / product category -->

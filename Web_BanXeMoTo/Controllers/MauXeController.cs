@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_BanXeMoTo.Models;
+using X.PagedList;
 
 namespace Web_BanXeMoTo.Controllers
 {
@@ -19,18 +20,68 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var model = new ViewModel
+            //A ViewBag property provides the view with the current sort order, because this must be included in 
+            //  the paging links in order to keep the sort order the same while paging
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+
+            var ModelList = new List<MauXe>();
+
+            //ViewBag.CurrentFilter, provides the view with the current filter string.
+            //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.
+            if (searchString != null)
             {
-                ListXe = database.Xes.ToArray(),
-                ListLoaiXe = database.LoaiXes.ToArray(),
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
+            using (var context = new QLMTContext())
+            {
+                var model = from s in context.MauXes
+                            select s;
+                //Search and match data, if search string is not null or empty
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    model = model.Where(s => s.Idmau.Contains(searchString)
+                                           || s.Idhang.Contains(searchString)
+                                           || s.TenXe.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        ModelList = model.OrderByDescending(s => s.TenXe).ToList();
+                        break;
+
+                    default:
+                        ModelList = model.OrderBy(s => s.TenXe).ToList();
+                        break;
+                }
+
+            }
+            //indicates the size of list
+            int pageSize = 10;
+            //set page to one is there is no value, ??  is called the null-coalescing operator.
+            int pageNumber = (page ?? 1);
+            //return the Model data with paged
+            var modelv = new ViewModel
+            {
                 ListHang = database.Hangs.ToArray(),
-                ListMauXe = database.MauXes.ToArray(),
+                ListXe = database.Xes.ToArray(),
+                ListMauXes = ModelList.ToPagedList(pageNumber, pageSize),
                 ListKhuyenMai = database.KhuyenMais.ToArray()
             };
-            return View(model);
+            return View(modelv);
         }
+
 
         public IActionResult Create()
         {
@@ -214,15 +265,21 @@ namespace Web_BanXeMoTo.Controllers
         //Create Model to use Multiple Model in View
         public Hang hang { get; set; }
         public KhuyenMai khuyenMai { get; set; }
+        public KhachHang khachHang { get; set; }
         public MauXe mauXe { get; set; }
-
+        public Xe Xe { get; set; }
         public LoaiXe loaiXe { get; set; }
+
         public LoaiXe[] ListLoaiXe { get; set; }
         public Xe[] ListXe { get; set; }
-
         public MauXe[] ListMauXe { get; set; }
         public Hang[] ListHang { get; set; }
         public KhuyenMai[] ListKhuyenMai { get; set; }
+
+        public IPagedList<MauXe> ListMauXes { get; set; }
+        public IPagedList<Hang> ListHangs { get; set; }
+        public IPagedList<Xe> ListXes { get; set; }
+        public IPagedList<KhachHang> ListKhachHangs { get; set; }
     }
 
 }

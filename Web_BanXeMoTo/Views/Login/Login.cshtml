@@ -53,20 +53,21 @@
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <div class="form-group">
                                             <input asp-for="Email" class="form-control form-control-user"
-                                                   placeholder="Email......">
+                                                   placeholder="Email">
                                             <span asp-validation-for="Email" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <input asp-for="Password" class="form-control form-control-user"
                                                    placeholder="Mật khẩu">
                                             <span asp-validation-for="Password" class="text-danger"></span>
+                                            <a class="small" asp-controller="Login" asp-action="Reset">Quên mật khẩu?</a>
                                         </div>
 
-                                        <input type="submit" value="Login" class="btn btn-primary btn-user btn-block" />
+                                        <input type="submit" value="Đăng nhập" class="btn btn-primary btn-user btn-block" />
                                         <hr>
                                     </form>
                                     <div class="text-center">
-                                        <a class="small" asp-controller="Login" asp-action="Register">Đăng kí tài khoản ! </a>
+                                        <a class="small" asp-controller="Login" asp-action="Register">Đăng kí tài khoản!</a>
                                     </div>
                                 </div>
                             </div>

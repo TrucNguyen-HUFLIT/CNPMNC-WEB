@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "D6b04Y7iZIi5WfVUjRBK5Z7vf7TwacKLqXLACxnIKs2tMDcgCcFmj8TuBKnkxSBGSi+zL6m9IFyVX5sAnMIYzQ==",
+  "dgSpecHash": "+5yQHvqvesVl72lTv16tY+3oT2A04E8ZJq7CgXTe+aE3/V8O1z2Bngu3Le+1H3CJEaTE6tcNHycfxuBmLI67TA==",
   "success": true,
   "projectFilePath": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\CNPM\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dell\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\jetbrains.annotations\\2021.1.0\\jetbrains.annotations.2021.1.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\mailkit\\2.11.1\\mailkit.2.11.1.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.0\\microsoft.aspnetcore.authorization.5.0.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\microsoft.aspnetcore.components\\5.0.0\\microsoft.aspnetcore.components.5.0.0.nupkg.sha512",
@@ -144,7 +145,9 @@
     "C:\\Users\\Dell\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Dell\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\Dell\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\x.pagedlist\\8.1.0\\x.pagedlist.8.1.0.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\x.pagedlist.mvc.core\\8.1.0\\x.pagedlist.mvc.core.8.1.0.nupkg.sha512"
   ],
   "logs": []
 }

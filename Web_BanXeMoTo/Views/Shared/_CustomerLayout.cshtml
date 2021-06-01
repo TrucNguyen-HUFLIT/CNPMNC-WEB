@@ -31,6 +31,7 @@
 
     <!-- Main style sheet -->
     <link href="~/customer/css/style.css" rel="stylesheet">
+    <link href="~/customer/css/style_customize.css" rel="stylesheet">
 
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -106,7 +107,7 @@
                         <div class="aa-header-bottom-area">
                             <!-- logo  -->
                             <div class="aa-logo">
-                                <a href="index.html">
+                                <a href="@Url.ActionLink("Home","Customer")">
                                     <span class="logo"></span>
                                     <p>H2T <strong>Moto</strong> <span>Don't let dreams be just the dream</span></p>
                                 </a>
@@ -130,7 +131,7 @@
                             <!-- / cart box -->
                             <!-- search box -->
                             <div class="aa-cartbox" style="padding-right:30px">
-                                <a class="aa-cart-link" href="cart.html">
+                                <a class="aa-cart-link" href="@Url.ActionLink("ProductsCart","Customer")">
                                     <span class="fa fa-shopping-basket"></span>
                                     <span class="aa-cart-title">Giỏ hàng</span>
                                     <span class="aa-cart-notify">2</span>
@@ -159,7 +160,7 @@
                         <div class="navbar-collapse collapse">
                             <!-- Left nav -->
                             <ul class="nav navbar-nav">
-                                <li><a href="index.html">Trang chủ</a></li>
+                                <li><a href="@Url.ActionLink("Home","Customer")">Trang chủ</a></li>
                                 <li>
                                     <a href="product.html">Honda<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
@@ -252,8 +253,8 @@
                                     <div class="aa-footer-widget">
                                         <h3>Menu</h3>
                                         <ul class="aa-footer-nav">
-                                            <li><a href="index.html">Trang chủ</a></li>
-                                            <li><a href="product.html">Sản phẩm</a></li>
+                                            <li><a href="@Url.ActionLink("Home","Customer")">Trang chủ</a></li>
+                                            <li><a href="@Url.ActionLink("Products","Customer")">Sản phẩm</a></li>
                                             <li><a href="#">Về chúng tôi</a></li>
                                             <li><a href="#">Liên hệ</a></li>
                                         </ul>
@@ -263,9 +264,9 @@
                                     <div class="aa-footer-widget">
                                         <h3>Thông tin liên hệ</h3>
                                         <ul class="aa-footer-nav">
-                                            <li><a href="#">Địa chỉ: 828 Sư Vạn Hạnh, Phường 13, Q10, TP. Hồ Chí Minh</a></li>
-                                            <li><a href="#">Số điện thoại: 0933090455</a></li>
-                                            <li><a href="#">Giờ làm việc: 8g00 - 5g00 (T2-T7)</a></li>
+                                            <li><a >Địa chỉ: 828 Sư Vạn Hạnh, Phường 13, Q10, TP. Hồ Chí Minh</a></li>
+                                            <li><a >Số điện thoại: 0933090455</a></li>
+                                            <li><a >Giờ làm việc: 8g00 - 5g00 (T2-T7)</a></li>
                                         </ul>
                                     </div>
                                 </div>

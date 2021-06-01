@@ -4,7 +4,7 @@
 }
 
 
-@model Web_BanXeMoTo.Controllers.ViewModelKH
+@model Web_BanXeMoTo.Controllers.CustomerViewModel
 <!-- Start slider -->
 <section id="aa-slider">
     <div class="aa-slider-area">
@@ -83,7 +83,7 @@
                             <img src="~/customer/images/brands/suzuki_GSX-R1000.jpg" alt="img">
                             <div class="aa-prom-content">
                                 @*<span>Giảm 15%</span>*@
-                                <h4><a href="product.html"><u>Xem thêm</u></a></h4>
+                                <h4><a href="@Url.ActionLink("Products","Customer")"><u>Xem thêm</u></a></h4>
                             </div>
                         </div>
                     </div>
@@ -94,6 +94,7 @@
 </section>
 <!-- / Promo section -->
 <!-- Products section -->
+
 <section id="aa-product">
     <div class="container">
         <div class="row">
@@ -102,47 +103,50 @@
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
                             <!-- start prduct navigation -->
-                            <h2 style="text-align: center; margin-bottom: 3px; margin-top: 5px;">Một vài sản phẩm</a></h2>
+                            <hr />
+                            <h2 style="text-align: center; margin-bottom: 3px; margin-top: 5px;">Một vài sản phẩm</h2>
                             <!-- Start men product category -->
                             <div class="tab-pane fade in active" id="men">
                                 <ul class="aa-product-catg">
                                     @{
-                                        int countMauXe = 0;
-                                        @foreach (var mau in Model.ListMauXe)
+                                        Random rnd = new Random();
+                                        HashSet<int> numbers = new HashSet<int>();
+                                        while (numbers.Count < 5)
                                         {
-                                            if (countMauXe == 5)
-                                                break;
+                                            numbers.Add(rnd.Next(0, Model.ListMauXe.Length));
+                                        }
+                                        @foreach (var i in numbers)
+                                        {
                                             <li>
                                                 <figure>
-                                                    <a class="aa-product-img" href="#"><img src="@mau.HinhAnh1" width="350" height="250"></a>
-                                                    <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
+                                                    <a class="aa-product-img" href="@Url.ActionLink("ProductDetails","Customer", new {id = Model.ListMauXe[i].Idmau })"><img src="@Model.ListMauXe[i].HinhAnh1" width="350" height="250"></a>
+                                                    <a class="aa-add-card-btn" href="@Url.ActionLink("ProductDetails","Customer", new {id =  Model.ListMauXe[i].Idmau })"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
                                                     <figcaption>
-                                                        <h4 class="aa-product-title"><a href="#">@Html.DisplayFor(model => mau.TenXe)</a></h4>
-                                                        <span class="aa-product-price">@string.Format("{0:N0}", ((Int64)mau.GiaBan)) VNĐ</span>
+                                                        <h4 class="aa-product-title"><a href="@Url.ActionLink("ProductDetails","Customer", new {id =  Model.ListMauXe[i].Idmau })">@Html.DisplayFor(model => Model.ListMauXe[i].TenXe)</a></h4>
+                                                        <span class="aa-product-price">@string.Format("{0:N0}", ((Int64)Model.ListMauXe[i].GiaBan)) VNĐ</span>
                                                         @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
                                                     </figcaption>
                                                 </figure>
                                                 <!-- product badge -->
                                                 @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
                                             </li>
-                                            countMauXe++;
                                         }
                                     }
 
                                     <!-- start single product item -->
-                                <li>
-                                    <figure style="height: 300px">
-                                        <a class="aa-product-img" href="#"><img src="~/img/CB1000R_02.png" width="350" height="250"></a>
-                                        <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>Xem thêm</a>
-                                        <figcaption>
-                                            <h4 class="aa-product-title"><a href="#"></a></h4>
-                                            <span class="aa-product-price"></span>
-                                            @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
-                                        </figcaption>
-                                    </figure>
-                                    <!-- product badge -->
-                                    @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
-                                </li>
+                                    <li>
+                                        <figure style="height: 300px">
+                                            <a class="aa-product-img" href="@Url.ActionLink("Products","Customer")"><img src="~/img/Products/KTM-SUPER-ADVENTURE-03.png" width="350" height="250"></a>
+                                            <a class="aa-add-card-btn" href="@Url.ActionLink("Products","Customer")"><span class="fa fa-shopping-cart"></span>Xem thêm</a>
+                                            <figcaption>
+                                                <h4 class="aa-product-title"><a href="#"></a></h4>
+                                                <span class="aa-product-price"></span>
+                                                @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
+                                            </figcaption>
+                                        </figure>
+                                        <!-- product badge -->
+                                        @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
+                                    </li>
                                 </ul>
                             </div>
                         </div>

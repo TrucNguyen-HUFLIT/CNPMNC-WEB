@@ -104,61 +104,64 @@
                             <br />
                             <br />
                             <li>
-                                <p class="btn-active"> @Html.ActionLink("Thông tin cá nhân", "ProfileNhanVien", "Profile")</p>
-
+                                @Html.ActionLink("Thông tin cá nhân ", "ProfileNhanVien", "Profile")
                             </li>
                             <li class="app-sidebar__heading">Quản lý</li>
+
                             @if (Web_BanXeMoTo.Models.StaticAcc.TypeAcc == "admin")
                             {
-                            <li>
+                                <li>
 
-                                @Html.ActionLink("Quản lý Mẫu Xe", "Index", "MauXe")
-                            </li>
-                            <li>
-                                @Html.ActionLink("Quản lý Hãng xe", "Index", "Hang")
-                            </li>
-                            <li>
-                                @Html.ActionLink("Quản lý Giá", "Index", "MauXe")
-                            </li>
-
-                            <li>
-                                @Html.ActionLink("Quản lý Nhân viên", "Index", "NhanVien")
-                            </li>
-                            <li>
-                                @Html.ActionLink("Quản lý Hóa đơn ", "Index","HoaDon")
-                            </li>
-
-                             <li class="app-sidebar__heading">Danh sách</li>
-                              <li>
-                                @Html.ActionLink("Danh sách xe", "Index", "Xe")
-                            </li>
-                             <li class="app-sidebar__heading">Thống kê</li>
-                              <li>
-                                @Html.ActionLink("Thống kê doanh số", "", "")
-                            </li>
-
+                                    @Html.ActionLink("Quản lý Mẫu xe", "Index", "MauXe")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Quản lý Hãng xe", "Index", "Hang")
+                                </li>
+                                <li>
+                                    <a @*href="@Url.ActionLink("Index", "MauXe")"*@>Quản lý Giá</a>
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Quản lý Hóa đơn", "Index", "HoaDon")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Quản lý Nhân viên", "Index", "NhanVien")
+                                </li>
+                                <li class="app-sidebar__heading">Danh sách</li>
+                                <li>
+                                    @Html.ActionLink("Danh sách xe", "Index", "Xe")
+                                </li>
+                                <li class="app-sidebar__heading">
+                                    Thống kê
+                                </li>
+                                <li class="btn-active">
+                                    @Html.ActionLink("Thống kê doanh số", "MauXe")
+                                </li>
                             }
                             else if (Web_BanXeMoTo.Models.StaticAcc.TypeAcc == "staff")
                             {
+                                <li>
+                                    @Html.ActionLink("Quản lý Hóa đơn", "Index", "HoaDon")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Quản lý Bán hàng", "MauXe")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Quản lý Đặt Lịch", "Index", "DatLiches")
+                                </li>
+                                <li class="app-sidebar__heading">Danh sách</li>
+                                <li>
+                                    @Html.ActionLink("Danh sách xe", "Index", "Xe")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Danh sách Khách hàng", "Index", "KhachHang")
+                                </li>
+}
+
+
+
 
                             <li>
-                                @Html.ActionLink("Quản lý Hóa đơn", "Index", "HoaDon")
-                            </li>
-                             <li>
-                                @Html.ActionLink("Quản lý Đặt xe", "Index", "DatXe")
-                            </li>
-                            <li class="app-sidebar__heading">Danh sách</li>
-                            <li>
-                                @Html.ActionLink("Danh sách xe", "Index", "Xe")
-                            </li>
-                            <li>
-                                @Html.ActionLink("Danh sách Khách hàng", "Index", "KhachHang")
-                            </li>
-                            }
-                            <li>
-                                <a class="nav-item dropdown-item" asp-action="Logout" asp-controller="Login">
-                                   Đăng xuất
-                                </a>
+                                @Html.ActionLink("Đăng xuất", "Logout", "Login")
                             </li>
                         </ul>
                     </div>

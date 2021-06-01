@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_BanXeMoTo.Models;
+using X.PagedList;
 
 namespace Web_BanXeMoTo.Controllers
 {
@@ -23,23 +24,63 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
-        public async Task<IActionResult> Index(string filter, int page, string sortEx = "TenKh")
+        public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            //A ViewBag property provides the view with the current sort order, because this must be included in 
+            //  the paging links in order to keep the sort order the same while paging
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-            var qry = database.KhachHangs.AsNoTracking().OrderBy(p => p.TenKh)
-                .AsQueryable();
-            if (!string.IsNullOrWhiteSpace(filter))
+            ViewBag.Role = TempData["Role"];
+
+            var ModelList = new List<KhachHang>();
+
+            //ViewBag.CurrentFilter, provides the view with the current filter string.
+            //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.
+            if (searchString != null)
             {
-                qry = qry.Where(p => p.TenKh.Contains(filter));
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
+            using (var context = new QLMTContext())
+            {
+                var model = from s in context.KhachHangs
+                            select s;
+                //Search and match data, if search string is not null or empty
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    model = model.Where(s => s.Idkh.ToString().Contains(searchString)
+                                           || s.TenKh.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        ModelList = model.OrderByDescending(s => s.Idkh).ToList();
+                        break;
+
+                    default:
+                        ModelList = model.OrderBy(s => s.Idkh).ToList();
+                        break;
+                }
 
             }
-            var model = await PagingList.CreateAsync(qry, 15, page, sortEx, "TenKh");
-            model.RouteValue = new RouteValueDictionary {
-            { "filter", filter}
+            //indicates the size of list
+            int pageSize = 10;
+            //set page to one is there is no value, ??  is called the null-coalescing operator.
+            int pageNumber = (page ?? 1);
+            //return the Model data with paged
+            var modelv = new ViewModel
+            {
+                ListKhachHangs = ModelList.ToPagedList(pageNumber, pageSize)
             };
-            return View(model);
-            
-
+            return View(modelv);
         }
         public IActionResult Edit(int id)
         {
