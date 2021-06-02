@@ -2440,6 +2440,7 @@ F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\X.PagedList.Mvc.Core.dll
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Login\Reset.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Xe\Create.cshtml.g.cs
+<<<<<<< HEAD
 C:\Users\HP\Desktop\ĐỒ ÁN BÁO CÁO\CNPMNC-WEB-master\CNPMNC-WEB-master\Web_BanXeMoTo\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\HP\Desktop\ĐỒ ÁN BÁO CÁO\CNPMNC-WEB-master\CNPMNC-WEB-master\Web_BanXeMoTo\bin\Debug\net5.0\appsettings.json
 C:\Users\HP\Desktop\ĐỒ ÁN BÁO CÁO\CNPMNC-WEB-master\CNPMNC-WEB-master\Web_BanXeMoTo\bin\Debug\net5.0\Web_BanXeMoTo.exe
@@ -2907,3 +2908,5 @@ C:\Users\HP\Desktop\ĐỒ ÁN BÁO CÁO\CNPMNC-WEB-master\CNPMNC-WEB-master\Web_
 C:\Users\HP\Desktop\ĐỒ ÁN BÁO CÁO\CNPMNC-WEB-master\CNPMNC-WEB-master\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.pdb
 C:\Users\HP\Desktop\ĐỒ ÁN BÁO CÁO\CNPMNC-WEB-master\CNPMNC-WEB-master\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.genruntimeconfig.cache
 C:\Users\HP\Desktop\ĐỒ ÁN BÁO CÁO\CNPMNC-WEB-master\CNPMNC-WEB-master\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\GioHang\Index.cshtml.g.cs
+=======
+>>>>>>> master
