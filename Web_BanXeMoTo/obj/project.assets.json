@@ -7842,19 +7842,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dell\\.nuget\\packages\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
+      "projectUniqueName": "C:\\Users\\HP\\Desktop\\ĐỒ ÁN BÁO CÁO\\CNPMNC-WEB-master\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
+      "projectName": "Web_BanXeMoTo",
+      "projectPath": "C:\\Users\\HP\\Desktop\\ĐỒ ÁN BÁO CÁO\\CNPMNC-WEB-master\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HP\\Desktop\\ĐỒ ÁN BÁO CÁO\\CNPMNC-WEB-master\\Web_BanXeMoTo\\obj\\",
+=======
       "projectUniqueName": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\CNPM\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
       "projectName": "Web_BanXeMoTo",
       "projectPath": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\CNPM\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
       "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
       "outputPath": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\CNPM\\CNPMNC-WEB\\Web_BanXeMoTo\\obj\\",
+>>>>>>> master
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7929,7 +7941,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

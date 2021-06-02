@@ -27,7 +27,11 @@ namespace Web_BanXeMoTo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+<<<<<<< HEAD
+            services.AddDbContext<QLMTContext>(options => options.UseSqlServer("Server=DESKTOP-1N34MNR;Database=QLMT;Trusted_Connection=True;"));
+=======
             services.AddDbContext<QLMTContext>(options => options.UseSqlServer("Server=DESKTOP-I7EOLFR\\SQLEXPRESS;Database=QLMT;Trusted_Connection=True;"));
+>>>>>>> master
             services.AddMvc();
             services.AddSession();
   

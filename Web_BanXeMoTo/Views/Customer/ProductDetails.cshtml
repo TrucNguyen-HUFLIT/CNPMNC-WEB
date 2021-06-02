@@ -1,9 +1,14 @@
 ﻿@model Web_BanXeMoTo.Controllers.CustomerViewModel
 
+<<<<<<< HEAD
+@{ ViewData["Title"] = "Thông tin xe " /*+ Model.MauXe.TenXe*/;
+                Layout = "~/Views/Shared/_CustomerLayout.cshtml"; }
+=======
 @{
     ViewData["Title"] = "Thông tin xe " /*+ Model.MauXe.TenXe*/;
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
+>>>>>>> master
 
 <!-- product category -->
 <section id="aa-product-details">
@@ -13,6 +18,10 @@
                 <div class="aa-product-details-area">
                     <div class="aa-product-details-content">
                         <div class="row">
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
                             <!-- Modal view slider -->
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="aa-product-view-slider">
@@ -42,6 +51,48 @@
                             <!-- Modal view content -->
                             @if (Model.ListXe.Length == 0)
                             {
+<<<<<<< HEAD
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="aa-product-view-content" style="margin-left: 100px">
+                        <h1>@Model.MauXe.TenXe</h1>
+                        <br>
+                        <div class="aa-price-block">
+                            <span class="aa-product-view-price" style="color: red;">
+                                @string.Format("{0:N0}", ((Int64)Model.MauXe.GiaBan)) VNĐ
+                            </span>
+                            <p class="aa-product-avilability">
+                                Trạng thái: <span>Hết hàng</span>
+                            </p>
+                        </div>
+                        <div class="aa-prod-view-bottom">
+                            <a class="aa-add-to-cart-btn"><del>Đặt hàng</del></a>
+                        </div>
+                    </div>
+                </div> }
+                            else
+                            {
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="aa-product-view-content" style="margin-left: 100px">
+                        <h1>@Model.MauXe.TenXe</h1>
+                        <br>
+                        <div class="aa-price-block">
+                            <span class="aa-product-view-price" style="color: red;">
+                                @string.Format("{0:N0}", ((Int64)Model.MauXe.GiaBan)) VNĐ
+                            </span>
+                            <p class="aa-product-avilability">
+                                Trạng thái: <span>Còn hàng</span>
+                            </p>
+                        </div>
+                        <div class="aa-prod-view-bottom">
+                            <p> <button type="button" data-id="@Model.MauXe.Idmau" class="ajax-add aa-add-to-cart-btn"> Thêm vào giỏ hàng </button></p>
+                        </div>
+                    </div>
+                </div>}
+
+                        </div>
+
+
+=======
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="aa-product-view-content" style="margin-left: 100px">
                                         <h1>@Model.MauXe.TenXe</h1>
@@ -82,6 +133,7 @@
                             }
 
                         </div>
+>>>>>>> master
                     </div>
                     <div class="aa-product-details-bottom">
                         <h3><b>Thông tin sản phẩm</b></h3>
@@ -105,6 +157,29 @@
                         <ul class="aa-product-catg ">
                             <!-- start single product item -->
 
+<<<<<<< HEAD
+                            @{ Random rnd = new Random();
+                                            HashSet<int> numbers = new HashSet<int>();
+                                            while (numbers.Count < 4)
+                                            {
+                                                numbers.Add(rnd.Next(0, Model.ListMauXe.Length));
+                                            }
+                                @foreach (var i in numbers)
+                                {
+                    <li style="height:250px">
+                        <figure>
+                            <a class="aa-product-img" href="@Url.ActionLink("ProductDetails","Customer", new {id = Model.ListMauXe[i].Idmau })"><img src="@Model.ListMauXe[i].HinhAnh1" width="242" height="170"></a>
+                            <a class="aa-add-card-btn" href="@Url.ActionLink("ProductDetails","Customer", new {id =  Model.ListMauXe[i].Idmau })"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
+                            <figcaption>
+                                <h4 class="aa-product-title"><a href="@Url.ActionLink("ProductDetails","Customer", new {id =  Model.ListMauXe[i].Idmau })">@Html.DisplayFor(model => Model.ListMauXe[i].TenXe)</a></h4>
+                                <span class="aa-product-price">@string.Format("{0:N0}", ((Int64)Model.ListMauXe[i].GiaBan)) VNĐ</span>
+                                @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
+                            </figcaption>
+                        </figure>
+                        <!-- product badge -->
+                        @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
+                    </li>} }
+=======
                             @{
                                 Random rnd = new Random();
                                 HashSet<int> numbers = new HashSet<int>();
@@ -129,6 +204,7 @@
                                     </li>
                                 }
                             }
+>>>>>>> master
                         </ul>
                     </div>
                 </div>
@@ -137,3 +213,42 @@
     </div>
 </section>
 <!-- / product category -->
+<<<<<<< HEAD
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(document).ready(function () {
+            $(".ajax-add").click(function () {
+                $.ajax({
+                    url: "/GioHang/AddToCart",
+                    data: {
+                        id: $(this).data("id"),
+                        SoLuong: 1,
+                        type: "ajax"
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thêm giỏ hàng thành công',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                        console.log(data.soLuong);
+                        $("#cart_count").html(data.soLuong);
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thêm giỏ hàng thất bại',
+                            text: 'Vui lòng thử lại',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+=======
+>>>>>>> master
