@@ -36,11 +36,6 @@
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> master
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -80,7 +75,6 @@
                             <!-- / header top left -->
                             @if (Web_BanXeMoTo.Models.StaticAcc.Avatar == "")
                             {
-<<<<<<< HEAD
                 <div class="aa-header-top-right">
                     <ul class="aa-head-top-nav-right">
                         <li><a asp-action="Login" asp-controller="Login">Đăng nhập</a></li>
@@ -94,23 +88,6 @@
         <li><a asp-action="logout" asp-controller="Login">Đăng xuất</a></li>
     </ul>
 </div>}
-=======
-                                <div class="aa-header-top-right">
-                                    <ul class="aa-head-top-nav-right">
-                                        <li><a asp-action="Login" asp-controller="Login">Đăng nhập</a></li>
-                                        <li><a asp-action="Register" asp-controller="Login">Đăng ký</a></li>
-                                    </ul>
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="aa-header-top-right">
-                                    <ul class="aa-head-top-nav-right">
-                                        <li><a asp-action="logout" asp-controller="Login">Đăng xuất</a></li>
-                                    </ul>
-                                </div>
-                            }
->>>>>>> master
 
                         </div>
                     </div>
@@ -135,7 +112,6 @@
                             <!-- cart box -->
                             @if (Web_BanXeMoTo.Models.StaticAcc.Avatar != "")
                             {
-<<<<<<< HEAD
                 <div class="aa-cartbox">
                     <a class="aa-cart-link" asp-action="ProfileKhachHang" asp-controller="Profile">
                         <div>
@@ -146,24 +122,10 @@
                         </span>
                     </a>
                 </div>}
-=======
-                                <div class="aa-cartbox">
-                                    <a class="aa-cart-link" asp-action="ProfileKhachHang" asp-controller="Profile">
-                                        <div>
-                                            <img src="@Web_BanXeMoTo.Models.StaticAcc.Avatar" style=" border-radius: 50%; " height="40" width="40" />
-                                        </div>
-                                        <span class="aa-cart-title">
-                                            @Web_BanXeMoTo.Models.StaticAcc.Name
-                                        </span>
-                                    </a>
-                                </div>
-                            }
->>>>>>> master
 
                             <!-- / cart box -->
                             <!-- search box -->
                             <div class="aa-cartbox" style="padding-right:30px">
-<<<<<<< HEAD
                                 <a class="aa-cart-link" href="@Url.ActionLink("Index","GioHang")">
                                     <span class="fa fa-shopping-basket"></span>
                                     <span class="aa-cart-title">Giỏ hàng</span>
@@ -178,12 +140,6 @@
                                         }
                                         @data.Sum(c => c.SoLuong)
                                     </span>
-=======
-                                <a class="aa-cart-link" href="@Url.ActionLink("ProductsCart","Customer")">
-                                    <span class="fa fa-shopping-basket"></span>
-                                    <span class="aa-cart-title">Giỏ hàng</span>
-                                    <span class="aa-cart-notify">2</span>
->>>>>>> master
                                 </a>
                             </div>
                             <!-- / search box -->
@@ -313,15 +269,9 @@
                                     <div class="aa-footer-widget">
                                         <h3>Thông tin liên hệ</h3>
                                         <ul class="aa-footer-nav">
-<<<<<<< HEAD
                                             <li><a>Địa chỉ: 828 Sư Vạn Hạnh, Phường 13, Q10, TP. Hồ Chí Minh</a></li>
                                             <li><a>Số điện thoại: 0933090455</a></li>
                                             <li><a>Giờ làm việc: 8g00 - 5g00 (T2-T7)</a></li>
-=======
-                                            <li><a >Địa chỉ: 828 Sư Vạn Hạnh, Phường 13, Q10, TP. Hồ Chí Minh</a></li>
-                                            <li><a >Số điện thoại: 0933090455</a></li>
-                                            <li><a >Giờ làm việc: 8g00 - 5g00 (T2-T7)</a></li>
->>>>>>> master
                                         </ul>
                                     </div>
                                 </div>
@@ -407,11 +357,7 @@
     <!-- <script type="text/javascript" src="js/nouislider.js"></script> -->
     <!-- Custom js -->
     <script src="~/customer/js/custom.js"></script>
-<<<<<<< HEAD
     @RenderSection("scripts", required: false)
     @RenderSection("scriptsdelete", required: false)
-=======
-
->>>>>>> master
 </body>
 </html>

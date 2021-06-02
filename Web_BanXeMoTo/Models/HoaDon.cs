@@ -22,11 +22,24 @@ namespace Web_BanXeMoTo.Models
         [Display(Name = "Ngày đặt")]
         public DateTime NgayDat { get; set; }
         [Display(Name = "Trạng thái")]
-        public string TrangThai { get; set; }
+        public TrangThaiHoaDon TrangThai { get; set; }
 
         public virtual KhachHang IdkhNavigation { get; set; }
 
         [Display(Name = "Chi tiết hóa đơn")]
         public virtual ICollection<ChiTietHd> ChiTietHds { get; set; }
+
+    }
+    public enum TrangThaiHoaDon
+    {
+        [Display(Name = "Chưa xác nhận")]
+        ChuaXacNhan = 0,
+        [Display(Name = "Đã xác nhận")]
+        DaXacNhan = 1,
+        [Display(Name = "Đã thanh toán")]
+        DaThanhToan = 2,
+        [Display(Name = "Hoàn tất")]
+        HoanTat = 3,
+
     }
 }

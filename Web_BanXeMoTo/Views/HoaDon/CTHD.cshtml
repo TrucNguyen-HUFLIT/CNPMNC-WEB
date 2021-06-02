@@ -54,7 +54,7 @@
                                     <option disabled style="font-weight:900">- @mauXe.IdhangNavigation.TenHang :&emsp;@mauXe.TenXe </option>
                                     @foreach (var xe in Model.ListXe)
                                     {
-                                        if (mauXe.Idmau == xe.Idmau && xe.TrangThai == true)
+                                        if (mauXe.Idmau == xe.Idmau && xe.TrangThai == Web_BanXeMoTo.Models.TrangThaiXe.ConHang)
                                         {
                                             <option value="@xe.Idxe">&emsp;&emsp;+ @xe.Idxe</option>
                                         }

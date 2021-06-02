@@ -55,7 +55,7 @@ namespace Web_BanXeMoTo.Models
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string MoTa { get; set; }
 
-        public bool? TrangThai { get; set; }
+        public TrangThaiMauXe TrangThai { get; set; }
 
         public virtual Hang IdhangNavigation { get; set; }
         public virtual KhuyenMai IdkmNavigation { get; set; }
@@ -74,5 +74,12 @@ namespace Web_BanXeMoTo.Models
         public IFormFile UploadHinh3 { get; set; }
 
 
+    }
+    public enum TrangThaiMauXe
+    {
+        [Display(Name = "Còn hàng")]
+        ConHang = 0,
+        [Display(Name = "Hết hàng")]
+        HetHang = 1,
     }
 }

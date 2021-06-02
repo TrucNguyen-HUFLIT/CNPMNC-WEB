@@ -153,14 +153,7 @@
                                         }
                                     </td>
                                     <td class="text-center">
-                                        @if (item.TrangThai == true)
-                                        {
-                                            <p>Còn hàng</p>
-                                        }
-                                        else
-                                        {
-                                            <p>Đã bán</p>
-                                        }
+                                       @Html.DisplayFor(model=>item.TrangThai)
                                     </td>
                                     <td>
                                         <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>
