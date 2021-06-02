@@ -12,7 +12,7 @@ namespace Web_BanXeMoTo.Models
     {
         public MauXe()
         {
-            DatLiches = new HashSet<DatLich>();
+            ChiTietDgs = new HashSet<ChiTietDg>();
             Xes = new HashSet<Xe>();
         }
 
@@ -26,12 +26,16 @@ namespace Web_BanXeMoTo.Models
         [Display(Name = "Hãng xe")]
         public string Idhang { get; set; }
 
+        [Display(Name = "Loại Xe")]
+        public string IdloaiXe { get; set; }
+
         [Display(Name = "Tên xe")]
         [Required(ErrorMessage = "Không được bỏ trống")]
+
         public string TenXe { get; set; }
 
         [Display(Name = "Giá bán")]
-        [Required(ErrorMessage = "Không được bỏ trống")]
+        [Range(1000, 9999999999999999999, ErrorMessage = "Giá bán phải lớn hơn 1000VNĐ")]
         public decimal GiaBan { get; set; }
 
         [Display(Name = "Hình 1")]
@@ -44,17 +48,21 @@ namespace Web_BanXeMoTo.Models
         public string HinhAnh3 { get; set; }
 
         [Display(Name = "Bảo hành")]
-        [Required(ErrorMessage = "Không được bỏ trống")]
-        [Range(1,36)]
+        [Range(1, 36, ErrorMessage = "Chỉ bảo hành từ 1 đến 36 tháng")]
         public int BaoHanh { get; set; }
 
         [Display(Name = "Mô tả")]
+        [Required(ErrorMessage = "Không được bỏ trống")]
         public string MoTa { get; set; }
+
+        public bool? TrangThai { get; set; }
 
         public virtual Hang IdhangNavigation { get; set; }
         public virtual KhuyenMai IdkmNavigation { get; set; }
-        public virtual ICollection<DatLich> DatLiches { get; set; }
+        public virtual LoaiXe IdloaiXeNavigation { get; set; }
+        public virtual ICollection<ChiTietDg> ChiTietDgs { get; set; }
         public virtual ICollection<Xe> Xes { get; set; }
+
         [NotMapped]
         [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UploadHinh1 { get; set; }

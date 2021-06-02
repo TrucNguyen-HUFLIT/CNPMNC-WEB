@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\Desktop\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj": {}
+    "C:\\Users\\HP\\Desktop\\ĐỒ ÁN BÁO CÁO\\CNPMNC-WEB-master\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\Desktop\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj": {
+    "C:\\Users\\HP\\Desktop\\ĐỒ ÁN BÁO CÁO\\CNPMNC-WEB-master\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\ĐỒ ÁN BÁO CÁO\\CNPMNC-WEB-master\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
         "projectName": "Web_BanXeMoTo",
-        "projectPath": "C:\\Users\\HP\\Desktop\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
+        "projectPath": "C:\\Users\\HP\\Desktop\\ĐỒ ÁN BÁO CÁO\\CNPMNC-WEB-master\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\CNPMNC-WEB\\Web_BanXeMoTo\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\ĐỒ ÁN BÁO CÁO\\CNPMNC-WEB-master\\Web_BanXeMoTo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -43,13 +43,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "MailKit": {
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[2.11.1, )"
             },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.4, )"
             },
@@ -66,6 +64,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "ReflectionIT.Mvc.Paging": {
+              "target": "Package",
+              "version": "[5.1.1, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[8.1.0, )"
             }
           },
           "imports": [

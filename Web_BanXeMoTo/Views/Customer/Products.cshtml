@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+@model Web_BanXeMoTo.Controllers.CustomerViewModel
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
+
+<!-- product category -->
+<section id="aa-product-category">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                <div class="aa-product-catg-content">
+                    <div class="aa-product-catg-head">
+                        <div class="aa-product-catg-head-left">
+                            <h1 style="font-weight:bold">HONDA</h1>
+                            <hr style="border-top: 1px solid #b98e8e;" />
+                            <form action="" class="aa-sort-form">
+                                <label for="">Sắp xếp theo : </label>
+                                <div class="aa-prod-view-bottom">
+                                    @Html.ActionLink("Giá tăng dần", "Products", new { sortOrder = "" }, new { @class = "aa-add-to-cart-btn", @style = "width: 150px; padding: 5px;" })
+                                    @Html.ActionLink("Giá giảm dần", "Products", new { sortOrder = "name_desc" }, new { @class = "aa-add-to-cart-btn", @style = "width: 150px; padding: 5px;" })
+                                </div>
+                            </form>
+                            <div style="float:right;margin-left: 160px;margin-top: 22px;">
+
+                                @using (Html.BeginForm("Products", "Customer", FormMethod.Get, new { }))
+                                {
+                                    <div class="aa-prod-view-bottom">
+                                        <input type="text" id="searchString" name="searchString" placeholder="Tìm kiếm">
+                                        <input type="submit" value="Search" class="aa-add-to-cart-btn" style="width: 100px; padding: 5px;" />
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="aa-product-catg-body">
+                        <ul class="aa-product-catg">
+                            <!-- start single product item -->
+                            @foreach (var mauXe in Model.ListMauXes)
+                            {
+                                <li style="height:300px">
+                                    <figure>
+                                        <a class="aa-product-img" href="@Url.ActionLink("ProductDetails","Customer", new {id = mauXe.Idmau })"><img src="@mauXe.HinhAnh1" width="260" height="180"></a>
+                                        <a class="aa-add-card-btn" href="@Url.ActionLink("ProductDetails","Customer", new {id =  mauXe.Idmau })" style="padding: 8px 0px;"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
+                                        <figcaption>
+                                            <h4 class="aa-product-title"><a href="@Url.ActionLink("ProductDetails","Customer", new {id =  mauXe.Idmau })">@Html.DisplayFor(model => mauXe.TenXe)</a></h4>
+                                            <span class="aa-product-price">@string.Format("{0:N0}", ((Int64)mauXe.GiaBan)) VNĐ</span>
+                                            @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
+                                        </figcaption>
+                                    </figure>
+                                    <!-- product badge -->
+                                    @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
+                                </li>
+                            }
+                            <!-- start single product item -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+                <aside class="aa-sidebar">
+                    <!-- Honda -->
+                    <div class="aa-sidebar-widget">
+                        <h3>Honda</h3>
+                        <ul class="aa-catg-nav">
+                            <li><a href="#">Sport</a></li>
+                            <li><a href="">SprotTouring</a></li>
+                            <li><a href="">Classic</a></li>
+                            <li><a href="">Naked</a></li>
+                        </ul>
+                    </div>
+                    <!-- Yamaha -->
+                    <div class="aa-sidebar-widget">
+                        <h3>Yamaha</h3>
+                        <ul class="aa-catg-nav">
+                            <li><a href="#">HyperNaked</a></li>
+                            <li><a href="">SuperSport</a></li>
+                            <li><a href="">XSR</a></li>
+                        </ul>
+                    </div>
+                    <!-- Kawasaki -->
+                    <div class="aa-sidebar-widget">
+                        <h3>Kawasaki</h3>
+                        <ul class="aa-catg-nav">
+                            <li><a href="#">Ninja</a></li>
+                            <li><a href="">Versys</a></li>
+                            <li><a href="">Naked</a></li>
+                        </ul>
+                    </div>
+                    <!-- Suzuki -->
+                    <div class="aa-sidebar-widget">
+                        <h3>Suzuki</h3>
+                        <ul class="aa-catg-nav">
+                            <li><a href="#">Naked</a></li>
+                            <li><a href="">Sport</a></li>
+                            <li><a href="">ADV</a></li>
+                        </ul>
+                    </div>
+                    <!-- Ducati -->
+                    <div class="aa-sidebar-widget">
+                        <h3>Ducati</h3>
+                        <ul class="aa-catg-nav">
+                            <li><a href="#">Naked Ducati</a></li>
+                            <li><a href="">Sport</a></li>
+                            <li><a href="">Multitrada</a></li>
+                        </ul>
+                    </div>
+                    <!-- BMW -->
+                    <div class="aa-sidebar-widget">
+                        <h3>BMW</h3>
+                        <ul class="aa-catg-nav">
+                            <li><a href="#">ADV</a></li>
+                            <li><a href="">Cafe racer</a></li>
+                            <li><a href="">Sport</a></li>
+                        </ul>
+                    </div>
+                    <!-- KTM -->
+                    <div class="aa-sidebar-widget">
+                        <h3>KTM</h3>
+                        <ul class="aa-catg-nav">
+                            <li><a href="#">Naked</a></li>
+                            <li><a href="">ADV</a></li>
+                            <li><a href="">Sport</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center; margin-left:300px">
+        @Html.PagedListPager(Model.ListMauXes, page => Url.Action("Products",
+                                          new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</section>
+<!-- / product category -->

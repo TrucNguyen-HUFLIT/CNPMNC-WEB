@@ -1,11 +1,7 @@
 ﻿@model Web_BanXeMoTo.Controllers.ViewModel
 
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<div class="form-group">
-    <label asp-for="mauXe.Idmau" class="control-label"></label>
-    <input asp-for="mauXe.Idmau" class="form-control" />
-    <span asp-validation-for="mauXe.Idmau" class="text-danger"></span>
-</div>
+
+
 <div class="form-group">
     <label asp-for="mauXe.TenXe" class="control-label"></label>
     <input asp-for="mauXe.TenXe" class="form-control" />
@@ -29,7 +25,15 @@
         }
     </select>
 </div>
-
+<div class="position-relative form-group">
+    <label asp-for="mauXe.IdloaiXe" class="control-label"></label>
+    <select asp-for="mauXe.IdloaiXe" class="form-control">
+        @foreach (var item in Model.ListLoaiXe)
+        {
+            <option value="@item.IdloaiXe">@item.TenLoaiXe</option>
+        }
+    </select>
+</div>
 <div class="form-group">
     <label asp-for="mauXe.GiaBan" class="control-label"></label>
     <input asp-for="mauXe.GiaBan" class="form-control" />
@@ -51,25 +55,25 @@
     <input asp-for="mauXe.UploadHinh1" accept="image/*" />
     @if (Model.mauXe != null)
     {
-        <img src="@("~/img/" + Model.mauXe.HinhAnh1)" asp-append-version="true" width="120" height="90" />
+        <img src="@Model.mauXe.HinhAnh1" asp-append-version="true" width="120" height="90" />
     }
-    <span asp-validation-for="mauXe.UploadHinh1" class="text-danger"></span>
+    <span asp-validation-for="mauXe.UploadHinh1" class="text-danger" hidden></span>
 </div>
 <div class="form-group">
     <label asp-for="mauXe.UploadHinh2" class="control-label"></label>
     <input asp-for="mauXe.UploadHinh2" accept="image/*" />
     @if (Model.mauXe != null)
     {
-        <img src="@("~/img/" + Model.mauXe.HinhAnh2)" asp-append-version="true" width="120" height="90" />
+        <img src="@Model.mauXe.HinhAnh2" asp-append-version="true" width="120" height="90" />
     }
-    <span asp-validation-for="mauXe.UploadHinh2" class="text-danger"></span>
+    <span asp-validation-for="mauXe.UploadHinh2" class="text-danger" hidden></span>
 </div>
 <div class="form-group">
     <label asp-for="mauXe.UploadHinh3" class="control-label"></label>
     <input asp-for="mauXe.UploadHinh3" accept="image/*" />
     @if (Model.mauXe != null)
     {
-        <img src="@("~/img/" + Model.mauXe.HinhAnh3)" asp-append-version="true" width="120" height="90" />
+        <img src="@Model.mauXe.HinhAnh3" asp-append-version="true" width="120" height="90" />
     }
-    <span asp-validation-for="mauXe.UploadHinh3" class="text-danger"></span>
+    <span asp-validation-for="mauXe.UploadHinh3" class="text-danger" hidden></span>
 </div>
