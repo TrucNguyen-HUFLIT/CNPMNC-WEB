@@ -35,11 +35,13 @@ namespace Web_BanXeMoTo.Controllers
             return View(Carts);
         }
 
-        public IActionResult AddToCart(string id, int SoLuong, string type = "Normal")
+        [HttpGet]
+        public IActionResult AddToCart(string id, string type = "Normal")
         {
             var myCart = Carts;
             var item = myCart.SingleOrDefault(p => p.Idmau == id);
-            if(item==null)
+            int soLuong = 0;
+            if (item==null)
             {
                 var mauxe = database.MauXes.SingleOrDefault(p => p.Idmau == id);
                 item = new CartModel
@@ -47,7 +49,7 @@ namespace Web_BanXeMoTo.Controllers
                     Idmau = id,
                     TenXe = mauxe.TenXe,
                     GiaBan = mauxe.GiaBan,
-                    SoLuong = SoLuong,
+                    SoLuong = soLuong = 1,
                     Hinh = mauxe.HinhAnh1,
                     
                 };
@@ -56,41 +58,74 @@ namespace Web_BanXeMoTo.Controllers
             }
             else
             {
-                item.SoLuong += SoLuong;
+                item.SoLuong++;
+                soLuong = item.SoLuong;
             }
             HttpContext.Session.Set("GioHang", myCart);
             if(type=="ajax")
             {
                 return Json(new
                 {
-                    SoLuong = Carts.Sum(c => c.SoLuong),
-                   
-                });
+                    id = id,
+                    soLuong = soLuong,
+                    total = Carts.Sum(c => c.SoLuong),
+                }) ;
             }
             return RedirectToAction("Index");
         }
         
        
         [HttpGet]
-        public IActionResult RemoveCart(string id)
-        {           
+        public IActionResult MinusFromCart(string id,  string type = "Normal")
+        {
             var myCart = Carts;
             var mauxe = database.MauXes.SingleOrDefault(p => p.Idmau == id);
+            int soLuong = 0;
             foreach (var item in myCart)
             {
                 
-                if (item.Idmau == mauxe.Idmau&& item.SoLuong==1)
-                {
-                    myCart.Remove(item);
-                    break;
-                }    
-                else if(item.SoLuong>1)
+                 if(item.Idmau == mauxe.Idmau && item.SoLuong>0)
                 {
                     item.SoLuong--;
+                    soLuong = item.SoLuong;
                     break;
                 }    
             }
             HttpContext.Session.Set("GioHang", myCart);
+            if (type == "ajax")
+            {
+                return Json(new
+                {
+                    id = id,
+                    soLuong = soLuong,
+                    total = Carts.Sum(c => c.SoLuong),
+                });
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult RemoveFromCart(string id, string type = "Normal")
+        {
+            var myCart = Carts;
+            var mauxe = database.MauXes.SingleOrDefault(p => p.Idmau == id);
+            foreach (var item in myCart)
+            {
+
+                if (item.Idmau == mauxe.Idmau )
+                {
+                    myCart.Remove(item);
+                    break;
+                }
+            }
+            HttpContext.Session.Set("GioHang", myCart);
+            if (type == "ajax")
+            {
+                return Json(new
+                {
+                    SoLuong = Carts.Sum(c => c.SoLuong),
+                });
+            }
             return RedirectToAction("Index");
         }
     }

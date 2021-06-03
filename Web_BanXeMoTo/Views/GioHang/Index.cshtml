@@ -35,23 +35,24 @@
 
                                 <td><a href="#"><img src="@item.Hinh" alt="@item.Idmau"></a></td>
 
-                                <td><a class="aa-cart-title" href="#">@item.TenXe</a></td>
+                                <td><a class="aa-cart-title" href="@Url.ActionLink("ProductDetails","Customer",new {id = item.Idmau })">@item.TenXe</a></td>
                                 <td> @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ</td>
                                 <td>
-                                    <div class="input-group mb-3" style="max-width: 120px;">
-                                       
-                                        <input type="text" class="form-control text-center" value="@item.SoLuong" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                        
-                                    </div>
+                                    <button type="button" data-id="@item.Idmau" class="ajax-add fa fa-plus" style="width: auto; color : #ff6666">  </button>
+                                    &nbsp;
+                                    <span id="soLuong_@item.Idmau">@item.SoLuong</span>
+                                    &nbsp;
+                                    <button type="button" data-id="@item.Idmau" class="ajax-minus fa fa-minus" style="width: auto; color : #ff6666">  </button>
+
                                 </td>
                                 <td>@string.Format("{0:N0}", ((Int64)item.ThanhTien)) VNĐ</td>
                                 <td>
-                                    <a asp-action="RemoveCart" asp-controller="GioHang"   asp-route-id="@item.Idmau" class="ajax-delete btn btn-sm btn-danger">X</a>
-                                    @*<a>  <button type="button" data-id="@item.Idmau" class="ajax-delete aa-add-to-cart-btn"> X </button></a>*@
+                                    @*<a asp-action="RemoveCart" asp-controller="GioHang"   data-id="@item.Idmau" class="ajax-delete btn btn-sm btn-danger">X</a>*@
+                                    <p>  <button type="button" data-id="@item.Idmau" class="ajax-delete fa fa-times" style="width: auto; color : #ff6666">  </button></p>
 
                                 </td>
                             </tr>
-                            }
+}
 
                                     </tbody>
                                 </table>
@@ -81,48 +82,72 @@
     </div>
 </section>
 <!-- / Cart view section -->
-@*@section scriptsdelete{
+@section scriptsdelete{
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>$(document).ready(function () {
-            $(".ajax-delete").click(function () {
+    <script>
+        $(document).ready(function () {
+            $(".ajax-minus").click(function () {
                 $.ajax({
-                    url: "/GioHang/RemoveCart",
-                    
+                    url: "/GioHang/MinusFromCart",
+
                     data: {
                         id: $(this).data("id"),
-                        SoLuong: 1,
                         type: "ajax"
                     },
+
+                    success: function (data) {
+                        
+                        $("#cart_count").html(data.total);
+                        $("#soLuong_" + data.id).html(data.soLuong);
+
+                        console.log(data)
+                    },
+                });
+            });
+        });
+        $(document).ready(function () {
+            $(".ajax-delete").click(function () {
+                $.ajax({
+                    url: "/GioHang/RemoveFromCart",
+
+                    data: {
+                        id: $(this).data("id"),
+                        type: "ajax"
+                    },
+
                     success: function (data) {
                         Swal.fire({
-                            title: 'Bạn có chắc chắn muốn xóa',
                             icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Đồng ý'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire(
-                                    'Xóa thành công!',
-                                    'Xe đã được xóa khỏi giỏ hàng',
-                                    'success'
-                                )
-                            }
-                        });
-                 
-                    },
-                    error: function () {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Xóa sản phẩm thất bại',
-                            text: 'Vui lòng thử lại',
+                            title: 'Xe đã được xóa khỏi giỏ hàng',
                             showConfirmButton: false,
                             timer: 2500
                         });
-                    }
+                        $("#cart_count").html(data.soLuong);
+                        console.log(data)
+                        setTimeout(() => window.location.replace("/giohang/index"), 2500);
+
+                    },
                 });
             });
-        });</script>
-}*@
+        });
+        $(document).ready(function () {
+            $(".ajax-add").click(function () {
+                $.ajax({
+                    url: "/GioHang/AddToCart",
+                    data: {
+                        id: $(this).data("id"),
+                        type: "ajax"
+                    },
+                    success: function (data) {
+                        
+                        $("#cart_count").html(data.total);
+                        $("#soLuong_" + data.id).html(data.soLuong);
+                        console.log(data)
+
+                    },
+                });
+            });
+        });
+    </script>
+}
 

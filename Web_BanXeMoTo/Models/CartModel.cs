@@ -12,7 +12,7 @@ namespace Web_BanXeMoTo.Models
 
         public string Hinh { get; set; }
         public decimal GiaBan { get; set; }
-        public decimal SoLuong { get; set; }
+        public int SoLuong { get; set; }
         public double ThanhTien => (double)(SoLuong * GiaBan);
        
 
