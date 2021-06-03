@@ -1,5 +1,6 @@
 ﻿@{ ViewData["Title"] = "Danh sách nhân viên";
     Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
+
 @model Web_BanXeMoTo.Controllers.ViewModelNV
 @using X.PagedList.Mvc.Core;
 @using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div>
-
-                    Quản lý nhân viên
-
+                    <h2 style="font-weight:500">Quản lý Nhân viên</h2>
                 </div>
             </div>
         </div>
@@ -27,8 +26,6 @@
             <a asp-action="Create" class="nav-link ">
                 <span>Thêm nhân viên </span>
             </a>
-
-
         </li>
     </ul>
     <div class="row">

@@ -1,4 +1,5 @@
-﻿@{ Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
+﻿@{ ViewData["Title"] = "Danh sách hãng xe";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
 @model Web_BanXeMoTo.Controllers.ViewModel
 @using X.PagedList.Mvc.Core;
 @using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div>
-
-                    Quản lý Hãng xe
-
+                    <h2 style="font-weight:500">Quản lý Hãng xe</h2>
                 </div>
             </div>
         </div>
@@ -34,7 +33,7 @@
                 <div class="card-body">
                     @using (Html.BeginForm("Index", "Hang", FormMethod.Get, new { @style = "float: right; width: 40%" }))
                     {
-                        <input type="text" id="searchString" name="searchString" placeholder="Find by id or name">
+        <input type="text" id="searchString" name="searchString" placeholder="Find by id or name">
                         <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />}
                     <br />
                     <table class="table table-hover">
@@ -55,39 +54,38 @@
                         <tbody>
                             @foreach (var item in Model.ListHangs)
                             {
-                                <tr>
-                                    <td>
-                                        @item.Idhang
-                                    </td>
+                <tr>
+                    <td>
+                        @item.Idhang
+                    </td>
 
-                                    <td>
-                                        @item.TenHang
-                                    </td>
-                                    <td class="text-center">
-                                        @{ int amount = 0;
-                                            @foreach (var mauxe in Model.ListMauXe)
-                                            {
-                                                if (mauxe.Idhang == item.Idhang)
-                                                {
-                                                    amount++;
-                                                }
-                                            }
-                                            @amount }
+                    <td>
+                        @item.TenHang
+                    </td>
+                    <td class="text-center">
+                        @{ int amount = 0;
+            @foreach (var mauxe in Model.ListMauXe)
+            {
+                if (mauxe.Idhang == item.Idhang)
+                {
+                    amount++;
+                }
+            }
+                            @amount }
 
-                                    </td>
-                                    <td style="width: 207.6px;">
-                                        <a asp-action="Edit" asp-route-id="@item.Idhang" class="btn  btn-outline-warning">Sửa</a>
-                                        <form asp-action="Delete" asp-route-id="@item.Idhang">
-                                            <input type="submit" value="Xóa" class="btn btn-outline-danger" hidden />
-                                        </form>
-                                    </td>
-                                </tr>
-}
+                    </td>
+                    <td style="width: 207.6px;">
+                        <a asp-action="Edit" asp-route-id="@item.Idhang" class="btn  btn-outline-warning">Sửa</a>
+                        <form asp-action="Delete" asp-route-id="@item.Idhang">
+                            <input type="submit" value="Xóa" class="btn btn-outline-danger" hidden />
+                        </form>
+                    </td>
+                </tr>}
                         </tbody>
                     </table>
 
                     @Html.PagedListPager(Model.ListHangs, page => Url.Action("Index",
-                                                          new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                                               new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
                 </div>
             </div>
         </div>

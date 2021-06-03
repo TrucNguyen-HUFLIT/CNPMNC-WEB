@@ -106,7 +106,7 @@ namespace Web_BanXeMoTo.Controllers
             xe.TenXe = await database.MauXes.Where(s => s.Idmau == xe.Idmau).Select(x => x.TenXe).FirstOrDefaultAsync();
             int length = database.Xes.Where(s => s.Idmau == xe.Idmau).ToArray().Length + 1;
             xe.Idxe = xe.TenXe + "-" + length;
-            xe.TrangThai = TrangThaiXe.ConHang;
+            xe.TrangThai = TrangThaiXe.ChuaBan;
             database.Add(xe);
             await database.SaveChangesAsync();
             return RedirectToAction("Index");
