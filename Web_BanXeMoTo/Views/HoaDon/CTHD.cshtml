@@ -1,7 +1,7 @@
 ﻿@model Web_BanXeMoTo.Controllers.HoaDonViewModel
 
 @{
-    ViewData["Title"] = "Tạo chi tiết hóa đơn";
+    ViewData["Title"] = "Thêm chi tiết hóa đơn";
     Layout = "~/Views/Shared/_LayoutManager.cshtml";
 }
 
@@ -12,7 +12,7 @@
             <div class="page-title-heading">
                 <div>
 
-                    Quản lý Hóa đơn
+                    <h2 style="font-weight:500">Quản lý Hóa đơn</h2>
 
                 </div>
             </div>
@@ -54,7 +54,7 @@
                                     <option disabled style="font-weight:900">- @mauXe.IdhangNavigation.TenHang :&emsp;@mauXe.TenXe </option>
                                     @foreach (var xe in Model.ListXe)
                                     {
-                                        if (mauXe.Idmau == xe.Idmau && xe.TrangThai == Web_BanXeMoTo.Models.TrangThaiXe.ConHang)
+                                        if (mauXe.Idmau == xe.Idmau && xe.TrangThai == Web_BanXeMoTo.Models.TrangThaiXe.ChuaBan)
                                         {
                                             <option value="@xe.Idxe">&emsp;&emsp;+ @xe.Idxe</option>
                                         }

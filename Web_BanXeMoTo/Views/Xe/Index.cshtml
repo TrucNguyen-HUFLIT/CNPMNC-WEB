@@ -11,9 +11,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div>
-
-                    Quản lý Xe
-
+                    <h2 style="font-weight:500">Quản lý Xe</h2>
                 </div>
             </div>
         </div>
@@ -28,8 +26,6 @@
             <a asp-action="Create" class="nav-link  ">
                 <span>Thêm xe</span>
             </a>
-
-
         </li>
     </ul>
     <div class="row">
@@ -70,7 +66,7 @@
                                 <th class="text-center">
                                     <label class="control-label">Tình trạng </label>
                                 </th>
-                                <th></th>
+                                @*<th></th>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -155,11 +151,11 @@
                                     <td class="text-center">
                                        @Html.DisplayFor(model=>item.TrangThai)
                                     </td>
-                                    <td>
+                                    @*<td>
                                         <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>
                                         <a asp-action="Delete" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-danger" hidden>Xóa</a>
                                         <a asp-action="Edit" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Sửa</a>
-                                    </td>
+                                    </td>*@
                                 </tr>
                             }
                         </tbody>

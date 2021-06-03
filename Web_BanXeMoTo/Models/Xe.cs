@@ -23,9 +23,9 @@ namespace Web_BanXeMoTo.Models
     }
     public enum TrangThaiXe
     {
-        [Display(Name = "Còn hàng")]
-        ConHang = 0,
-        [Display(Name = "Hết hàng")]
-        HetHang = 1,
+        [Display(Name = "Chưa bán")]
+        ChuaBan = 0,
+        [Display(Name = "Đã bán")]
+        DaBan = 1,
     }
 }

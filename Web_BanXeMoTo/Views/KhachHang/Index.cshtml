@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "Index";
+﻿@{ ViewData["Title"] = "Danh sách khách hàng";
     Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
 
 @model Web_BanXeMoTo.Controllers.ViewModel
@@ -14,9 +14,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div>
-
-                    Quản lý khách hàng
-
+                    <h2 style="font-weight:500">Quản lý Khách hàng</h2>
                 </div>
             </div>
         </div>
@@ -40,7 +38,7 @@
                     <table class="table table-hover table-sm">
                         <thead>
                             <tr>
-                                <th>
+                                <th class="text-center">
                                     <label class="control-label">@Html.ActionLink("ID Khách hàng", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
                                 </th>
 
@@ -55,7 +53,7 @@
                                 <th>
                                     <label asp-for="khachHang.DiaChi" class="control-label"></label>
                                 </th>
-                                <th class="text-center">
+                                <th >
                                     <label asp-for="khachHang.Email" class="control-label"></label>
                                 </th>
                                 <th>
@@ -67,7 +65,7 @@
                             @foreach (var khachhang in Model.ListKhachHangs)
                             {
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
                                         @Html.DisplayFor(khachHang => khachhang.Idkh)
                                     </td>
 

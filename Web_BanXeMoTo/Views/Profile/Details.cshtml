@@ -1,7 +1,7 @@
-﻿@using Microsoft.AspNetCore.Http;
-@model Web_BanXeMoTo.Models.KhachHang
+﻿@model Web_BanXeMoTo.Controllers.HoaDonViewModel
+@using Microsoft.AspNetCore.Http;
 
-@{  Layout = null; }
+@{    Layout = null; }
 <!doctype html>
 
 <html lang="en">
@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>H2T Moto | Thông tin cá nhân </title>
+    <title>H2T Moto | Chi tiết đơn hàng </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
@@ -74,6 +74,7 @@
                         </li>
                         <li class="btn-group  nav-item">
                             <a id="role" href="javascript:void(0);" class="nav-link">
+
                                 @Context.Session.GetString("email")
                             </a>
                         </li>
@@ -119,83 +120,73 @@
                             <li>
                                 @Html.ActionLink("Đăng xuất", "Logout", "Login")
                             </li>
-
-
-
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="app-main__outer">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="main-card mb-3 card">
-                            <div class="card-body">
-                                <form asp-action="ProfileKhachHang" enctype="multipart/form-data">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <div class="form-group">
-                                        <div class="card-img ">
-                                            @*<img src="@(Model.nhanVien != null? Url.Content("/img"+Model.nhanVien.Avt) :"/img/icon.png")" height="200" width="200" id="previewImg" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />*@
-                                            <img src="@Model.Avatar" id="output" height="200" width="200" style="margin: auto;display: block;border-radius: 50%;">
-                                        </div>
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div>
+                                    <h2 style="font-weight:500">Lịch sử đơn hàng</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <table class="table table-hover table-sm">
+                                        <h3>ID Hóa đơn: @Model.ChiTietHd.Idhd</h3>
+                                        <br />
+                                        <thead>
+                                            <tr>
 
-                                    </div>
+                                                <th>
+                                                    <label asp-for="ChiTietHd.Idxe" class="control-label"></label>
+                                                </th>
+                                                <th>
+                                                    <label asp-for="ChiTietHd.KhuyenMai" class="control-label"></label>
+                                                </th>
 
-                                    <input asp-for="Idkh" class="" readonly hidden />
-
-                                    <div class="form-group">
-                                        <label asp-for="Email" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input asp-for="Email" class="form-control" readonly />
-                                            <span asp-validation-for="Email" class="text-danger"></span>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label asp-for="TenKh" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input asp-for="TenKh" class="form-control" />
-                                            <span asp-validation-for="TenKh" class="text-danger"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label asp-for="DienThoai" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input asp-for="DienThoai" class="form-control" />
-                                            <span asp-validation-for="DienThoai" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="DiaChi" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input asp-for="DiaChi" class="form-control" />
-                                            <span asp-validation-for="DiaChi" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input asp-for="UploadHinh" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Pass" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input name="Pass" type="password" class="form-control" placeholder="Điền mật khẩu để thay đổi thông tin" />
-                                            <span asp-validation-for="Pass" class="text-danger"></span>
-                                            <span class="text-danger">@ViewBag.ErrorPass</span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" value="Lưu" class="btn btn-primary" />
-                                    </div>
-                                </form>
+                                                <th>
+                                                    <label asp-for="ChiTietHd.GiaBan" class="control-label"></label>
+                                                </th>
+                                                <th>
+                                                    <label class="control-label">Thành tiền</label>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.ListChiTietHd)
+                                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Idxe)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.KhuyenMai)
+                                    </td>
+                                    <td>
+                                        @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ
+                                    </td>
+                                    <td>
+                                        @string.Format("{0:N0}", (((double)item.GiaBan) - ((double)item.GiaBan) * (item.KhuyenMai == 0 ? 1 : (double)item.KhuyenMai / 100))) VNĐ
+                                    </td>
+                                </tr>}
+                                        </tbody>
+                                    </table>
+                                    <a href="@Url.ActionLink("History", "Profile",new {page = 1 })" style="margin-left:45%" class="btn btn-secondary">Trở về</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
     </div>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_BanXeMoTo.Models;
+using X.PagedList;
 
 namespace Web_BanXeMoTo.Controllers
 {
@@ -18,15 +19,29 @@ namespace Web_BanXeMoTo.Controllers
         {
             database = db;
         }
-        public IActionResult Index()
+        public IActionResult Index( int? page)
         {
-            var model = new HoaDonViewModel
+            //A ViewBag property provides the view with the current sort order, because this must be included in 
+            //  the paging links in order to keep the sort order the same while paging
+
+            ViewBag.Role = TempData["Role"];
+
+            var ModelList = database.HoaDons.ToList();
+
+            //ViewBag.CurrentFilter, provides the view with the current filter string.
+            //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.
+            //indicates the size of list
+            int pageSize = 5;
+            //set page to one is there is no value, ??  is called the null-coalescing operator.
+            int pageNumber = (page ?? 1);
+            //return the Model data with paged
+            var modelv = new HoaDonViewModel
             {
-                ListHoaDon = database.HoaDons.ToArray(),
+                ListHoaDon = ModelList.ToPagedList(pageNumber, pageSize),
                 ListChiTietHd = database.ChiTietHds.ToArray(),
                 ListKhachHang = database.KhachHangs.ToArray()
             };
-            return View(model);
+            return View(modelv);
         }
 
         public IActionResult Create()
@@ -59,14 +74,13 @@ namespace Web_BanXeMoTo.Controllers
             };
             return View(model);
         }
-
         public async Task<IActionResult> CTHD(string ID)
         {
             var model = new HoaDonViewModel
             {
                 ChiTietHd = new ChiTietHd { Idhd = ID },
                 ListMauXe = database.MauXes.ToArray(),
-                ListXe = database.Xes.ToArray(),
+                ListXe = database.Xes.Where(x=>x.TrangThai==TrangThaiXe.ChuaBan).ToArray(),
             };
             foreach (var mauxe in model.ListMauXe)
             {
@@ -80,9 +94,12 @@ namespace Web_BanXeMoTo.Controllers
         {
             try
             {
-                var IdMau = await database.Xes.Where(x => x.Idxe == chiTietHd.Idxe).Select(x => x.Idmau).FirstOrDefaultAsync();
-                var MauXe = await database.MauXes.Where(x => x.Idmau == IdMau).Select(x => new { x.GiaBan, x.Idkm }).FirstOrDefaultAsync();
+                var Xe = await database.Xes.Where(x => x.Idxe == chiTietHd.Idxe).FirstOrDefaultAsync();
+                var MauXe = await database.MauXes.Where(x => x.Idmau == Xe.Idmau).Select(x => new { x.GiaBan, x.Idkm }).FirstOrDefaultAsync();
                 var KhuyenMai = await database.KhuyenMais.Where(x => x.Idkm == MauXe.Idkm).Select(x => x.GiaTri).FirstOrDefaultAsync();
+
+                Xe.TrangThai = TrangThaiXe.DaBan;
+                database.Xes.Update(Xe);
 
                 chiTietHd.KhuyenMai = KhuyenMai;
                 chiTietHd.GiaBan = MauXe.GiaBan;
@@ -106,6 +123,18 @@ namespace Web_BanXeMoTo.Controllers
                 return View(model);
             }
         }
+        public async Task<IActionResult> DeleteCTHD(string idXe, string idHD)
+        {
+            var Xe = await database.Xes.Where(x => x.Idxe == idXe).FirstOrDefaultAsync();
+            var ChiTietHD = await database.ChiTietHds.Where(x => x.Idhd == idHD && x.Idxe == idXe).FirstOrDefaultAsync();
+
+            Xe.TrangThai = TrangThaiXe.ChuaBan;
+            database.Xes.Update(Xe);
+
+            database.Remove(ChiTietHD);
+            database.SaveChanges();
+            return RedirectToAction("Details", new { ID = idHD });
+        }
 
         public string GetIDHD()
         {
@@ -127,6 +156,6 @@ namespace Web_BanXeMoTo.Controllers
         public ChiTietHd ChiTietHd { get; set; }
         public ChiTietHd[] ListChiTietHd { get; set; }
         public HoaDon HoaDon { get; set; }
-        public HoaDon[] ListHoaDon { get; set; }
+        public IPagedList<HoaDon> ListHoaDon { get; set; }
     }
 }
