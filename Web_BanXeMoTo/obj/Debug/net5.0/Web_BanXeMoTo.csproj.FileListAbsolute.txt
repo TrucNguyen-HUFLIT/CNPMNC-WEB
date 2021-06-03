@@ -2434,7 +2434,6 @@ F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.genruntimeconfig.cache
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\Products.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\ProductDetails.cshtml.g.cs
-F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\ProductsCart.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\JetBrains.Annotations.dll
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\X.PagedList.dll
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\X.PagedList.Mvc.Core.dll
@@ -3374,3 +3373,4 @@ C:\Users\HP\Desktop\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\runtimes\win\lib\n
 C:\Users\HP\Desktop\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.Views.pdb
 C:\Users\HP\Desktop\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.csproj.CopyComplete
 C:\Users\HP\Desktop\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.genruntimeconfig.cache
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\GioHang\Index.cshtml.g.cs
