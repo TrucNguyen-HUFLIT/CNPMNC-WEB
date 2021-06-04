@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace Web_BanXeMoTo.Controllers
             }
         }
 
-        public IActionResult Products(string sortOrder, string currentFilter, string searchString, int? page)
+        public async Task<IActionResult> ProductsAsync(string idHang, string idLoai, string sortOrder, string currentFilter, string searchString, int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
             //  the paging links in order to keep the sort order the same while paging
@@ -68,50 +69,74 @@ namespace Web_BanXeMoTo.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-
-
-            using (var context = new QLMTContext())
+            var model = from s in database.MauXes
+                        select s;
+            var hang = new Hang();
+            var loaiXe = new LoaiXe();
+            if (idHang != null && idLoai != null)
             {
-                var model = from s in context.MauXes
-                            select s;
-                //Search and match data, if search string is not null or empty
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    model = model.Where(s => s.TenXe.Contains(searchString));
-                }
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        ModelList = model.OrderByDescending(s => s.GiaBan).ToList();
-                        break;
-
-                    default:
-                        ModelList = model.OrderBy(s => s.GiaBan).ToList();
-                        break;
-                }
-
+                model = from s in database.MauXes
+                        where s.Idhang == idHang && s.IdloaiXe == idLoai
+                        select s;
+                hang = await database.Hangs.Where(x => x.Idhang == idHang).FirstOrDefaultAsync();
+                loaiXe = await database.LoaiXes.Where(x => x.IdloaiXe == idLoai).FirstOrDefaultAsync();
             }
+            else if (idLoai != null)
+            {
+                model = from s in database.MauXes
+                        where s.IdloaiXe == idLoai
+                        select s;
+                loaiXe = await database.LoaiXes.Where(x => x.IdloaiXe == idLoai).FirstOrDefaultAsync();
+            }
+            else if (idHang != null)
+            {
+                model = from s in database.MauXes
+                        where s.Idhang == idHang
+                        select s;
+                hang = await database.Hangs.Where(x => x.Idhang == idHang).FirstOrDefaultAsync();
+            }
+
+
+            //Search and match data, if search string is not null or empty
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(s => s.TenXe.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    ModelList = model.OrderByDescending(s => s.GiaBan).ToList();
+                    break;
+
+                default:
+                    ModelList = model.OrderBy(s => s.GiaBan).ToList();
+                    break;
+            }
+
             //indicates the size of list
             int pageSize = 9;
             //set page to one is there is no value, ??  is called the null-coalescing operator.
             int pageNumber = (page ?? 1);
             //return the Model data with paged
+
             var modelv = new CustomerViewModel
             {
-                ListHang = database.Hangs.ToArray(),
-                ListXe = database.Xes.ToArray(),
+                Hang = hang,
+                LoaiXe = loaiXe,
+                ListHang = await database.Hangs.ToArrayAsync(),
+                ListXe = await database.Xes.ToArrayAsync(),
                 ListMauXes = ModelList.ToPagedList(pageNumber, pageSize),
             };
             return View(modelv);
         }
 
-        public IActionResult ProductDetails(string id)
+        public async Task<IActionResult> ProductDetailsAsync(string id)
         {
             var model = new CustomerViewModel
             {
                 MauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault(),
-                ListMauXe = database.MauXes.ToArray(),
-                ListXe = database.Xes.Where(x => x.Idmau == id).ToArray()
+                ListMauXe = await database.MauXes.ToArrayAsync(),
+                ListXe = await database.Xes.Where(x => x.Idmau == id).ToArrayAsync()
             };
 
             return View(model);
@@ -125,8 +150,11 @@ namespace Web_BanXeMoTo.Controllers
     }
     public class CustomerViewModel
     {
+
         public IPagedList<MauXe> ListMauXes { get; set; }
         public Xe[] ListXe { get; set; }
+        public Hang Hang { get; set; }
+        public LoaiXe LoaiXe { get; set; }
         public MauXe MauXe { get; set; }
         public MauXe[] ListMauXe { get; set; }
         public Hang[] ListHang { get; set; }
