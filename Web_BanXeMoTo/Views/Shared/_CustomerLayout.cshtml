@@ -81,8 +81,8 @@
                         <li><a asp-action="Register" asp-controller="Login">Đăng ký</a></li>
                     </ul>
                 </div> }
-            else
-            {
+                            else
+                            {
 <div class="aa-header-top-right">
     <ul class="aa-head-top-nav-right">
         <li><a asp-action="logout" asp-controller="Login">Đăng xuất</a></li>
@@ -103,7 +103,7 @@
                         <div class="aa-header-bottom-area">
                             <!-- logo  -->
                             <div class="aa-logo">
-                                <a href="@Url.ActionLink("Home","Customer")">
+                                <a href="@Url.ActionLink("Home", "Customer")">
                                     <span class="logo"></span>
                                     <p>H2T <strong>Moto</strong> <span>Don't let dreams be just the dream</span></p>
                                 </a>
@@ -126,17 +126,17 @@
                             <!-- / cart box -->
                             <!-- search box -->
                             <div class="aa-cartbox" style="padding-right:30px">
-                                <a class="aa-cart-link" href="@Url.ActionLink("Index","GioHang")">
+                                <a class="aa-cart-link" href="@Url.ActionLink("Index", "GioHang")">
                                     <span class="fa fa-shopping-basket"></span>
                                     <span class="aa-cart-title">Giỏ hàng</span>
                                     <span class="aa-cart-notify" id="cart_count">
                                         @using Web_BanXeMoTo.Helpers
                                         @using Web_BanXeMoTo.Models
                                         @{ var data = Context.Session.Get<List<CartModel>>("GioHang");
-                                                        if (data == null)
-                                                        {
-                                                            data = new List<CartModel>();
-                                                        }
+                                            if (data == null)
+                                            {
+                                                data = new List<CartModel>();
+                                            }
                                         }
                                         @data.Sum(c => c.SoLuong)
                                     </span>
@@ -165,57 +165,48 @@
                         <div class="navbar-collapse collapse">
                             <!-- Left nav -->
                             <ul class="nav navbar-nav">
-                                <li><a href="@Url.ActionLink("Home","Customer")">Trang chủ</a></li>
+                                <li><a href="@Url.ActionLink("Home", "Customer")">Trang chủ</a></li>
                                 <li>
-                                    <a href="product.html">Honda<span class="caret"></span></a>
+                                    <a href="@Url.ActionLink("Products", "Customer", new {idHang = "HD" })">Honda<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="product.html">Casual</a></li>
-                                        <li><a href="product.html">Sports</a></li>
-                                        <li><a href="product.html">Formal</a></li>
-                                        <li><a href="product.html">Standard</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "HD" , idLoai= "SPSP"})">Super Sport</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "HD" , idLoai= "SP"})">Sport</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "HD" , idLoai= "CL"})">Classic</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="product.html">Yamaha <span class="caret"></span></a>
+                                    <a href="@Url.ActionLink("Products", "Customer", new {idHang = "YM"})">Yamaha <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="product.html">Kurta & Kurti</a></li>
-                                        <li><a href="product.html">Trousers</a></li>
-                                        <li><a href="product.html">Casual</a></li>
-                                        <li><a href="product.html">Sports</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "YM", idLoai= "CL"})">Classic</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "YM", idLoai= "SP"})">Sport</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "YM", idLoai= "NK"})">Naked</a></li>
+                                    </ul>
+                                <li>
+                                    <a href="@Url.ActionLink("Products", "Customer", new {idHang = "KW"})">Kawasaki <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "KW", idLoai = "SPSP"})">Super Sport</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "KW", idLoai = "SPT"})">Sport Touring</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "KW", idLoai = "NK"})">Naked</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="@Url.ActionLink("Products", "Customer", new {idHang = "SZ"})">Suzuki <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "SZ", idLoai = "SP"})">Sport</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "SZ", idLoai = "SPT"})">Sport Touring</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "SZ", idLoai = "NK"})">Naked</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="@Url.ActionLink("Products", "Customer")">Hãng Khác <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "DCT"})">Ducati</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "KTM"})">KTM</a></li>
+                                        <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "BMW"})">BMW</a></li>
 
-                                    </ul>
-                                <li>
-                                    <a href="product.html">Kawasaki <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="product.html">Casual</a></li>
-                                        <li><a href="product.html">Sports</a></li>
-                                        <li><a href="product.html">Formal</a></li>
-                                        <li><a href="product.html">Standard</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="product.html">Suzuki <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="product.html">Camera</a></li>
-                                        <li><a href="product.html">Mobile</a></li>
-                                        <li><a href="product.html">Tablet</a></li>
-                                        <li><a href="product.html">Laptop</a></li>
-                                        <li><a href="product.html">Accesories</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="product.html">Hãng Khác <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="product.html">Camera</a></li>
-                                        <li><a href="product.html">Mobile</a></li>
-                                        <li><a href="product.html">Tablet</a></li>
-                                        <li><a href="product.html">Laptop</a></li>
-                                        <li><a href="product.html">Accesories</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#aa-footer">Liên hệ </a></li>
-
-
                             </ul>
                         </div><!--/.nav-collapse -->
                     </div>
