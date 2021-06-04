@@ -31,28 +31,30 @@
                                         @foreach (var item in Model)
                                         {
                                             ToTalAmount += item.ThanhTien;
-                            <tr>
+                                            <tr>
 
-                                <td><a href="#"><img src="@item.Hinh" alt="@item.Idmau"></a></td>
+                                                <td><a href="#"><img src="@item.Hinh" alt="@item.Idmau"></a></td>
 
-                                <td><a class="aa-cart-title" href="@Url.ActionLink("ProductDetails","Customer",new {id = item.Idmau })">@item.TenXe</a></td>
-                                <td> @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ</td>
-                                <td>
-                                    <button type="button" data-id="@item.Idmau" class="ajax-add fa fa-plus" style="width: auto; color : #ff6666">  </button>
-                                    &nbsp;
-                                    <span id="soLuong_@item.Idmau">@item.SoLuong</span>
-                                    &nbsp;
-                                    <button type="button" data-id="@item.Idmau" class="ajax-minus fa fa-minus" style="width: auto; color : #ff6666">  </button>
+                                                <td><a class="aa-cart-title" href="@Url.ActionLink("ProductDetails","Customer",new {id = item.Idmau })">@item.TenXe</a></td>
+                                                <td> @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ</td>
+                                                <td>
+                                                    <button type="button" data-id="@item.Idmau" class="ajax-add fa fa-plus" style="width: auto; color : #ff6666">  </button>
+                                                    &nbsp;
+                                                    <span id="soLuong_@item.Idmau">@item.SoLuong</span>
+                                                    &nbsp;
+                                                    <button type="button" data-id="@item.Idmau" class="ajax-minus fa fa-minus" style="width: auto; color : #ff6666">  </button>
 
-                                </td>
-                                <td>@string.Format("{0:N0}", ((Int64)item.ThanhTien)) VNĐ</td>
-                                <td>
-                                    @*<a asp-action="RemoveCart" asp-controller="GioHang"   data-id="@item.Idmau" class="ajax-delete btn btn-sm btn-danger">X</a>*@
-                                    <p>  <button type="button" data-id="@item.Idmau" class="ajax-delete fa fa-times" style="width: auto; color : #ff6666">  </button></p>
+                                                </td>
+                                                <td>
+                                                    <span id="thanhTien_@item.Idmau">@string.Format("{0:N0}", ((Int64)item.ThanhTien)) </span> VNĐ
+                                                </td>
+                                                <td>
+                                                    @*<a asp-action="RemoveCart" asp-controller="GioHang"   data-id="@item.Idmau" class="ajax-delete btn btn-sm btn-danger">X</a>*@
+                                                    <p>  <button type="button" data-id="@item.Idmau" class="ajax-delete fa fa-times" style="width: auto; color : #ff6666">  </button></p>
 
-                                </td>
-                            </tr>
-}
+                                                </td>
+                                            </tr>
+                                        }
 
                                     </tbody>
                                 </table>
@@ -96,9 +98,10 @@
                     },
 
                     success: function (data) {
-                        
+
                         $("#cart_count").html(data.total);
                         $("#soLuong_" + data.id).html(data.soLuong);
+                        $("#thanhTien_" + data.id).html(data.thanhTien);
 
                         console.log(data)
                     },
@@ -139,9 +142,10 @@
                         type: "ajax"
                     },
                     success: function (data) {
-                        
+
                         $("#cart_count").html(data.total);
                         $("#soLuong_" + data.id).html(data.soLuong);
+                        $("#thanhTien_" + data.id).html(data.thanhTien);
                         console.log(data)
 
                     },

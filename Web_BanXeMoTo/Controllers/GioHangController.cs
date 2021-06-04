@@ -21,14 +21,14 @@ namespace Web_BanXeMoTo.Controllers
             get
             {
                 var data = HttpContext.Session.Get<List<CartModel>>("GioHang");
-                if(data==null)
+                if (data == null)
                 {
                     data = new List<CartModel>();
                 }
                 return data;
             }
-          
-           
+
+
         }
         public IActionResult Index()
         {
@@ -41,7 +41,8 @@ namespace Web_BanXeMoTo.Controllers
             var myCart = Carts;
             var item = myCart.SingleOrDefault(p => p.Idmau == id);
             int soLuong = 0;
-            if (item==null)
+            double thanhTien = 0;
+            if (item == null)
             {
                 var mauxe = database.MauXes.SingleOrDefault(p => p.Idmau == id);
                 item = new CartModel
@@ -51,45 +52,16 @@ namespace Web_BanXeMoTo.Controllers
                     GiaBan = mauxe.GiaBan,
                     SoLuong = soLuong = 1,
                     Hinh = mauxe.HinhAnh1,
-                    
+
                 };
-               
+
                 myCart.Add(item);
             }
             else
             {
                 item.SoLuong++;
                 soLuong = item.SoLuong;
-            }
-            HttpContext.Session.Set("GioHang", myCart);
-            if(type=="ajax")
-            {
-                return Json(new
-                {
-                    id = id,
-                    soLuong = soLuong,
-                    total = Carts.Sum(c => c.SoLuong),
-                }) ;
-            }
-            return RedirectToAction("Index");
-        }
-        
-       
-        [HttpGet]
-        public IActionResult MinusFromCart(string id,  string type = "Normal")
-        {
-            var myCart = Carts;
-            var mauxe = database.MauXes.SingleOrDefault(p => p.Idmau == id);
-            int soLuong = 0;
-            foreach (var item in myCart)
-            {
-                
-                 if(item.Idmau == mauxe.Idmau && item.SoLuong>0)
-                {
-                    item.SoLuong--;
-                    soLuong = item.SoLuong;
-                    break;
-                }    
+                thanhTien = item.ThanhTien;
             }
             HttpContext.Session.Set("GioHang", myCart);
             if (type == "ajax")
@@ -97,6 +69,40 @@ namespace Web_BanXeMoTo.Controllers
                 return Json(new
                 {
                     id = id,
+                    thanhTien = thanhTien,
+                    soLuong = soLuong,
+                    total = Carts.Sum(c => c.SoLuong),
+                });
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
+        public IActionResult MinusFromCart(string id, string type = "Normal")
+        {
+            var myCart = Carts;
+            var mauxe = database.MauXes.SingleOrDefault(p => p.Idmau == id);
+            int soLuong = 0;
+            double thanhTien = 0;
+            foreach (var item in myCart)
+            {
+
+                if (item.Idmau == mauxe.Idmau && item.SoLuong > 0)
+                {
+                    item.SoLuong--;
+                    thanhTien = item.ThanhTien;
+                    soLuong = item.SoLuong;
+                    break;
+                }
+            }
+            HttpContext.Session.Set("GioHang", myCart);
+            if (type == "ajax")
+            {
+                return Json(new
+                {
+                    id = id,
+                    thanhTien = thanhTien,
                     soLuong = soLuong,
                     total = Carts.Sum(c => c.SoLuong),
                 });
@@ -112,7 +118,7 @@ namespace Web_BanXeMoTo.Controllers
             foreach (var item in myCart)
             {
 
-                if (item.Idmau == mauxe.Idmau )
+                if (item.Idmau == mauxe.Idmau)
                 {
                     myCart.Remove(item);
                     break;
