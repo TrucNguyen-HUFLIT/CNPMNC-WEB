@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,7 +85,7 @@ namespace Web_BanXeMoTo.Controllers
                 var emailExisted = database.KhachHangs.Any(x => x.Email == registerModels.Email);
                 if(emailExisted)
                 {
-                    ViewBag.error = "Email đã tồn tại";
+                    ViewBag.error = "Email đã tồn tại!";
                     return View(registerModels);
                 }
                 var model = new KhachHang
@@ -92,12 +94,12 @@ namespace Web_BanXeMoTo.Controllers
                     TenKh = registerModels.Email,
                     Email = registerModels.Email,
                     Pass = registerModels.Password,
-                    DiaChi = "",
-                    DienThoai = "",
-                    Avatar = "icon.png",
-                    Idtype = "type03",
+                    DiaChi = "Hãy cập nhật địa chỉ của bạn",
+                    DienThoai = "Hãy cập nhật số điện thoại của bạn",
+                    Avatar = "/img/Avatar/avt-default.png",
+                    Idtype = "type3",
                 };
-
+                ViewBag.success = "Đã đăng ký thành công!";
                 database.KhachHangs.Add(model);
                 await database.SaveChangesAsync();
                 return View("Login");
@@ -131,8 +133,32 @@ namespace Web_BanXeMoTo.Controllers
                 await database.SaveChangesAsync();
 
                 #region Send mail
+                MimeMessage message = new();
 
+                MailboxAddress from = new("H2T Moto", "h2t.moto.huflit@gmail.com");
+                message.From.Add(from);
+
+                MailboxAddress to = new(model.TenKh, model.Email);
+                message.To.Add(to);
+
+                message.Subject = "Reset Mật khẩu thành công";
+                BodyBuilder bodyBuilder = new()
+                {
+                    HtmlBody = $"<h1>Mật khẩu của bạn đã được reset, mật khẩu mới: {model.Pass}  </h1>",
+                    TextBody = "Mật Khẩu của bạn đã được thay đổi "
+                };
+                message.Body = bodyBuilder.ToMessageBody();
+                // xac thuc email
+                SmtpClient client = new();
+                //connect (smtp address, port , true)
+                await client.ConnectAsync("smtp.gmail.com", 465, true);
+                await client.AuthenticateAsync("h2t.moto.huflit@gmail.com", "H2tmotohuflit");
+                //send email
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
+                client.Dispose();
                 #endregion
+                ViewBag.success = "Hãy kiểm tra email của bạn để lấy mật khẩu mới!";
 
                 return View("Login");
             }
@@ -160,7 +186,7 @@ namespace Web_BanXeMoTo.Controllers
 
         public string GetPasswordRandom()
         {
-            Random rnd = new Random();
+            Random rnd = new();
             string value = "";
             for (int i = 0; i < 6; i++)
             {
