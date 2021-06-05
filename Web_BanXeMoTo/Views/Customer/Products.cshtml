@@ -15,14 +15,17 @@
                         <div class="aa-product-catg-head-left">
                             @if (Model.LoaiXe.IdloaiXe != null && Model.Hang.Idhang != null)
                             {
-                <h1 style="font-weight:bold">@Model.Hang.TenHang : @Model.LoaiXe.TenLoaiXe</h1> }
-            else if (Model.LoaiXe.IdloaiXe != null)
-            {
-<h1 style="font-weight:bold">@Model.LoaiXe.TenLoaiXe</h1>}
-else if (Model.Hang.Idhang != null)
-{
-<h1 style="font-weight:bold">@Model.Hang.TenHang</h1>}
-
+                                <h1 style="font-weight:bold">@Model.Hang.TenHang : @Model.LoaiXe.TenLoaiXe</h1> }
+                            else if (Model.LoaiXe.IdloaiXe != null)
+                            {
+                                <h1 style="font-weight:bold">@Model.LoaiXe.TenLoaiXe</h1>}
+                            else if (Model.Hang.Idhang != null)
+                            {
+                                <h1 style="font-weight:bold">@Model.Hang.TenHang</h1>}
+                            else
+                            {
+                                <h1 style="font-weight:bold">Tất cả sản phẩm</h1>
+                            }
                             <hr style="border-top: 1px solid #b98e8e;" />
                             <form action="" class="aa-sort-form">
                                 <label for="">Sắp xếp theo : </label>
@@ -35,11 +38,12 @@ else if (Model.Hang.Idhang != null)
 
                                 @using (Html.BeginForm("Products", "Customer", FormMethod.Get, new { }))
                                 {
-                    <div class="aa-prod-view-bottom">
-                        <input type="text" id="searchString" name="searchString" placeholder="Tìm kiếm">
-                        <input type="submit" value="Search" class="aa-add-to-cart-btn" style="width: 100px; padding: 5px;" />
-                    </div>}
+                                    <div class="aa-prod-view-bottom">
+                                        <input type="text" id="searchString" name="searchString" placeholder="Tìm kiếm">
+                                        <input type="submit" value="Search" class="aa-add-to-cart-btn" style="width: 100px; padding: 5px;" />
+                                    </div>}
                             </div>
+
                         </div>
 
 
@@ -49,19 +53,20 @@ else if (Model.Hang.Idhang != null)
                             <!-- start single product item -->
                             @foreach (var mauXe in Model.ListMauXes)
                             {
-                <li style="height:300px">
-                    <figure>
-                        <a class="aa-product-img" href="@Url.ActionLink("ProductDetails","Customer", new {id = mauXe.Idmau })"><img src="@mauXe.HinhAnh1" width="260" height="180"></a>
-                        <a class="aa-add-card-btn" href="@Url.ActionLink("ProductDetails","Customer", new {id =  mauXe.Idmau })" style="padding: 8px 0px;"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
-                        <figcaption>
-                            <h4 class="aa-product-title"><a href="@Url.ActionLink("ProductDetails","Customer", new {id =  mauXe.Idmau })">@Html.DisplayFor(model => mauXe.TenXe)</a></h4>
-                            <span class="aa-product-price">@string.Format("{0:N0}", ((Int64)mauXe.GiaBan)) VNĐ</span>
-                            @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
-                        </figcaption>
-                    </figure>
-                    <!-- product badge -->
-                    @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
-                </li>}
+                                <li style="height:300px">
+                                    <figure>
+                                        <a class="aa-product-img" href="@Url.ActionLink("ProductDetails","Customer", new {id = mauXe.Idmau })"><img src="@mauXe.HinhAnh1" width="260" height="180"></a>
+                                        <a class="aa-add-card-btn" href="@Url.ActionLink("ProductDetails","Customer", new {id =  mauXe.Idmau })" style="padding: 8px 0px;"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
+                                        <figcaption>
+                                            <h4 class="aa-product-title"><a href="@Url.ActionLink("ProductDetails","Customer", new {id =  mauXe.Idmau })">@Html.DisplayFor(model => mauXe.TenXe)</a></h4>
+                                            <span class="aa-product-price">@string.Format("{0:N0}", ((Int64)mauXe.GiaBan)) VNĐ</span>
+                                            @*<span class="aa-product-price"><del>250 Triệu</del></span>*@
+                                        </figcaption>
+                                    </figure>
+                                    <!-- product badge -->
+                                    @*<span class="aa-badge aa-sold-out" href="#">Sold Out!</span>*@
+                                </li>
+}
                             <!-- start single product item -->
                         </ul>
                     </div>
@@ -71,7 +76,7 @@ else if (Model.Hang.Idhang != null)
                 <aside class="aa-sidebar">
                     <!-- Honda -->
                     <div class="aa-sidebar-widget">
-                        <h3>Honda</h3>
+                        <a href="@Url.ActionLink("Products", "Customer", new {idHang = "HD"})"><h3>Honda</h3></a>
                         <ul class="aa-catg-nav">
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "HD" , idLoai= "SPSP"})">Super Sport</a></li>
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "HD" , idLoai= "SP"})">Sport</a></li>
@@ -80,7 +85,7 @@ else if (Model.Hang.Idhang != null)
                     </div>
                     <!-- Yamaha -->
                     <div class="aa-sidebar-widget">
-                        <h3>Yamaha</h3>
+                        <a href="@Url.ActionLink("Products", "Customer", new {idHang = "YM"})"><h3>Yamaha</h3></a>
                         <ul class="aa-catg-nav">
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "YM", idLoai= "CL"})">Classic</a></li>
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "YM", idLoai= "SP"})">Sport</a></li>
@@ -89,7 +94,7 @@ else if (Model.Hang.Idhang != null)
                     </div>
                     <!-- Kawasaki -->
                     <div class="aa-sidebar-widget">
-                        <h3>Kawasaki</h3>
+                        <a href="@Url.ActionLink("Products", "Customer", new {idHang = "KW"})"><h3>Kawasaki</h3></a>
                         <ul class="aa-catg-nav">
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "KW", idLoai = "SPSP"})">Super Sport</a></li>
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "KW", idLoai = "SPT"})">Sport Touring</a></li>
@@ -98,7 +103,7 @@ else if (Model.Hang.Idhang != null)
                     </div>
                     <!-- Suzuki -->
                     <div class="aa-sidebar-widget">
-                        <h3>Suzuki</h3>
+                        <a href="@Url.ActionLink("Products", "Customer", new {idHang = "SZ"})"><h3>Suzuki</h3></a>
                         <ul class="aa-catg-nav">
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "SZ", idLoai = "SP"})">Sport</a></li>
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "SZ", idLoai = "SPT"})">Sport Touring</a></li>
@@ -107,7 +112,7 @@ else if (Model.Hang.Idhang != null)
                     </div>
                     <!-- Ducati -->
                     <div class="aa-sidebar-widget">
-                        <h3>Ducati</h3>
+                        <a href="@Url.ActionLink("Products", "Customer", new {idHang = "DCT"})"><h3>Ducati</h3></a>
                         <ul class="aa-catg-nav">
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "DCT", idLoai = "SPCT"})">Sport City</a></li>
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "DCT", idLoai = "NK"})">Naked</a></li>
@@ -115,7 +120,7 @@ else if (Model.Hang.Idhang != null)
                     </div>
                     <!-- BMW -->
                     <div class="aa-sidebar-widget">
-                        <h3>BMW</h3>
+                        <a href="@Url.ActionLink("Products", "Customer", new {idHang = "BMW"})"><h3>BMW</h3></a>
                         <ul class="aa-catg-nav">
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "BMW", idLoai = "SP"})">Sport</a></li>
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "BMW", idLoai = "SPT"})">Sport Touring</a></li>
@@ -124,7 +129,7 @@ else if (Model.Hang.Idhang != null)
                     </div>
                     <!-- KTM -->
                     <div class="aa-sidebar-widget">
-                        <h3>KTM</h3>
+                        <a href="@Url.ActionLink("Products", "Customer", new {idHang = "KTM"})"><h3>KTM</h3></a>
                         <ul class="aa-catg-nav">
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "KTM", idLoai = "SP"})">Sport</a></li>
                             <li><a href="@Url.ActionLink("Products", "Customer", new {idHang = "KTM", idLoai = "SPT"})">Sport Touring</a></li>
