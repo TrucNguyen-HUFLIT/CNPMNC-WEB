@@ -151,6 +151,15 @@
                         console.log(data)
 
                     },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thêm giỏ hàng thất bại',
+                            text: 'Số lượng sản phẩm đã hết',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
                 });
             });
         });

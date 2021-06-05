@@ -95,7 +95,7 @@ namespace Web_BanXeMoTo.Controllers
                     Email = registerModels.Email,
                     Pass = registerModels.Password,
                     DiaChi = "Hãy cập nhật địa chỉ của bạn",
-                    DienThoai = "Hãy cập nhật số điện thoại của bạn",
+                    DienThoai = "",
                     Avatar = "/img/Avatar/avt-default.png",
                     Idtype = "type3",
                 };
