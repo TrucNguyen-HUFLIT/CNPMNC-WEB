@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Web_BanXeMoTo.Helpers;
 using Web_BanXeMoTo.Models;
@@ -63,7 +65,7 @@ namespace Web_BanXeMoTo.Controllers
                 soLuong = item.SoLuong;
                 thanhTien = item.ThanhTien;
             }
-            foreach(var mauxe in myCart)
+            foreach (var mauxe in myCart)
             {
                 tongTien += mauxe.ThanhTien;
             }
@@ -146,6 +148,67 @@ namespace Web_BanXeMoTo.Controllers
                 });
             }
             return RedirectToAction("Index");
+        }
+
+
+        public async Task<IActionResult> ThanhToan()
+        {
+            var myCart = Carts;
+            if (User.FindFirst(ClaimTypes.Email) == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            string email = User.FindFirst(ClaimTypes.Email).Value;
+            var khachHang = await database.KhachHangs.Where(x => x.Email == email).FirstOrDefaultAsync();
+
+            var hoaDon = new HoaDon
+            {
+                Idhd = GetIDHD(),
+                Idkh = khachHang.Idkh,
+                NgayDat = DateTime.Now,
+                TrangThai = TrangThaiHoaDon.ChuaXacNhan,
+
+            };
+            database.Add(hoaDon);
+            await database.SaveChangesAsync();
+
+            foreach (var item in myCart)
+            {
+                var Idkm = await database.MauXes.Where(x => x.Idmau == item.Idmau).Select(x => x.Idkm).FirstOrDefaultAsync();
+                var listXe = await database.Xes.Where(x => x.Idmau == item.Idmau && x.TrangThai == TrangThaiXe.ChuaBan).ToArrayAsync();
+
+                var khuyenMai = await database.KhuyenMais.Where(x => x.Idkm == Idkm).Select(x => x.GiaTri).FirstOrDefaultAsync();
+
+                for (int count = 0; count < item.SoLuong; count++)
+                {
+                    database.Add(new ChiTietHd
+                    {
+                        Idhd = hoaDon.Idhd,
+                        Idxe = listXe[count].Idxe,
+                        KhuyenMai = khuyenMai,
+                        GiaBan = (decimal)item.GiaBan,
+
+                    });
+                    listXe[count].TrangThai = TrangThaiXe.DaBan;
+
+                    database.Xes.Update(listXe[count]);
+                    await database.SaveChangesAsync();
+
+                }
+            }
+            return RedirectToAction("Home", "Customer");
+        }
+
+
+        public string GetIDHD()
+        {
+            var list = database.HoaDons.ToArray();
+
+            int.TryParse(list[list.Length - 1].Idhd.Substring(2), out int lastID);
+
+            string ID = "HD" + ++lastID;
+
+            return ID;
         }
     }
 }
