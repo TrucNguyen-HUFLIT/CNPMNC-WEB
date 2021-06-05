@@ -38,15 +38,17 @@ namespace Web_BanXeMoTo.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddToCart(string id, string type = "Normal")
+        public async Task<IActionResult> AddToCartAsync(string id, string type = "Normal")
         {
             var myCart = Carts;
             var item = myCart.SingleOrDefault(p => p.Idmau == id);
-            int soLuong = 0;
-            double tongTien = 0, thanhTien = 0;
+            var amount = database.Xes.Where(x => x.Idmau == id && x.TrangThai == TrangThaiXe.ChuaBan).ToArray().Length;
+            int soLuong = item == null ? 0 : item.SoLuong;
+            double tongTien = 0, thanhTien = item == null ? 0 : item.ThanhTien;
+
             if (item == null)
             {
-                var mauxe = database.MauXes.SingleOrDefault(p => p.Idmau == id);
+                var mauxe = await database.MauXes.SingleOrDefaultAsync(p => p.Idmau == id);
                 item = new CartModel
                 {
                     Idmau = id,
@@ -54,17 +56,21 @@ namespace Web_BanXeMoTo.Controllers
                     GiaBan = mauxe.GiaBan,
                     SoLuong = soLuong = 1,
                     Hinh = mauxe.HinhAnh1,
-
                 };
 
                 myCart.Add(item);
             }
             else
             {
-                item.SoLuong++;
-                soLuong = item.SoLuong;
-                thanhTien = item.ThanhTien;
+                if (item.SoLuong < amount)
+                {
+                    soLuong = ++item.SoLuong;
+                    thanhTien = item.ThanhTien;
+                }
+                else
+                    return BadRequest();
             }
+
             foreach (var mauxe in myCart)
             {
                 tongTien += mauxe.ThanhTien;
@@ -74,10 +80,10 @@ namespace Web_BanXeMoTo.Controllers
             {
                 return Json(new
                 {
-                    id = id,
-                    tongTien = tongTien,
-                    thanhTien = thanhTien,
-                    soLuong = soLuong,
+                    id,
+                    tongTien,
+                    thanhTien,
+                    soLuong,
                     total = Carts.Sum(c => c.SoLuong),
                 });
             }
@@ -115,10 +121,10 @@ namespace Web_BanXeMoTo.Controllers
             {
                 return Json(new
                 {
-                    id = id,
-                    tongTien = tongTien,
-                    thanhTien = thanhTien,
-                    soLuong = soLuong,
+                    id,
+                    tongTien,
+                    thanhTien,
+                    soLuong,
                     total = Carts.Sum(c => c.SoLuong),
                 });
             }
