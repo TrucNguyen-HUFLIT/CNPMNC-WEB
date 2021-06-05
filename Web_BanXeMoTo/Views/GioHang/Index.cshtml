@@ -68,7 +68,7 @@
 
                                     <tr>
                                         <th>Tổng tiền</th>
-                                        <td>@string.Format("{0:N0}", ((Int64)ToTalAmount)) VNĐ</td>
+                                        <td><span id="tongTien">@string.Format("{0:N0}", ((Int64)ToTalAmount))</span> VNĐ</td>
                                     </tr>
 
 
@@ -101,7 +101,8 @@
 
                         $("#cart_count").html(data.total);
                         $("#soLuong_" + data.id).html(data.soLuong);
-                        $("#thanhTien_" + data.id).html(data.thanhTien);
+                        $("#thanhTien_" + data.id).html(new Intl.NumberFormat().format(data.thanhTien));
+                        $("#tongTien").html(new Intl.NumberFormat().format(data.tongTien));
 
                         console.log(data)
                     },
@@ -145,13 +146,15 @@
 
                         $("#cart_count").html(data.total);
                         $("#soLuong_" + data.id).html(data.soLuong);
-                        $("#thanhTien_" + data.id).html(data.thanhTien);
+                        $("#thanhTien_" + data.id).html(new Intl.NumberFormat().format(data.thanhTien));
+                        $("#tongTien").html(new Intl.NumberFormat().format(data.tongTien));
                         console.log(data)
 
                     },
                 });
             });
         });
+
     </script>
 }
 
