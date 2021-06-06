@@ -3845,3 +3845,8 @@ D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_Ban
 D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\ref\Web_BanXeMoTo.dll
 D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.pdb
 D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.genruntimeconfig.cache
+D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\BraintreeHttp-Dotnet.dll
+D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\Source.dll
+D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\GioHang\CheckoutSuccess.cshtml.g.cs
+D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\GioHang\CheckoutFail.cshtml.g.cs
+D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\GioHang\Notify.cshtml.g.cs

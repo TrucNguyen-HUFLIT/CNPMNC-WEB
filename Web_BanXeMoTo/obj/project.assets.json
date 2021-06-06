@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "BraintreeHttp-Dotnet/0.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/BraintreeHttp-Dotnet.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/BraintreeHttp-Dotnet.dll": {}
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -1008,6 +1017,18 @@
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "PayPal/2.0.0-rc2": {
+        "type": "package",
+        "dependencies": {
+          "BraintreeHttp-Dotnet": "0.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Source.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Source.dll": {}
         }
       },
       "Portable.BouncyCastle/1.8.10": {
@@ -2260,6 +2281,18 @@
     }
   },
   "libraries": {
+    "BraintreeHttp-Dotnet/0.3.0": {
+      "sha512": "ARHcstlJ2uRxqJVAxhJ7PJbzsDD9us+docpKHuay6psUVpQJo4cH0negfo8rv/iEakGhx0Rxgp/HUu6ZLa+lsA==",
+      "type": "package",
+      "path": "braintreehttp-dotnet/0.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "braintreehttp-dotnet.0.3.0.nupkg.sha512",
+        "braintreehttp-dotnet.nuspec",
+        "lib/netstandard2.0/BraintreeHttp-Dotnet.dll"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -4043,6 +4076,18 @@
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "newtonsoft.json.11.0.2.nupkg.sha512",
         "newtonsoft.json.nuspec"
+      ]
+    },
+    "PayPal/2.0.0-rc2": {
+      "sha512": "QmsC08dT2Bp4zxsWAXYnnYDL3x870LbC81Hodlmm3Df/WGUOVkcyMSFcTdZ8l0Xw823WW6WgZVl2ZIx7phWuCw==",
+      "type": "package",
+      "path": "paypal/2.0.0-rc2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Source.dll",
+        "paypal.2.0.0-rc2.nupkg.sha512",
+        "paypal.nuspec"
       ]
     },
     "Portable.BouncyCastle/1.8.10": {
@@ -7837,24 +7882,29 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.4",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
+      "PayPal >= 2.0.0-rc2",
       "ReflectionIT.Mvc.Paging >= 5.1.1",
       "X.PagedList.Mvc.Core >= 8.1.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dell\\.nuget\\packages\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\CNPM\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
+      "projectUniqueName": "D:\\lap trinh\\năm 3\\Semester 2\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
       "projectName": "Web_BanXeMoTo",
-      "projectPath": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\CNPM\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
-      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-      "outputPath": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\CNPM\\CNPMNC-WEB\\Web_BanXeMoTo\\obj\\",
+      "projectPath": "D:\\lap trinh\\năm 3\\Semester 2\\CNPMNC-WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "D:\\lap trinh\\năm 3\\Semester 2\\CNPMNC-WEB\\Web_BanXeMoTo\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7902,6 +7952,10 @@
             "target": "Package",
             "version": "[5.0.2, )"
           },
+          "PayPal": {
+            "target": "Package",
+            "version": "[2.0.0-rc2, )"
+          },
           "ReflectionIT.Mvc.Paging": {
             "target": "Package",
             "version": "[5.1.1, )"
@@ -7929,7 +7983,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

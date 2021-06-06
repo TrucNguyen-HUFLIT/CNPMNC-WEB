@@ -156,8 +156,12 @@
                                                 <th>
                                                     <label asp-for="HoaDon.NgayDat" class="control-label"></label>
                                                 </th>
+                                                
                                                 <th>
                                                     <label class="control-label">Tổng tiền</label>
+                                                </th>
+                                                <th>
+                                                    <label asp-for="HoaDon.TrangThai" class="control-label"></label>
                                                 </th>
                                                 <th></th>
                                             </tr>
@@ -185,6 +189,7 @@
                                     }
                                                     @string.Format("{0:N0}", ((double)@amount)) } VNĐ
                                     </td>
+                                    <td>@Html.DisplayFor(model=>item.TrangThai)</td>
                                     <td>
                                         <a asp-action="Details" asp-route-id="@item.Idhd" class="btn btn-sm btn-outline-info">Chi tiết</a>
                                     </td>
