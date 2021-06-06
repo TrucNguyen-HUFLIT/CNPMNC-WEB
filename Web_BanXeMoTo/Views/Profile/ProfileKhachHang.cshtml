@@ -118,11 +118,11 @@
                                 @Html.ActionLink("Lịch sử đơn hàng", "History", "Profile")
                             </li>
                             <li>
+                                @Html.ActionLink("Đổi mật khẩu", "ChangePasswordKH", "Profile")
+                            </li>
+                            <li>
                                 @Html.ActionLink("Đăng xuất", "Logout", "Login")
                             </li>
-
-
-
                         </ul>
                     </div>
                 </div>
@@ -133,63 +133,65 @@
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
                             <div class="card-body">
-                                <form asp-action="ProfileKhachHang" enctype="multipart/form-data">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <div class="form-group">
-                                        <div class="card-img ">
-                                            @*<img src="@(Model.nhanVien != null? Url.Content("/img"+Model.nhanVien.Avt) :"/img/icon.png")" height="200" width="200" id="previewImg" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />*@
-                                            <img src="@Model.Avatar" id="output" height="200" width="200" style="margin: auto;display: block;border-radius: 50%;">
-                                            <br />
-                                            <input asp-for="UploadHinh" accept="image/*" style="margin-left: auto; margin-right: auto; display: block;" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" />
+                                <div style="margin-left: 50px; margin-right: 50px">
+                                    <form asp-action="ProfileKhachHang" enctype="multipart/form-data">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-group">
+                                            <div class="card-img ">
+                                                @*<img src="@(Model.nhanVien != null? Url.Content("/img"+Model.nhanVien.Avt) :"/img/icon.png")" height="200" width="200" id="previewImg" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />*@
+                                                <img src="@Model.Avatar" id="output" height="200" width="200" style="margin: auto;display: block;border-radius: 50%;">
+                                                <br />
+                                                <input asp-for="UploadHinh" accept="image/*" style="margin-left: auto; margin-right: auto; display: block;" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" />
+                                            </div>
+
                                         </div>
 
-                                    </div>
+                                        <input asp-for="Idkh" class="" readonly hidden />
 
-                                    <input asp-for="Idkh" class="" readonly hidden />
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label"></label>
+                                            <div class="col-md-12">
+                                                <input asp-for="Email" class="form-control" readonly />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
 
-                                    <div class="form-group">
-                                        <label asp-for="Email" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input asp-for="Email" class="form-control" readonly />
-                                            <span asp-validation-for="Email" class="text-danger"></span>
                                         </div>
 
-                                    </div>
+                                        <div class="form-group">
+                                            <label asp-for="TenKh" class="control-label"></label>
+                                            <div class="col-md-12">
+                                                <input asp-for="TenKh" class="form-control" />
+                                                <span asp-validation-for="TenKh" class="text-danger"></span>
+                                            </div>
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label asp-for="TenKh" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input asp-for="TenKh" class="form-control" />
-                                            <span asp-validation-for="TenKh" class="text-danger"></span>
+                                        <div class="form-group">
+                                            <label asp-for="DienThoai" class="control-label"></label>
+                                            <div class="col-md-12">
+                                                <input asp-for="DienThoai" class="form-control" />
+                                                <span asp-validation-for="DienThoai" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label asp-for="DienThoai" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input asp-for="DienThoai" class="form-control" />
-                                            <span asp-validation-for="DienThoai" class="text-danger"></span>
+                                        <div class="form-group">
+                                            <label asp-for="DiaChi" class="control-label"></label>
+                                            <div class="col-md-12">
+                                                <input asp-for="DiaChi" class="form-control" />
+                                                <span asp-validation-for="DiaChi" class="text-danger"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="DiaChi" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input asp-for="DiaChi" class="form-control" />
-                                            <span asp-validation-for="DiaChi" class="text-danger"></span>
+                                        <div class="form-group">
+                                            <label asp-for="Pass" class="control-label"></label>
+                                            <div class="col-md-12">
+                                                <input name="Pass" type="password" class="form-control" placeholder="Điền mật khẩu để thay đổi thông tin" />
+                                                <span asp-validation-for="Pass" class="text-danger"></span>
+                                                <span class="text-danger">@ViewBag.ErrorPass</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Pass" class="control-label"></label>
-                                        <div class="col-md-12">
-                                            <input name="Pass" type="password" class="form-control" placeholder="Điền mật khẩu để thay đổi thông tin" />
-                                            <span asp-validation-for="Pass" class="text-danger"></span>
-                                            <span class="text-danger">@ViewBag.ErrorPass</span>
+                                        <div class="form-group">
+                                            <input type="submit" value="Cập nhật" class="btn btn-primary" style="margin-left: 100px; width: 100px;" />
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" value="Lưu" class="btn btn-primary" />
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -199,11 +201,8 @@
         </div>
 
     </div>
-    </div>
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
     <script type="text/javascript" src="~/js/main.js"></script>
-
 </body>
-
-
+</html>

@@ -10634,7 +10634,7 @@ button,
     color: #343a40;
     white-space: nowrap;
     transition: all .2s;
-    margin: .1rem 0
+    margin: .1rem 0;
 }
 
 .vertical-nav-menu li a:hover {

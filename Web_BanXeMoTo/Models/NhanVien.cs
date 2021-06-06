@@ -47,5 +47,21 @@ namespace Web_BanXeMoTo.Models
 
         [NotMapped]
         public IFormFile UpLoadAvt { get; set; }
+
+
+        // Change Password
+        [NotMapped]
+        [Display(Name = "Nhập mật khẩu cũ")]
+        public string CurrentPassword { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Nhập mật khẩu mới")]
+        public string NewPassword { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Xác nhận mật khẩu mới")]
+        [Compare("NewPassword", ErrorMessage = "Xác nhận mật khẩu không chính xác, vui lòng kiểm tra lại !!!")]
+        public string ConfirmNewPassword { get; set; }
+
     }
 }

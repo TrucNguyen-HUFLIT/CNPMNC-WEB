@@ -88,7 +88,7 @@ namespace Web_BanXeMoTo.Controllers
                     return View(model);
                 }
                 khachHang.Avatar = StaticAcc.Avatar;
-                ViewBag.ErrorPass = "Mật khẩu sai!";
+                ViewBag.ErrorPass = "Sai mật khẩu !!!";
                 return View(khachHang);
             }
             khachHang.Avatar = StaticAcc.Avatar;
@@ -202,14 +202,106 @@ namespace Web_BanXeMoTo.Controllers
                                             .Where(x => x.Idtype == model.Idtype)
                                             .Select(x => x.Name)
                                             .FirstOrDefaultAsync();
-
                     return View(model);
                 }
                 nhanVien.Avatar = StaticAcc.Avatar;
-                ViewBag.ErrorPass = "Mật khẩu sai!";
+                ViewBag.ErrorPass = "Sai mật khẩu !!!";
                 return View(nhanVien);
             }
             nhanVien.Avatar = StaticAcc.Avatar;
+            return View(nhanVien);
+        }
+
+        // Change Password Khach hang (--->
+        [Authorize(Roles = "customer")]
+        [HttpGet]
+        public IActionResult ChangePasswordKH()
+        {
+            if (User.FindFirst(ClaimTypes.Email) == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            string email = User.FindFirst(ClaimTypes.Email).Value;
+            var model = new KhachHang();
+            model = database.KhachHangs.Where(x => x.Email == email).FirstOrDefault();
+            return View(model);
+        }
+
+        [Authorize(Roles = "customer")]
+        [HttpPost]
+        public async Task<IActionResult> ChangePasswordKH(KhachHang khachHang)
+        {
+            if (khachHang != null)
+            {
+                var model = await database.KhachHangs.Where(x => x.Idkh == khachHang.Idkh).FirstOrDefaultAsync();
+                if (model.Pass == khachHang.CurrentPassword)
+                {
+                    if (khachHang.NewPassword != null && khachHang.ConfirmNewPassword != null)
+                    {
+                        if (khachHang.ConfirmNewPassword == khachHang.NewPassword)
+                        {
+                            model.Pass = khachHang.NewPassword;
+
+                            database.Update(model);
+                            await database.SaveChangesAsync();
+                            TempData["result"] = "Đổi mật khẩu thành công !!!";
+                            return View(model);
+                        }
+                        return View(model);
+                    }
+                    ViewBag.ErrorNull = "Không được bỏ trống";
+                }
+                ViewBag.ErrorPass = "Sai mật khẩu !!!";
+                return View(model);
+            }
+            return View(khachHang);
+        } // <----)
+
+
+
+        [Authorize(Roles = "admin, staff")]
+        [HttpGet]
+        public IActionResult ChangePasswordNV()
+        {
+            if (User.FindFirst(ClaimTypes.Email) == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            string email = User.FindFirst(ClaimTypes.Email).Value;
+            var model = new NhanVien();
+            model = database.NhanViens.Where(x => x.Email == email).FirstOrDefault();
+            return View(model);
+        }
+
+        [Authorize(Roles = "admin, staff")]
+        [HttpPost]
+        public async Task<IActionResult> ChangePasswordNV(NhanVien nhanVien)
+        {
+            if (nhanVien != null)
+            {
+                var model = await database.NhanViens.Where(x => x.Idnv == nhanVien.Idnv).FirstOrDefaultAsync();
+                if (model.Pass == nhanVien.CurrentPassword)
+                {
+                    if (nhanVien.NewPassword != null && nhanVien.ConfirmNewPassword != null)
+                    {
+                        if (nhanVien.ConfirmNewPassword == nhanVien.NewPassword)
+                        {
+                            model.Pass = nhanVien.NewPassword;
+
+                            database.Update(model);
+                            await database.SaveChangesAsync();
+                            TempData["result"] = "Đổi mật khẩu thành công !!!";
+                            return View(model);
+                        }
+                        return View(model);
+                    }
+                    ViewBag.ErrorNull = "Không được bỏ trống";
+                }
+                ViewBag.ErrorPass = "Sai mật khẩu !!!";
+                return View(model);
+            }
             return View(nhanVien);
         }
     }

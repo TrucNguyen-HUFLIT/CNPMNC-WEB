@@ -119,8 +119,8 @@
                                     @Html.ActionLink("Quản lý Hãng xe", "Index", "Hang")
                                 </li>
                                 @*<li>
-                                        <a href="@Url.ActionLink("Index", "MauXe")">Quản lý Giá</a>
-                                    </li>*@
+                <a href="@Url.ActionLink("Index", "MauXe")">Quản lý Giá</a>
+            </li>*@
                                 <li>
                                     @Html.ActionLink("Quản lý Hóa đơn", "Index", "HoaDon")
                                 </li>
@@ -155,7 +155,9 @@
                                     @Html.ActionLink("Danh sách Khách hàng", "Index", "KhachHang")
                                 </li>
                             }
-
+                            <li>
+                                @Html.ActionLink("Đổi mật khẩu", "ChangePasswordNV", "Profile")
+                            </li>
                             <li>
                                 @Html.ActionLink("Đăng xuất", "Logout", "Login")
                             </li>
@@ -175,5 +177,5 @@
     @RenderSection("monthPicker", required: false)
 
 </body>
-
+</html>
 
