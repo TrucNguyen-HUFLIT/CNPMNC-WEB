@@ -109,7 +109,7 @@ namespace Web_BanXeMoTo.Controllers
                 model.khachHang.Pass = khachHang.Pass;
                 model.khachHang.DienThoai = khachHang.DienThoai;
                 model.khachHang.DiaChi = khachHang.DiaChi;
-              
+
                 string wwwRootPath = hostEnvironment.WebRootPath;
 
                 string fileName1;
@@ -131,7 +131,7 @@ namespace Web_BanXeMoTo.Controllers
             }
             return View(model);
         }
-        
+
     }
     public class ViewModelKH
     {

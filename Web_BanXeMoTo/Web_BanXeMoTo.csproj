@@ -16,13 +16,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\BanHang\ChuaXacNhan.cshtml" />
+    <None Include="Views\BanHang\Create.cshtml" />
+    <None Include="Views\BanHang\CTHD.cshtml" />
+    <None Include="Views\BanHang\DaXacNhan.cshtml" />
+    <None Include="Views\BanHang\Details.cshtml" />
     <None Include="Views\Customer\Home.cshtml" />
-    <None Include="Views\HoaDon\Create.cshtml" />
-    <None Include="Views\HoaDon\CTHD.cshtml" />
     <None Include="Views\HoaDon\Details.cshtml" />
     <None Include="Views\HoaDon\Index.cshtml" />
     <None Include="Views\KhachHang\Index.cshtml" />
     <None Include="Views\Login\Login.cshtml" />
+    <None Include="Views\MauXe\Create.cshtml" />
+    <None Include="Views\MauXe\Delete.cshtml" />
+    <None Include="Views\MauXe\Details.cshtml" />
+    <None Include="Views\MauXe\Edit.cshtml" />
+    <None Include="Views\MauXe\Index.cshtml" />
+    <None Include="Views\MauXe\_FormEdit.cshtml" />
+    <None Include="Views\MauXe\_ListDetails.cshtml" />
+    <None Include="Views\NhanVien\Create.cshtml" />
+    <None Include="Views\NhanVien\Detail.cshtml" />
+    <None Include="Views\NhanVien\Edit.cshtml" />
+    <None Include="Views\NhanVien\Index.cshtml" />
+    <None Include="Views\ThongKe\Index.cshtml" />
+    <None Include="Views\Xe\Create.cshtml" />
+    <None Include="Views\Xe\Index.cshtml" />
     <None Include="wwwroot\customer\fonts\fontawesome-webfont.svg" />
     <None Include="wwwroot\customer\fonts\fontawesome-webfont.woff2" />
     <None Include="wwwroot\customer\fonts\glyphicons-halflings-regular.svg" />

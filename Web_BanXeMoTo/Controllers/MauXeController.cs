@@ -104,8 +104,14 @@ namespace Web_BanXeMoTo.Controllers
                 ListHang = database.Hangs.ToArray(),
                 ListKhuyenMai = database.KhuyenMais.ToArray()
             };
+
             if (ModelState.IsValid)
             {
+                if (database.MauXes.Any(x => x.Idmau == mauXe.Idmau || x.TenXe == mauXe.TenXe))
+                {
+                    ViewBag.error = "Tên xe hoặc ID mẫu đã tồn tại";
+                    return View(model);
+                }
                 #region Save Image from wwwroot/img
                 string wwwRootPath = hostEnvironment.WebRootPath;
                 string fileName1 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh1.FileName);
@@ -120,9 +126,10 @@ namespace Web_BanXeMoTo.Controllers
                 mauXe.HinhAnh2 = "/img/Products/" + fileName2 + extension2;
                 mauXe.HinhAnh3 = "/img/Products/" + fileName3 + extension3;
 
-                string path1 = Path.Combine(wwwRootPath + "/img/Products/", fileName1);
-                string path2 = Path.Combine(wwwRootPath + "/img/Products/", fileName2);
-                string path3 = Path.Combine(wwwRootPath + "/img/Products/", fileName3);
+
+                string path1 = Path.Combine(wwwRootPath + "/img/Products/", fileName1 + extension1);
+                string path2 = Path.Combine(wwwRootPath + "/img/Products/", fileName2 + extension2);
+                string path3 = Path.Combine(wwwRootPath + "/img/Products/", fileName3 + extension3);
 
 
                 using (var fileStream = new FileStream(path1, FileMode.Create))
@@ -220,7 +227,7 @@ namespace Web_BanXeMoTo.Controllers
                     fileName1 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh1.FileName);
                     extension1 = Path.GetExtension(mauXe.UploadHinh1.FileName);
                     model.mauXe.HinhAnh1 = "/img/Products/" + fileName1 + extension1;
-                    string path1 = Path.Combine(wwwRootPath + "/img/Products/", fileName1);
+                    string path1 = Path.Combine(wwwRootPath + "/img/Products/", fileName1 + extension1);
                     using (var fileStream = new FileStream(path1, FileMode.Create))
                     {
                         await mauXe.UploadHinh1.CopyToAsync(fileStream);
@@ -231,7 +238,7 @@ namespace Web_BanXeMoTo.Controllers
                     fileName2 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh2.FileName);
                     extension2 = Path.GetExtension(mauXe.UploadHinh2.FileName);
                     model.mauXe.HinhAnh2 = "/img/Products/" + fileName2 + extension2;
-                    string path2 = Path.Combine(wwwRootPath + "/img/Products/", fileName2);
+                    string path2 = Path.Combine(wwwRootPath + "/img/Products/", fileName2 + extension2);
                     using (var fileStream = new FileStream(path2, FileMode.Create))
                     {
                         await mauXe.UploadHinh2.CopyToAsync(fileStream);
@@ -243,7 +250,7 @@ namespace Web_BanXeMoTo.Controllers
                     fileName3 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh3.FileName);
                     extension3 = Path.GetExtension(mauXe.UploadHinh3.FileName);
                     model.mauXe.HinhAnh3 = "/img/Products/" + fileName3 + extension3;
-                    string path3 = Path.Combine(wwwRootPath + "/img/Products/", fileName3);
+                    string path3 = Path.Combine(wwwRootPath + "/img/Products/", fileName3 + extension3);
                     using (var fileStream = new FileStream(path3, FileMode.Create))
                     {
                         await mauXe.UploadHinh3.CopyToAsync(fileStream);

@@ -38,8 +38,5 @@ namespace Web_BanXeMoTo.Models
         DaXacNhan = 1,
         [Display(Name = "Đã thanh toán")]
         DaThanhToan = 2,
-        [Display(Name = "Hoàn tất")]
-        HoanTat = 3,
-
     }
 }

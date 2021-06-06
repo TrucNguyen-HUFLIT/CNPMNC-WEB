@@ -45,6 +45,8 @@
                             <label asp-for="mauXe.Idmau" class="control-label"></label>
                             <input asp-for="mauXe.Idmau" class="form-control" />
                             <span asp-validation-for="mauXe.Idmau" class="text-danger"></span>
+                            <span  class="text-danger">@ViewBag.error</span>
+
                         </div>
                         
                         <partial name="_FormEdit" model="Model" />

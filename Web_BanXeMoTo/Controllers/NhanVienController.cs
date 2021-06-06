@@ -110,9 +110,19 @@ namespace Web_BanXeMoTo.Controllers
         public async Task<IActionResult> Create(NhanVien nhanVien)
         {
 
-            var model = new ViewModelNV();
-            model.ListType = database.TypeAccs.ToArray();
-            model.nhanVien = nhanVien;
+
+            var model = new ViewModelNV
+            {
+                ListNhanVien = database.NhanViens.ToArray(),
+                ListType = database.TypeAccs.ToArray(),
+                nhanVien = nhanVien
+            };
+            model.nhanVien.Idnv = model.ListNhanVien[^1].Idnv + 1;
+            if (database.NhanViens.Any(x => x.Email == nhanVien.Email))
+            {
+                ViewBag.error = "Email nhân viên đã tồn tại";
+                return View(model);
+            }
 
             if (ModelState.IsValid)
             {
@@ -120,7 +130,7 @@ namespace Web_BanXeMoTo.Controllers
                 string fileName = Path.GetFileNameWithoutExtension(nhanVien.UpLoadAvt.FileName);
                 string extension = Path.GetExtension(nhanVien.UpLoadAvt.FileName);
                 nhanVien.Avatar = "/img/Avatar/" + fileName + extension;
-                string path = Path.Combine(wwwRootPath + "/img/Avatar/", fileName);
+                string path = Path.Combine(wwwRootPath + "/img/Avatar/", fileName + extension);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     await nhanVien.UpLoadAvt.CopyToAsync(fileStream);
@@ -164,7 +174,7 @@ namespace Web_BanXeMoTo.Controllers
                     fileName = Path.GetFileNameWithoutExtension(nhanVien.UpLoadAvt.FileName);
                     extension = Path.GetExtension(nhanVien.UpLoadAvt.FileName);
                     model.nhanVien.Avatar = "/img/Avatar/" + fileName + extension;
-                    string path = Path.Combine(wwwRootPath + "/img/Avatar/", fileName);
+                    string path = Path.Combine(wwwRootPath + "/img/Avatar/", fileName + extension);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         await nhanVien.UpLoadAvt.CopyToAsync(fileStream);

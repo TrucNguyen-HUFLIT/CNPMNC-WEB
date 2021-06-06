@@ -75,19 +75,19 @@
                             <!-- / header top left -->
                             @if (Web_BanXeMoTo.Models.StaticAcc.Avatar == "")
                             {
-                <div class="aa-header-top-right">
-                    <ul class="aa-head-top-nav-right">
-                        <li><a asp-action="Login" asp-controller="Login">Đăng nhập</a></li>
-                        <li><a asp-action="Register" asp-controller="Login">Đăng ký</a></li>
-                    </ul>
-                </div> }
+                                <div class="aa-header-top-right">
+                                    <ul class="aa-head-top-nav-right">
+                                        <li><a asp-action="Login" asp-controller="Login">Đăng nhập</a></li>
+                                        <li><a asp-action="Register" asp-controller="Login">Đăng ký</a></li>
+                                    </ul>
+                                </div> }
                             else
                             {
-<div class="aa-header-top-right">
-    <ul class="aa-head-top-nav-right">
-        <li><a asp-action="logout" asp-controller="Login">Đăng xuất</a></li>
-    </ul>
-</div>}
+                                <div class="aa-header-top-right">
+                                    <ul class="aa-head-top-nav-right">
+                                        <li><a asp-action="logout" asp-controller="Login">Đăng xuất</a></li>
+                                    </ul>
+                                </div>}
 
                         </div>
                     </div>
@@ -112,16 +112,16 @@
                             <!-- cart box -->
                             @if (Web_BanXeMoTo.Models.StaticAcc.Avatar != "")
                             {
-                <div class="aa-cartbox">
-                    <a class="aa-cart-link" asp-action="ProfileKhachHang" asp-controller="Profile">
-                        <div>
-                            <img src="@Web_BanXeMoTo.Models.StaticAcc.Avatar" style=" border-radius: 50%; " height="40" width="40" />
-                        </div>
-                        <span class="aa-cart-title">
-                            @Web_BanXeMoTo.Models.StaticAcc.Name
-                        </span>
-                    </a>
-                </div>}
+                                <div class="aa-cartbox">
+                                    <a class="aa-cart-link" asp-action="ProfileKhachHang" asp-controller="Profile">
+                                        <div>
+                                            <img src="@Web_BanXeMoTo.Models.StaticAcc.Avatar" style=" border-radius: 50%; " height="40" width="40" />
+                                        </div>
+                                        <span class="aa-cart-title">
+                                            @Web_BanXeMoTo.Models.StaticAcc.Name
+                                        </span>
+                                    </a>
+                                </div>}
 
                             <!-- / cart box -->
                             <!-- search box -->

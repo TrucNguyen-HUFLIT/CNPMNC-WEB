@@ -1,0 +1,115 @@
+﻿@model Web_BanXeMoTo.Controllers.HoaDonViewModel
+
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
+
+@{ ViewData["Title"] = "DS HĐ chưa xác nhận";
+
+    Layout = "~/Views/Shared/_LayoutManager.cshtml"; }
+
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    <h2 style="font-weight:500">Quản lý Bán hàng</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        <li class="nav-item">
+            <a asp-action="ChuaXacNhan" class="nav-link active">
+                <span>DS HĐ chưa xác nhận</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="DaXacNhan" class="nav-link ">
+                <span>DS HĐ đã xác nhận</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Create" class="nav-link ">
+                <span>Tạo hóa đơn</span>
+            </a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label asp-for="HoaDon.Idhd" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="HoaDon.IdkhNavigation.TenKh" class="control-label"></label>
+                                </th>
+
+                                <th>
+                                    <label asp-for="HoaDon.NgayDat" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label asp-for="HoaDon.TrangThai" class="control-label"></label>
+                                </th>
+                                <th>
+                                    <label class="control-label">Tổng tiền</label>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ListHoaDon)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Idhd
+                                    </td>
+
+                                    <td>
+                                        @foreach (var kh in Model.ListKhachHang)
+                                        {
+
+                                            if (item.Idkh == kh.Idkh)
+                                            {
+                                                @kh.TenKh}
+                                        }
+                                    </td>
+                                    <td>
+                                        @item.NgayDat
+                                    </td>
+                                    <td>
+                                        @{ double amount = 0;
+                                            @foreach (var cthd in Model.ListChiTietHd)
+                                            {
+
+                                                if (item.Idhd == cthd.Idhd)
+                                                {
+                                                    amount += (((double)cthd.GiaBan) - ((double)cthd.GiaBan) * (cthd.KhuyenMai == 0 ? 1 : (double)cthd.KhuyenMai / 100));
+                                                }
+                                            }
+                                            @string.Format("{0:N0}", ((double)@amount))
+                                        } VNĐ
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => item.TrangThai)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Idhd" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                                        <a asp-action="XacNhan" asp-route-id="@item.Idhd" class="btn btn-sm btn-outline-info">Gửi mail xác nhận</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model.ListHoaDon, page => Url.Action("ChuaXacNhan", new { page }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

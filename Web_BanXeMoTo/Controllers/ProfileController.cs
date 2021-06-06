@@ -30,7 +30,7 @@ namespace Web_BanXeMoTo.Controllers
         {
             if (User.FindFirst(ClaimTypes.Email) == null)
             {
-                return RedirectToAction("Login","Login");
+                return RedirectToAction("Login", "Login");
             }
 
             string email = User.FindFirst(ClaimTypes.Email).Value;
@@ -53,7 +53,7 @@ namespace Web_BanXeMoTo.Controllers
             if (ModelState.IsValid)
             {
                 var model = await database.KhachHangs.Where(x => x.Idkh == khachHang.Idkh).FirstOrDefaultAsync();
-                if(model.Pass == khachHang.Pass)
+                if (model.Pass == khachHang.Pass)
                 {
                     model.TenKh = khachHang.TenKh;
                     model.DienThoai = khachHang.DienThoai;
@@ -67,8 +67,8 @@ namespace Web_BanXeMoTo.Controllers
                     {
                         fileName = Path.GetFileNameWithoutExtension(khachHang.UploadHinh.FileName);
                         extension = Path.GetExtension(khachHang.UploadHinh.FileName);
-                        model.Avatar = "/img/" + fileName + extension;
-                        string path1 = Path.Combine(wwwRootPath + "/img/", fileName);
+                        model.Avatar = "/img/Avatar/" + fileName + extension;
+                        string path1 = Path.Combine(wwwRootPath + "/img/Avatar/", fileName + extension);
                         using (var fileStream = new FileStream(path1, FileMode.Create))
                         {
                             await khachHang.UploadHinh.CopyToAsync(fileStream);
@@ -108,11 +108,11 @@ namespace Web_BanXeMoTo.Controllers
                 return RedirectToAction("Login", "Login");
             }
             string email = User.FindFirst(ClaimTypes.Email).Value;
-           var Idkh= await database.KhachHangs.Where(x => x.Email == email).Select(x=>x.Idkh).FirstOrDefaultAsync();
+            var Idkh = await database.KhachHangs.Where(x => x.Email == email).Select(x => x.Idkh).FirstOrDefaultAsync();
 
             ViewBag.Role = TempData["Role"];
 
-            var ModelList = database.HoaDons.Where(x=>x.Idkh==Idkh).ToList();
+            var ModelList = database.HoaDons.Where(x => x.Idkh == Idkh).ToList();
 
             //ViewBag.CurrentFilter, provides the view with the current filter string.
             //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.
@@ -183,8 +183,8 @@ namespace Web_BanXeMoTo.Controllers
                     {
                         fileName = Path.GetFileNameWithoutExtension(nhanVien.UpLoadAvt.FileName);
                         extension = Path.GetExtension(nhanVien.UpLoadAvt.FileName);
-                        model.Avatar = "/img/" + fileName + extension;
-                        string path1 = Path.Combine(wwwRootPath + "/img/", fileName);
+                        model.Avatar = "/img/Avatar/" + fileName + extension;
+                        string path1 = Path.Combine(wwwRootPath + "/img/Avatar/", fileName + extension);
                         using (var fileStream = new FileStream(path1, FileMode.Create))
                         {
                             await nhanVien.UpLoadAvt.CopyToAsync(fileStream);
@@ -212,7 +212,5 @@ namespace Web_BanXeMoTo.Controllers
             nhanVien.Avatar = StaticAcc.Avatar;
             return View(nhanVien);
         }
-
-
     }
 }

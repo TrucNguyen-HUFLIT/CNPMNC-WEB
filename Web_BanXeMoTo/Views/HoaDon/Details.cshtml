@@ -23,16 +23,6 @@
                 <span>Danh sách hóa đơn</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a asp-action="Create" class="nav-link ">
-                <span>Tạo hóa đơn</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a asp-action="CTHD" class="nav-link " asp-route-id="@Model.ChiTietHd.Idhd">
-                <span>Thêm xe</span>
-            </a>
-        </li>
     </ul>
     <div class="row">
         <div class="col-md-12">
@@ -40,7 +30,7 @@
                 <div class="card-body">
                     <table class="table table-hover table-sm">
                         <h3>ID Hóa đơn: @Model.ChiTietHd.Idhd</h3>
-                        <br/>
+                        <br />
                         <thead>
                             <tr>
                                 <th>
@@ -56,33 +46,32 @@
                                 <th>
                                     <label class="control-label">Thành tiền</label>
                                 </th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model.ListChiTietHd)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Idxe)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.KhuyenMai)
-                                </td>
-                                <td>
-                                    @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ
-                                </td>
-                                <td>
-                                    @string.Format("{0:N0}", (((double)item.GiaBan)-((double)item.GiaBan)*(item.KhuyenMai== 0 ? 1 : (double)item.KhuyenMai / 100))) VNĐ
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Xóa", "DeleteCTHD", new { idXe = item.Idxe, idHD = item.Idhd }, new { @class = "btn btn-sm btn-outline-danger" })
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Idxe)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.KhuyenMai)
+                                    </td>
+                                    <td>
+                                        @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ
+                                    </td>
+                                    <td>
+                                        @string.Format("{0:N0}", (((double)item.GiaBan) - ((double)item.GiaBan) * (item.KhuyenMai == 0 ? 1 : (double)item.KhuyenMai / 100))) VNĐ
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
-                </div>
+                    <br /><br />
+                    <a asp-action="Index" class="btn btn-secondary">Trở về</a>
+
+                </div>        
             </div>
         </div>
     </div>
