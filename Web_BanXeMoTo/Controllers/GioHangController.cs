@@ -202,6 +202,7 @@ namespace Web_BanXeMoTo.Controllers
 
                 }
             }
+            HttpContext.Session.Remove("GioHang");
             return RedirectToAction("Home", "Customer");
         }
 

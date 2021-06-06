@@ -123,9 +123,6 @@
                             <li>
                                 @Html.ActionLink("Đăng xuất", "Logout", "Login")
                             </li>
-
-
-
                         </ul>
                     </div>
                 </div>
@@ -159,6 +156,9 @@
                                                 <th>
                                                     <label class="control-label">Tổng tiền</label>
                                                 </th>
+                                                <th>
+                                                    <label asp-for="HoaDon.TrangThai" class="control-label"></label>
+                                                </th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -180,10 +180,13 @@
 
                                         if (item.Idhd == cthd.Idhd)
                                         {
-                                            amount += (((double)cthd.GiaBan) - ((double)cthd.GiaBan) * (cthd.KhuyenMai == 0 ? 1 : (double)cthd.KhuyenMai / 100));
+                                            amount += ((cthd.KhuyenMai == 0 ? ((double)cthd.GiaBan)  : ((double)cthd.GiaBan) - ((double)cthd.GiaBan) * ((double)cthd.KhuyenMai / 100)));
                                         }
                                     }
                                                     @string.Format("{0:N0}", ((double)@amount)) } VNĐ
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor( x => item.TrangThai)
                                     </td>
                                     <td>
                                         <a asp-action="Details" asp-route-id="@item.Idhd" class="btn btn-sm btn-outline-info">Chi tiết</a>

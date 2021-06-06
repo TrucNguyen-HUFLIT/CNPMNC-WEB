@@ -32,11 +32,14 @@
         <div class="col-md-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
+                    @Html.ActionLink("Đã bán", "Index", new { trangThai = Web_BanXeMoTo.Models.TrangThaiXe.DaBan}, new { @class = " btn btn-primary"@*, @style = "width: 150px; padding: 5px;"*@ })
+                    @Html.ActionLink("Chưa bán", "Index", new { trangThai = Web_BanXeMoTo.Models.TrangThaiXe.ChuaBan }, new {@class = " btn btn-primary" } )
+
                     @using (Html.BeginForm("Index", "Xe", FormMethod.Get, new { @style = "float: right; width: 40%" }))
                     {
-                        <input type="text" id="searchString" name="searchString" placeholder="Find by id or name">
-                        <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />}
-                    <br />
+                        <input type="text" id="searchString" name="searchString" placeholder="Tìm kiếm...">
+                        <input type="submit" value="Tìm kiếm" class="btn btn-outline-info" style="margin-bottom:5px" />}
+                    <br /><br />
                     <table class="table table-hover table-sm">
                         <thead>
                             <tr>
@@ -64,7 +67,7 @@
                                     <label class="control-label">Khuyến mãi</label>
                                 </th>
                                 <th class="text-center">
-                                    <label class="control-label">Tình trạng </label>
+                                    <label asp-for="Xe.TrangThai" class="control-label"></label>
                                 </th>
                                 @*<th></th>*@
                             </tr>
@@ -149,13 +152,13 @@
                                         }
                                     </td>
                                     <td class="text-center">
-                                       @Html.DisplayFor(model=>item.TrangThai)
+                                        @Html.DisplayFor(model => item.TrangThai)
                                     </td>
                                     @*<td>
-                                        <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>
-                                        <a asp-action="Delete" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-danger" hidden>Xóa</a>
-                                        <a asp-action="Edit" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Sửa</a>
-                                    </td>*@
+                            <a asp-action="Details" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                            <a asp-action="Delete" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-danger" hidden>Xóa</a>
+                            <a asp-action="Edit" asp-route-id="@item.Idmau" class="btn btn-sm btn-outline-warning">Sửa</a>
+                        </td>*@
                                 </tr>
                             }
                         </tbody>

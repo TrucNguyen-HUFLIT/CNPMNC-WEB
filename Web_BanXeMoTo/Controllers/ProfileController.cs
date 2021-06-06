@@ -67,8 +67,8 @@ namespace Web_BanXeMoTo.Controllers
                     {
                         fileName = Path.GetFileNameWithoutExtension(khachHang.UploadHinh.FileName);
                         extension = Path.GetExtension(khachHang.UploadHinh.FileName);
-                        model.Avatar = "/img/" + fileName + extension;
-                        string path1 = Path.Combine(wwwRootPath + "/img/", fileName);
+                        model.Avatar = "/img/Avatar/" + fileName + extension;
+                        string path1 = Path.Combine(wwwRootPath + "/img/Avatar/", fileName + extension);
                         using (var fileStream = new FileStream(path1, FileMode.Create))
                         {
                             await khachHang.UploadHinh.CopyToAsync(fileStream);
@@ -183,8 +183,8 @@ namespace Web_BanXeMoTo.Controllers
                     {
                         fileName = Path.GetFileNameWithoutExtension(nhanVien.UpLoadAvt.FileName);
                         extension = Path.GetExtension(nhanVien.UpLoadAvt.FileName);
-                        model.Avatar = "/img/" + fileName + extension;
-                        string path1 = Path.Combine(wwwRootPath + "/img/", fileName);
+                        model.Avatar = "/img/Avatar/" + fileName + extension;
+                        string path1 = Path.Combine(wwwRootPath + "/img/Avatar/", fileName + extension);
                         using (var fileStream = new FileStream(path1, FileMode.Create))
                         {
                             await nhanVien.UpLoadAvt.CopyToAsync(fileStream);

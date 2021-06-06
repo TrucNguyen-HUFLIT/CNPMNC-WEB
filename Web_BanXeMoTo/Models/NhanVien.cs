@@ -46,7 +46,6 @@ namespace Web_BanXeMoTo.Models
         public virtual TypeAcc IdtypeNavigation { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UpLoadAvt { get; set; }
     }
 }

@@ -88,8 +88,14 @@ namespace Web_BanXeMoTo.Controllers
         [HttpPost]
         public IActionResult Create(Hang hang)
         {
+            
             if (ModelState.IsValid)
             {
+                if (database.Hangs.Any(x => x.Idhang == hang.Idhang || x.TenHang == hang.TenHang))
+                {
+                    ViewBag.error = "Tên hãng hoặc ID hãng đã tồn tại";
+                    return View(hang);
+                }
                 database.Add(hang);
                 database.SaveChanges();
                 return RedirectToAction("Index");

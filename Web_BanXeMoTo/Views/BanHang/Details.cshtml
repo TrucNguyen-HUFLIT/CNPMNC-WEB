@@ -11,18 +11,53 @@
             <div class="page-title-heading">
                 <div>
 
-                    <h2 style="font-weight:500">Quản lý Hóa đơn</h2>
+                    <h2 style="font-weight:500">Quản lý Bán hàng</h2>
 
                 </div>
             </div>
         </div>
     </div>
     <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+        @if (Model.HoaDon.TrangThai == Web_BanXeMoTo.Models.TrangThaiHoaDon.ChuaXacNhan)
+        {
+            <li class="nav-item">
+                <a asp-action="ChuaXacNhan" class="nav-link active ">
+                    <span>DS HĐ chưa xác nhận</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="DaXacNhan" class="nav-link ">
+                    <span>DS HĐ đã xác nhận</span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a asp-action="ChuaXacNhan" class="nav-link  ">
+                    <span>DS HĐ chưa xác nhận</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="DaXacNhan" class="nav-link active">
+                    <span>DS HĐ đã xác nhận</span>
+                </a>
+            </li>
+        }
+
         <li class="nav-item">
-            <a asp-action="Index" class="nav-link active">
-                <span>Danh sách hóa đơn</span>
+            <a asp-action="Create" class="nav-link ">
+                <span>Tạo hóa đơn</span>
             </a>
         </li>
+        @if (Model.HoaDon.TrangThai == Web_BanXeMoTo.Models.TrangThaiHoaDon.ChuaXacNhan)
+        {
+            <li class="nav-item">
+                <a asp-action="CTHD" class="nav-link " asp-route-id="@Model.ChiTietHd.Idhd">
+                    <span>Thêm xe</span>
+                </a>
+            </li>
+        }
     </ul>
     <div class="row">
         <div class="col-md-12">
@@ -46,6 +81,7 @@
                                 <th>
                                     <label class="control-label">Thành tiền</label>
                                 </th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,14 +100,17 @@
                                     <td>
                                         @string.Format("{0:N0}", (((double)item.GiaBan) - ((double)item.GiaBan) * (item.KhuyenMai == 0 ? 1 : (double)item.KhuyenMai / 100))) VNĐ
                                     </td>
+                                    @if (Model.HoaDon.TrangThai == Web_BanXeMoTo.Models.TrangThaiHoaDon.ChuaXacNhan)
+                                    {
+                                        <td>
+                                            @Html.ActionLink("Xóa", "DeleteCTHD", new { idXe = item.Idxe, idHD = item.Idhd }, new { @class = "btn btn-sm btn-outline-danger" })
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>
                     </table>
-                    <br /><br />
-                    <a asp-action="Index" class="btn btn-secondary">Trở về</a>
-
-                </div>        
+                </div>
             </div>
         </div>
     </div>

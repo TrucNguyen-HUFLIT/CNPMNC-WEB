@@ -15,7 +15,10 @@ namespace Web_BanXeMoTo.Models
 
         public string Idxe { get; set; }
         public string Idmau { get; set; }
+
+        [Display(Name = "Trạng thái")]
         public TrangThaiXe TrangThai { get; set; }
+        [Display(Name = "Tên xe")]
         public string TenXe { get; set; }
 
         public virtual MauXe IdmauNavigation { get; set; }

@@ -35,7 +35,7 @@ namespace Web_BanXeMoTo
              .AddCookie(opt =>
              {
                  opt.LoginPath = "/";
-                 opt.AccessDeniedPath = "/login";
+                 opt.AccessDeniedPath = "/login/login";
                  opt.ReturnUrlParameter = "returnUrl";
                  opt.LogoutPath = "/logout";
                  opt.ExpireTimeSpan = TimeSpan.FromMinutes(5);

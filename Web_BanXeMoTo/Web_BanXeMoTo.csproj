@@ -17,8 +17,6 @@
 
   <ItemGroup>
     <None Include="Views\Customer\Home.cshtml" />
-    <None Include="Views\HoaDon\Create.cshtml" />
-    <None Include="Views\HoaDon\CTHD.cshtml" />
     <None Include="Views\HoaDon\Details.cshtml" />
     <None Include="Views\HoaDon\Index.cshtml" />
     <None Include="Views\KhachHang\Index.cshtml" />

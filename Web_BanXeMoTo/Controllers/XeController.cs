@@ -25,7 +25,7 @@ namespace Web_BanXeMoTo.Controllers
             this.hostEnvironment = hostEnvironment;
         }
 
-        public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, TrangThaiXe trangThai)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
             //  the paging links in order to keep the sort order the same while paging
@@ -54,6 +54,10 @@ namespace Web_BanXeMoTo.Controllers
             {
                 var model = from s in context.Xes
                             select s;
+                if(trangThai != null)
+                {
+                    model =  model.Where(x => x.TrangThai == trangThai);
+                }
                 //Search and match data, if search string is not null or empty
                 if (!String.IsNullOrEmpty(searchString))
                 {

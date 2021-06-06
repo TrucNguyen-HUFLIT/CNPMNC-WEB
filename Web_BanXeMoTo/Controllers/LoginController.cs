@@ -91,7 +91,7 @@ namespace Web_BanXeMoTo.Controllers
                 var model = new KhachHang
                 {
                     Idkh = database.KhachHangs.ToArray()[^1].Idkh + 1,
-                    TenKh = registerModels.Email,
+                    TenKh = "Cập nhật tên",
                     Email = registerModels.Email,
                     Pass = registerModels.Password,
                     DiaChi = "Hãy cập nhật địa chỉ của bạn",
