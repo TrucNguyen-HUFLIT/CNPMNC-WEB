@@ -7,15 +7,14 @@
 
     Layout = "~/Views/Shared/_LayoutManager.cshtml";
     double Total = 0;
-    }
-
+}
 
 <div class="app-main__inner">
     <div class="app-page-title">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div>
-                    <h2 style="font-weight:500">Quản lý Hóa đơn</h2>
+                    <h2 style="font-weight:500">Thống kê doanh số</h2>
                 </div>
             </div>
         </div>
@@ -38,7 +37,7 @@
                 <div class="card-body">
                     @using (Html.BeginForm("Index", "ThongKe", FormMethod.Get, new { @style = "float: right; width: 40%" }))
                     {
-                        <input type="month" id="searchString" name="searchString" >
+                        <input type="month" id="searchString" name="searchString">
                         <input type="submit" value="Tìm kiếm" class="btn btn-outline-info" style="margin-bottom:5px" />}
                     <table class="table table-hover table-sm">
                         <thead>
@@ -87,7 +86,7 @@
 
                                                 if (item.Idhd == cthd.Idhd)
                                                 {
-                                                    amount += (((double)cthd.GiaBan) - ((double)cthd.GiaBan) * (cthd.KhuyenMai == 0 ? 1 : (double)cthd.KhuyenMai / 100));
+                                                    amount += ((cthd.KhuyenMai == 0 ? ((double)cthd.GiaBan) : (((double)cthd.GiaBan) - ((double)cthd.GiaBan) * (double)cthd.KhuyenMai / 100)));
                                                 }
                                             }
                                             @string.Format("{0:N0}", ((double)@amount))
@@ -100,15 +99,9 @@
                                 </tr>
                             }
                             <tr>
-                                <td>
-                                </td>
-
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    Tổng doanh thu @ViewBag.mmyyyy :
-                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>Tổng doanh thu @ViewBag.monthyear</td>
                                 <td>
                                     @string.Format("{0:N0}", ((double)@Total)) VNĐ
                                 </td>
@@ -126,35 +119,35 @@
 </div>
 
 @*@section monthPicker{
-    <script src="//lib/jquery-ui-1.10.2/ui/jquery.ui.datepicker.js"></script>
-    <script>
-        jQuery(function ($) {
-            $.datepicker.regional["vi"] =
-            {
-                closeText: "Đóng",
-                prevText: "Trước",
-                nextText: "Sau",
-                currentText: "Hôm nay",
-                monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
-                monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
-                dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
-                dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
-                dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
-                weekHeader: "Tuần",
-                dateFormat: "dd/mm/yy",
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ""
-            };
+        <script src="//lib/jquery-ui-1.10.2/ui/jquery.ui.datepicker.js"></script>
+        <script>
+            jQuery(function ($) {
+                $.datepicker.regional["vi"] =
+                {
+                    closeText: "Đóng",
+                    prevText: "Trước",
+                    nextText: "Sau",
+                    currentText: "Hôm nay",
+                    monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+                    monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+                    dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+                    dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+                    dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+                    weekHeader: "Tuần",
+                    dateFormat: "dd/mm/yy",
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: ""
+                };
 
-            $.datepicker.setDefaults($("#searchString").datepicker.regional["vi"]);
-        });
-        $.datepicker.setDefaults(
-            $.extend(
-                { 'dateFormat': 'dd-mm-yy' },   
-                $.datepicker.regional['vi']
-            )
-        );
-    </script>
-}*@
+                $.datepicker.setDefaults($("#searchString").datepicker.regional["vi"]);
+            });
+            $.datepicker.setDefaults(
+                $.extend(
+                    { 'dateFormat': 'dd-mm-yy' },
+                    $.datepicker.regional['vi']
+                )
+            );
+        </script>
+    }*@

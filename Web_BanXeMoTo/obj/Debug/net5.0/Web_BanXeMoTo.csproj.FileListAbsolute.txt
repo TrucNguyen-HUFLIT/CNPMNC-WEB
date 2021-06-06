@@ -4328,3 +4328,4 @@ F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\Web_BanXeMoTo\obj\Debug\net5.0\Web
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.csproj.CopyComplete
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.genruntimeconfig.cache
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\ThongKe\Index.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\ThongKe\Details.cshtml.g.cs

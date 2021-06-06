@@ -89,7 +89,7 @@
 
                                                 if (item.Idhd == cthd.Idhd)
                                                 {
-                                                    amount += (((double)cthd.GiaBan) - ((double)cthd.GiaBan) * (cthd.KhuyenMai == 0 ? 1 : (double)cthd.KhuyenMai / 100));
+                                                    amount += (cthd.KhuyenMai == 0 ? ((double)cthd.GiaBan) : (((double)cthd.GiaBan) - ((double)cthd.GiaBan) * (double)cthd.KhuyenMai / 100));
                                                 }
                                             }
                                             @string.Format("{0:N0}", ((double)@amount))
