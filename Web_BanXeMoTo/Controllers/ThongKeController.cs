@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,7 @@ namespace Web_BanXeMoTo.Controllers
             using (var context = new QLMTContext())
             {
                 var model = from s in context.HoaDons
+                            where s.TrangThai == TrangThaiHoaDon.DaThanhToan
                             select s;
                 //Search and match data, if search string is not null or empty
                 if (!String.IsNullOrEmpty(searchString))
@@ -53,7 +55,7 @@ namespace Web_BanXeMoTo.Controllers
                     int.TryParse(searchString.Substring(0, 4), out int year);
                     //int month = searchString.Substring(5, 2);
                     //int year = searchString.Substring(0, 4);
-                    ViewBag.mmyyyy = month.ToString()+"/" + year.ToString();
+                    ViewBag.monthyear = month.ToString() + "/" + year.ToString();
 
                     model = model.Where(s => s.NgayDat.Month.Equals(month) && s.NgayDat.Year.Equals(year));
                 }
@@ -81,6 +83,17 @@ namespace Web_BanXeMoTo.Controllers
                 ListKhachHang = database.KhachHangs.ToArray()
             };
             return View(modelv);
+        }
+
+        public async Task<IActionResult> Details(string ID)
+        {
+            var model = new HoaDonViewModel
+            {
+                HoaDon = await database.HoaDons.FindAsync(ID),
+                ChiTietHd = new ChiTietHd { Idhd = ID },
+                ListChiTietHd = await database.ChiTietHds.Where(x => x.Idhd == ID).ToArrayAsync(),
+            };
+            return View(model);
         }
     }
 }
