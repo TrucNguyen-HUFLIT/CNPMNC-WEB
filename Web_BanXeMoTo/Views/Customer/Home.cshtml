@@ -68,7 +68,7 @@
                                             <img src="@mau.HinhAnh1" alt="img">
                                             <div class="aa-prom-content">
                                                 @*<span>Bán chạy</span>*@
-                                                <h4><a href="product.html"><u>@Html.DisplayFor(model => hang.TenHang)</u></a></h4>
+                                                <h4><a href="@Url.ActionLink("Products","Customer", new {idHang = mau.Idhang })"><u>@Html.DisplayFor(model => hang.TenHang)</u></a></h4>
                                             </div>
                                         </div>
                                     </div>
