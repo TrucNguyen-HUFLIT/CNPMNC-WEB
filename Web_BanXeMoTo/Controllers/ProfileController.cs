@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Web_BanXeMoTo.Models;
 using X.PagedList;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 
 namespace Web_BanXeMoTo.Controllers
 {
@@ -212,9 +213,102 @@ namespace Web_BanXeMoTo.Controllers
             return View(nhanVien);
         }
 
-        // Change Password Khach hang (--->
-        [Authorize(Roles = "customer")]
+        //// Change Password Khach hang (--->
+        //[Authorize(Roles = "customer")]
+        //[HttpGet]
+        //public IActionResult ChangePasswordKH()
+        //{
+        //    if (User.FindFirst(ClaimTypes.Email) == null)
+        //    {
+        //        return RedirectToAction("Login", "Login");
+        //    }
+
+        //    string email = User.FindFirst(ClaimTypes.Email).Value;
+        //    var model = new KhachHang();
+        //    model = database.KhachHangs.Where(x => x.Email == email).FirstOrDefault();
+        //    return View(model);
+        //}
+
+        //[Authorize(Roles = "customer")]
+        //[HttpPost]
+        //public async Task<IActionResult> ChangePasswordKH(KhachHang khachHang)
+        //{
+        //    if (khachHang != null)
+        //    {
+        //        var model = await database.KhachHangs.Where(x => x.Idkh == khachHang.Idkh).FirstOrDefaultAsync();
+        //        if (model.Pass == khachHang.CurrentPassword)
+        //        {
+        //            if (khachHang.NewPassword != null && khachHang.ConfirmNewPassword != null)
+        //            {
+        //                if (khachHang.ConfirmNewPassword == khachHang.NewPassword)
+        //                {
+        //                    model.Pass = khachHang.NewPassword;
+
+        //                    database.Update(model);
+        //                    await database.SaveChangesAsync();
+        //                    TempData["result"] = "Đổi mật khẩu thành công !!!";
+        //                    return View(model);
+        //                }
+        //                return View(model);
+        //            }
+        //            ViewBag.ErrorNull = "Không được bỏ trống";
+        //        }
+        //        ViewBag.ErrorPass = "Sai mật khẩu !!!";
+        //        return View(model);
+        //    }
+        //    return View(khachHang);
+        //} // <----)
+
+
+
+        //[Authorize(Roles = "admin, staff")]
+        //[HttpGet]
+        //public IActionResult ChangePasswordNV()
+        //{
+        //    if (User.FindFirst(ClaimTypes.Email) == null)
+        //    {
+        //        return RedirectToAction("Login", "Login");
+        //    }
+
+        //    string email = User.FindFirst(ClaimTypes.Email).Value;
+        //    var model = new NhanVien();
+        //    model = database.NhanViens.Where(x => x.Email == email).FirstOrDefault();
+        //    return View(model);
+        //}
+
+        //[Authorize(Roles = "admin, staff")]
+        //[HttpPost]
+        //public async Task<IActionResult> ChangePasswordNV(NhanVien nhanVien)
+        //{
+        //    if (nhanVien != null)
+        //    {
+        //        var model = await database.NhanViens.Where(x => x.Idnv == nhanVien.Idnv).FirstOrDefaultAsync();
+        //        if (model.Pass == nhanVien.CurrentPassword)
+        //        {
+        //            if (nhanVien.NewPassword != null && nhanVien.ConfirmNewPassword != null)
+        //            {
+        //                if (nhanVien.ConfirmNewPassword == nhanVien.NewPassword)
+        //                {
+        //                    model.Pass = nhanVien.NewPassword;
+
+        //                    database.Update(model);
+        //                    await database.SaveChangesAsync();
+        //                    TempData["result"] = "Đổi mật khẩu thành công !!!";
+        //                    return View(model);
+        //                }
+        //                return View(model);
+        //            }
+        //            ViewBag.ErrorNull = "Không được bỏ trống";
+        //        }
+        //        ViewBag.ErrorPass = "Sai mật khẩu !!!";
+        //        return View(model);
+        //    }
+        //    return View(nhanVien);
+        //}
+
+
         [HttpGet]
+        [Authorize(Roles = "customer")]
         public IActionResult ChangePasswordKH()
         {
             if (User.FindFirst(ClaimTypes.Email) == null)
@@ -223,45 +317,43 @@ namespace Web_BanXeMoTo.Controllers
             }
 
             string email = User.FindFirst(ClaimTypes.Email).Value;
-            var model = new KhachHang();
-            model = database.KhachHangs.Where(x => x.Email == email).FirstOrDefault();
+            var model = new ViewModelKH();
+            model.changePass = new ChangePassword();
+            model.khachHang = database.KhachHangs.Where(x => x.Email == email).FirstOrDefault();
+
+            model.changePass.Email = model.khachHang.Email;
             return View(model);
         }
-
-        [Authorize(Roles = "customer")]
         [HttpPost]
-        public async Task<IActionResult> ChangePasswordKH(KhachHang khachHang)
+        [Authorize(Roles = "customer")]
+        public async Task<IActionResult> ChangePasswordKH(ChangePassword changepass)
         {
-            if (khachHang != null)
+            var model = new ViewModelKH();
+            model.khachHang = await database.KhachHangs.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync();
+            if (model.khachHang != null)
             {
-                var model = await database.KhachHangs.Where(x => x.Idkh == khachHang.Idkh).FirstOrDefaultAsync();
-                if (model.Pass == khachHang.CurrentPassword)
+                if (model.khachHang.Pass == changepass.Password)
                 {
-                    if (khachHang.NewPassword != null && khachHang.ConfirmNewPassword != null)
+                    if(changepass.NewPassword == changepass.ConfirmPass)
                     {
-                        if (khachHang.ConfirmNewPassword == khachHang.NewPassword)
-                        {
-                            model.Pass = khachHang.NewPassword;
+                        model.khachHang.Pass = changepass.NewPassword;
 
-                            database.Update(model);
-                            await database.SaveChangesAsync();
-                            TempData["result"] = "Đổi mật khẩu thành công !!!";
-                            return View(model);
-                        }
+                        database.Update(model.khachHang);
+                        await database.SaveChangesAsync();
+                        TempData["result"] = "Đổi mật khẩu thành công !!!";
                         return View(model);
                     }
-                    ViewBag.ErrorNull = "Không được bỏ trống";
                 }
-                ViewBag.ErrorPass = "Sai mật khẩu !!!";
-                return View(model);
+                else
+                {
+                    ViewBag.ErrorPass = "Sai mật khẩu";
+                    return View(model);
+                }
             }
-            return View(khachHang);
-        } // <----)
-
-
-
-        [Authorize(Roles = "admin, staff")]
+            return View();
+        }
         [HttpGet]
+        [Authorize(Roles = "admin, staff")]
         public IActionResult ChangePasswordNV()
         {
             if (User.FindFirst(ClaimTypes.Email) == null)
@@ -270,39 +362,40 @@ namespace Web_BanXeMoTo.Controllers
             }
 
             string email = User.FindFirst(ClaimTypes.Email).Value;
-            var model = new NhanVien();
-            model = database.NhanViens.Where(x => x.Email == email).FirstOrDefault();
+            var model = new ViewModelNV();
+            model.changePass = new ChangePassword();
+            model.nhanVien = database.NhanViens.Where(x => x.Email == email).FirstOrDefault();
+
+            model.changePass.Email = model.nhanVien.Email;
             return View(model);
         }
-
-        [Authorize(Roles = "admin, staff")]
         [HttpPost]
-        public async Task<IActionResult> ChangePasswordNV(NhanVien nhanVien)
+        [Authorize(Roles = "admin, staff")]
+        public async Task<IActionResult> ChangePasswordNV(ChangePassword changepass)
         {
-            if (nhanVien != null)
+            var model = new ViewModelNV();
+            model.nhanVien = await database.NhanViens.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync();
+            if (model.nhanVien != null)
             {
-                var model = await database.NhanViens.Where(x => x.Idnv == nhanVien.Idnv).FirstOrDefaultAsync();
-                if (model.Pass == nhanVien.CurrentPassword)
+                if (model.nhanVien.Pass == changepass.Password)
                 {
-                    if (nhanVien.NewPassword != null && nhanVien.ConfirmNewPassword != null)
+                    if (changepass.NewPassword == changepass.ConfirmPass)
                     {
-                        if (nhanVien.ConfirmNewPassword == nhanVien.NewPassword)
-                        {
-                            model.Pass = nhanVien.NewPassword;
+                        model.nhanVien.Pass = changepass.NewPassword;
 
-                            database.Update(model);
-                            await database.SaveChangesAsync();
-                            TempData["result"] = "Đổi mật khẩu thành công !!!";
-                            return View(model);
-                        }
+                        database.Update(model.nhanVien);
+                        await database.SaveChangesAsync();
+                        TempData["result"] = "Đổi mật khẩu thành công !!!";
                         return View(model);
                     }
-                    ViewBag.ErrorNull = "Không được bỏ trống";
                 }
-                ViewBag.ErrorPass = "Sai mật khẩu !!!";
-                return View(model);
+                else
+                {
+                    ViewBag.ErrorPass = "Sai mật khẩu";
+                    return View(model);
+                }
             }
-            return View(nhanVien);
+            return View();
         }
     }
 }
