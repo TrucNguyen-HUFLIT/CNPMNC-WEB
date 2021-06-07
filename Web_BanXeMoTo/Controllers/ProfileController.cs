@@ -212,5 +212,97 @@ namespace Web_BanXeMoTo.Controllers
             nhanVien.Avatar = StaticAcc.Avatar;
             return View(nhanVien);
         }
+
+
+        [HttpGet]
+        [Authorize(Roles = "customer")]
+        public IActionResult ChangePasswordKH()
+        {
+            if (User.FindFirst(ClaimTypes.Email) == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            string email = User.FindFirst(ClaimTypes.Email).Value;
+            var model = new ViewModelKH();
+            model.changePass = new ChangePassword();
+            model.khachHang = database.KhachHangs.Where(x => x.Email == email).FirstOrDefault();
+
+            model.changePass.Email = model.khachHang.Email;
+            return View(model);
+        }
+        [HttpPost]
+        [Authorize(Roles = "customer")]
+        public async Task<IActionResult> ChangePasswordKH(ChangePassword changepass)
+        {
+            var model = new ViewModelKH();
+            model.khachHang = await database.KhachHangs.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync();
+            if (model.khachHang != null)
+            {
+                if (model.khachHang.Pass == changepass.Password)
+                {
+                    if (changepass.NewPassword == changepass.ConfirmPass)
+                    {
+                        model.khachHang.Pass = changepass.NewPassword;
+
+                        database.Update(model.khachHang);
+                        await database.SaveChangesAsync();
+                        TempData["result"] = "Đổi mật khẩu thành công !!!";
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorPass = "Sai mật khẩu";
+                    return View(model);
+                }
+            }
+            return View();
+        }
+        [HttpGet]
+        [Authorize(Roles = "admin, staff")]
+        public IActionResult ChangePasswordNV()
+        {
+            if (User.FindFirst(ClaimTypes.Email) == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            string email = User.FindFirst(ClaimTypes.Email).Value;
+            var model = new ViewModelNV();
+            model.changePass = new ChangePassword();
+            model.nhanVien = database.NhanViens.Where(x => x.Email == email).FirstOrDefault();
+
+            model.changePass.Email = model.nhanVien.Email;
+            return View(model);
+        }
+        [HttpPost]
+        [Authorize(Roles = "admin, staff")]
+        public async Task<IActionResult> ChangePasswordNV(ChangePassword changepass)
+        {
+            var model = new ViewModelNV();
+            model.nhanVien = await database.NhanViens.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync();
+            if (model.nhanVien != null)
+            {
+                if (model.nhanVien.Pass == changepass.Password)
+                {
+                    if (changepass.NewPassword == changepass.ConfirmPass)
+                    {
+                        model.nhanVien.Pass = changepass.NewPassword;
+
+                        database.Update(model.nhanVien);
+                        await database.SaveChangesAsync();
+                        TempData["result"] = "Đổi mật khẩu thành công !!!";
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorPass = "Sai mật khẩu";
+                    return View(model);
+                }
+            }
+            return View();
+        }
     }
 }

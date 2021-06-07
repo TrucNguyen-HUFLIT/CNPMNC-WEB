@@ -143,5 +143,7 @@ namespace Web_BanXeMoTo.Controllers
         public KhachHang khachHang { get; set; }
         public KhachHang[] ListKhachHang { get; set; }
         public TypeAcc[] ListType { get; set; }
+
+        public ChangePassword changePass { get; set; }
     }
 }
