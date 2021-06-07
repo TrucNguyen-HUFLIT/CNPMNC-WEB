@@ -10,6 +10,7 @@ using PayPal.Core;
 using PayPal.v1.Payments;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 using System.Security.Claims;
@@ -179,13 +180,13 @@ namespace Web_BanXeMoTo.Controllers
             }
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var khachHang = await database.KhachHangs.Where(x => x.Email == email).FirstOrDefaultAsync();
-
             var hoaDon = new HoaDon
             {
                 Idhd = GetIDHD(),
                 Idkh = khachHang.Idkh,
                 NgayDat = DateTime.Now,
                 TrangThai = TrangThaiHoaDon.ChuaXacNhan,
+
 
             };
             database.Add(hoaDon);
@@ -351,6 +352,7 @@ namespace Web_BanXeMoTo.Controllers
 
                 }
             }
+            HttpContext.Session.Remove("GioHang");
             return View();
         }
         public async Task<IActionResult> CheckoutSuccess()
@@ -395,14 +397,14 @@ namespace Web_BanXeMoTo.Controllers
                 }
             }
             SendEmailConfirm(hoaDon);
-
+            HttpContext.Session.Remove("GioHang");
             return View();
         }
 
-        public async Task SendEmailConfirm(HoaDon hoaDon )
+        public async Task SendEmailConfirm(HoaDon hoaDon)
         {
             var khachHang = await database.KhachHangs.Where(x => x.Idkh == hoaDon.Idkh).FirstOrDefaultAsync();
-            
+
             MimeMessage message = new MimeMessage();
 
             MailboxAddress from = new("H2T Moto", "h2t.moto.huflit@gmail.com");
@@ -430,9 +432,9 @@ namespace Web_BanXeMoTo.Controllers
         }
         public string GetIDHD()
         {
-            var list = database.HoaDons.ToArray();
+            var list = database.HoaDons.OrderByDescending(p => p.NgayDat.TimeOfDay).ToArray();
 
-            int.TryParse(list[list.Length - 1].Idhd.Substring(2), out int lastID);
+            int.TryParse(list[0].Idhd.Substring(2), out int lastID);
 
             string ID = "HD" + ++lastID;
 
