@@ -179,15 +179,15 @@ namespace Web_BanXeMoTo.Controllers
                 return RedirectToAction("Login", "Login");
             }
             string email = User.FindFirst(ClaimTypes.Email).Value;
-            var khachHang = await database.KhachHangs.Where(x => x.Email == email).FirstOrDefaultAsync();
+            var Idkh = await database.KhachHangs.Where(x => x.Email == email).Select(x=>x.Idkh).FirstOrDefaultAsync();
+            var now = DateTime.Now;
+            var date = now.AddMilliseconds(-now.Millisecond);
             var hoaDon = new HoaDon
             {
                 Idhd = GetIDHD(),
-                Idkh = khachHang.Idkh,
-                NgayDat = DateTime.Now,
+                Idkh = Idkh,
+                NgayDat = date,
                 TrangThai = TrangThaiHoaDon.ChuaXacNhan,
-
-
             };
             database.Add(hoaDon);
             await database.SaveChangesAsync();
@@ -396,7 +396,7 @@ namespace Web_BanXeMoTo.Controllers
 
                 }
             }
-            SendEmailConfirm(hoaDon);
+            await SendEmailConfirm(hoaDon);
             HttpContext.Session.Remove("GioHang");
             return View();
         }

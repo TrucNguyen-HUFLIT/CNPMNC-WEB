@@ -140,9 +140,15 @@ namespace Web_BanXeMoTo.Controllers
         }
         public async Task<IActionResult> Create()
         {
+            var now = DateTime.Now;
+            var date = now.AddMilliseconds(-now.Millisecond);
             var model = new HoaDonViewModel
             {
-                HoaDon = new HoaDon { Idhd = GetIDHD()},
+                HoaDon = new HoaDon 
+                {
+                    Idhd = GetIDHD(),
+                    NgayDat = date,
+                },
                 ListKhachHang = await database.KhachHangs.ToArrayAsync()
             };
             return View(model);

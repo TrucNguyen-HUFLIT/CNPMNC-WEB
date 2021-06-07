@@ -35,7 +35,7 @@ namespace Web_BanXeMoTo.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-1N34MNR;Database=QLMT;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-I7EOLFR\\SQLEXPRESS;Database=QLMT;Trusted_Connection=True;");
             }
         }
 
@@ -134,7 +134,7 @@ namespace Web_BanXeMoTo.Models
 
                 entity.Property(e => e.Idkh).HasColumnName("IDKH");
 
-                entity.Property(e => e.NgayDat).HasColumnType("date");
+                entity.Property(e => e.NgayDat).HasColumnType("datetime");
 
                 entity.HasOne(d => d.IdkhNavigation)
                     .WithMany(p => p.HoaDons)

@@ -2401,8 +2401,6 @@ F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Hang\Create.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Hang\Edit.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Hang\Index.cshtml.g.cs
-F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\HoaDon\Create.cshtml.g.cs
-F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\HoaDon\CTHD.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\HoaDon\Details.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\HoaDon\Index.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\KhachHang\Index.cshtml.g.cs
@@ -4334,3 +4332,15 @@ D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\V
 D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\BanHang\Details.cshtml.g.cs
 D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\ThongKe\Details.cshtml.g.cs
 D:\lap trinh\năm 3\Semester 2\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\ThongKe\Index.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\BraintreeHttp-Dotnet.dll
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\bin\Debug\net5.0\Source.dll
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\BanHang\ChuaXacNhan.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\BanHang\Create.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\BanHang\CTHD.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\BanHang\DaXacNhan.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\BanHang\Details.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\GioHang\CheckoutFail.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\GioHang\CheckoutSuccess.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\GioHang\Notify.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\ThongKe\Details.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\CNPM\CNPMNC-WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\ThongKe\Index.cshtml.g.cs
