@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using X.PagedList;
 
 namespace Web_BanXeMoTo.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class NhanVienController : Controller
     {
         private readonly QLMTContext database;

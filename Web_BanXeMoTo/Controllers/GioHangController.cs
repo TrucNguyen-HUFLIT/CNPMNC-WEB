@@ -170,14 +170,10 @@ namespace Web_BanXeMoTo.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize(Roles = "customer")]
         public async Task<IActionResult> ThanhToan()
         {
             var myCart = Carts;
-            if (User.FindFirst(ClaimTypes.Email) == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var Idkh = await database.KhachHangs.Where(x => x.Email == email).Select(x=>x.Idkh).FirstOrDefaultAsync();
             var now = DateTime.Now;
@@ -220,7 +216,7 @@ namespace Web_BanXeMoTo.Controllers
             return View("Notify");
         }
 
-        [Authorize]
+        [Authorize(Roles = "customer")]
         public async Task<IActionResult> PaypalCheckOut()
         {
             var environment = new SandboxEnvironment(_clientId, _secretKey);
@@ -314,6 +310,10 @@ namespace Web_BanXeMoTo.Controllers
         public async Task<IActionResult> CheckoutFail()
         {
             var myCart = Carts;
+            if (User.FindFirst(ClaimTypes.Email) == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var khachHang = await database.KhachHangs.Where(x => x.Email == email).FirstOrDefaultAsync();
 
@@ -358,6 +358,10 @@ namespace Web_BanXeMoTo.Controllers
         public async Task<IActionResult> CheckoutSuccess()
         {
             var myCart = Carts;
+            if (User.FindFirst(ClaimTypes.Email) == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var khachHang = await database.KhachHangs.Where(x => x.Email == email).FirstOrDefaultAsync();
 
