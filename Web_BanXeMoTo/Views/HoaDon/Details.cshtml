@@ -61,6 +61,7 @@
                                     <td>
                                         @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ
                                     </td>
+
                                     <td>
                                         @string.Format("{0:N0}", ((item.KhuyenMai == 0 ? ((double)item.GiaBan) : (((double)item.GiaBan) - ((double)item.GiaBan) * (double)item.KhuyenMai / 100)))) VNĐ
                                     </td>
