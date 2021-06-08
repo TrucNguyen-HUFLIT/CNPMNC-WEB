@@ -38,12 +38,12 @@
                                                 <td><a class="aa-cart-title" href="@Url.ActionLink("ProductDetails","Customer",new {id = item.Idmau })">@item.TenXe</a></td>
                                                 <td> @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ</td>
                                                 <td>
-                                                    <button type="button" data-id="@item.Idmau" class="ajax-add fa fa-plus" style="width: auto; color : #ff6666">  </button>
+                                                    <button type="button" data-id="@item.Idmau" class="ajax-minus fa fa-minus" style="width: auto; color : #ff6666">  </button>
                                                     &nbsp;
                                                     <span id="soLuong_@item.Idmau">@item.SoLuong</span>
                                                     &nbsp;
-                                                    <button type="button" data-id="@item.Idmau" class="ajax-minus fa fa-minus" style="width: auto; color : #ff6666">  </button>
 
+                                                    <button type="button" data-id="@item.Idmau" class="ajax-add fa fa-plus" style="width: auto; color : #ff6666">  </button>
                                                 </td>
                                                 <td>
                                                     <span id="thanhTien_@item.Idmau">@string.Format("{0:N0}", ((Int64)item.ThanhTien)) </span> VNĐ
@@ -62,13 +62,12 @@
                         </form>
                         <!-- Cart Total view -->
                         <div class="cart-view-total">
-                            <h4>Cart Totals</h4>
                             <table class="aa-totals-table">
                                 <tbody>
 
-                                    <tr>
+                                    <tr style="font-size: 130%">
                                         <th>Tổng tiền</th>
-                                        <td><span id="tongTien">@string.Format("{0:N0}", ((Int64)ToTalAmount))</span> VNĐ</td>
+                                        <td style="color: #ff6666"><span id="tongTien">@string.Format("{0:N0}", ((Int64)ToTalAmount))</span> VNĐ</td>
                                     </tr>
 
 
@@ -77,7 +76,7 @@
                             </table>
                             <a class="aa-cart-view-btn" asp-action="ThanhToan" asp-controller="GioHang" data-target="#checkout-modal">Thanh toán</a>
                             <a asp-action="PaypalCheckout">
-                                <img src="~/img/Background/paypal_checkout.gif" height="100" />
+                                <img src="~/img/Background/paypal-logo.jpg" height="70" />
                             </a>
                         </div>
                     </div>
