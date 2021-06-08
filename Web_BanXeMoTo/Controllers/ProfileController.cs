@@ -85,6 +85,7 @@ namespace Web_BanXeMoTo.Controllers
                                             .Where(x => x.Idtype == model.Idtype)
                                             .Select(x => x.Name)
                                             .FirstOrDefaultAsync();
+                    TempData["arlert-success"] = "Cập nhật thông tin thành công !!!";
                     return View(model);
                 }
                 khachHang.Avatar = StaticAcc.Avatar;
@@ -202,7 +203,7 @@ namespace Web_BanXeMoTo.Controllers
                                             .Where(x => x.Idtype == model.Idtype)
                                             .Select(x => x.Name)
                                             .FirstOrDefaultAsync();
-
+                    TempData["arlert-success"] = "Cập nhật thông tin thành công !!!";
                     return View(model);
                 }
                 nhanVien.Avatar = StaticAcc.Avatar;

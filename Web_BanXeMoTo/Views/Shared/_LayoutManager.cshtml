@@ -119,8 +119,8 @@
                                     @Html.ActionLink("Quản lý Hãng xe", "Index", "Hang")
                                 </li>
                                 @*<li>
-                <a href="@Url.ActionLink("Index", "MauXe")">Quản lý Giá</a>
-            </li>*@
+                                        <a href="@Url.ActionLink("Index", "MauXe")">Quản lý Giá</a>
+                                    </li>*@
                                 <li>
                                     @Html.ActionLink("Quản lý Hóa đơn", "Index", "HoaDon")
                                 </li>
@@ -172,9 +172,12 @@
 
         </div>
     </div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/main.js"></script>
+    <script src""></script>
     @RenderSection("monthPicker", required: false)
+
+    @RenderSection("Scripts", required: false)
 
 </body>
 
