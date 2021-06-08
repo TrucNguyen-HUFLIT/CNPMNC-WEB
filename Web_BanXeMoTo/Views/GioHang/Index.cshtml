@@ -33,7 +33,7 @@
                                             ToTalAmount += item.ThanhTien;
                                             <tr>
 
-                                                <td><a href="#"><img src="@item.Hinh" alt="@item.Idmau"></a></td>
+                                                <td><a href="#"><img src="@item.Hinh" alt="@item.Idmau"style="width:150px;height:80px"></a></td>
 
                                                 <td><a class="aa-cart-title" href="@Url.ActionLink("ProductDetails","Customer",new {id = item.Idmau })">@item.TenXe</a></td>
                                                 <td> @string.Format("{0:N0}", ((Int64)item.GiaBan)) VNĐ</td>
