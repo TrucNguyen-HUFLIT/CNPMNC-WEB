@@ -136,13 +136,13 @@ namespace Web_BanXeMoTo.Controllers
             return View(modelv);
         }
 
-        public async Task<IActionResult> ProductDetailsAsync(string id)
+        public async Task<IActionResult> ProductDetails(string id)
         {
             var model = new CustomerViewModel
             {
                 MauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault(),
                 ListMauXe = await database.MauXes.ToArrayAsync(),
-                ListXe = await database.Xes.Where(x => x.Idmau == id).ToArrayAsync()
+                ListXe = await database.Xes.Where(x => x.Idmau == id && x.TrangThai == TrangThaiXe.ChuaBan).ToArrayAsync()
             };
 
             return View(model);

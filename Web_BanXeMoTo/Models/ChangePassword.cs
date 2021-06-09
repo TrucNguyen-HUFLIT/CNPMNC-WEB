@@ -14,18 +14,18 @@ namespace Web_BanXeMoTo.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu hiện tại")]
-        [Required(ErrorMessage = "Không được bỏ trống")]
+        [Required(ErrorMessage = "Không được bỏ trống!")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu mới")]
-        [Required(ErrorMessage = "Không được bỏ trống")]
+        [Required(ErrorMessage = "Không được bỏ trống!")]
         public string NewPassword { get; set; }
 
         [NotMapped]
-        [Compare("NewPassword")]
+        [Compare("NewPassword",ErrorMessage = "Mật khẩu không khớp!")]
         [Display(Name = "Nhập lại mật khẩu")]
-        [Required(ErrorMessage = "Không được bỏ trống")]
+        [Required(ErrorMessage = "Không được bỏ trống!")]
         [DataType(DataType.Password)]
         public string ConfirmPass { get; set; }
     }

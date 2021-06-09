@@ -436,7 +436,7 @@ namespace Web_BanXeMoTo.Controllers
         }
         public string GetIDHD()
         {
-            var list = database.HoaDons.OrderByDescending(p => p.NgayDat.TimeOfDay).ToArray();
+            var list = database.HoaDons.OrderByDescending(p => p.NgayDat).ToArray();
 
             int.TryParse(list[0].Idhd.Substring(2), out int lastID);
 

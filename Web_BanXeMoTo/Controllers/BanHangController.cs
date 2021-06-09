@@ -240,9 +240,9 @@ namespace Web_BanXeMoTo.Controllers
 
         public string GetIDHD()
         {
-            var list = database.HoaDons.ToArray();
+            var list = database.HoaDons.OrderByDescending(p => p.NgayDat).ToArray();
 
-            int.TryParse(list[list.Length - 1].Idhd.Substring(2), out int lastID);
+            int.TryParse(list[0].Idhd.Substring(2), out int lastID);
 
             string ID = "HD" + ++lastID;
 

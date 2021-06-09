@@ -15,7 +15,7 @@ namespace Web_BanXeMoTo.Models
 
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Không được để trống!")]
-        [Compare("Password",ErrorMessage = "Mật khẩu không trùng khớp!")]
+        [Compare("Password",ErrorMessage = "Mật khẩu không khớp!")]
         public string ConfirmPassword { get; set; }
     }
 }
