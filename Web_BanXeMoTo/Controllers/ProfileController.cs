@@ -112,8 +112,7 @@ namespace Web_BanXeMoTo.Controllers
             var Idkh = await database.KhachHangs.Where(x => x.Email == email).Select(x => x.Idkh).FirstOrDefaultAsync();
 
             ViewBag.Role = TempData["Role"];
-
-            var ModelList = database.HoaDons.Where(x => x.Idkh == Idkh).ToList();
+            var ModelList = database.HoaDons.Where(x => x.Idkh == Idkh).OrderByDescending(p => p.NgayDat).ToList();
 
             //ViewBag.CurrentFilter, provides the view with the current filter string.
             //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.

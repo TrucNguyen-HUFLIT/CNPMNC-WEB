@@ -10,12 +10,12 @@ namespace Web_BanXeMoTo.Models
 
     {
         [DataType(DataType.EmailAddress)]
-        [Required(ErrorMessage = "Email not empty")]
+        [Required(ErrorMessage = "Không được để trống!")]
         public string Email { get; set; }
 
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Password not empty ")]
+        [Required(ErrorMessage = "Không được để trống!")]
 
         public string Password { get; set; }
     }

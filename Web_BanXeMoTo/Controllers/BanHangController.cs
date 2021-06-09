@@ -26,7 +26,7 @@ namespace Web_BanXeMoTo.Controllers
 
             ViewBag.Role = TempData["Role"];
 
-            var ModelList = database.HoaDons.Where(x=>x.TrangThai==TrangThaiHoaDon.ChuaXacNhan).ToList();
+            var ModelList = database.HoaDons.Where(x=>x.TrangThai==TrangThaiHoaDon.ChuaXacNhan).OrderByDescending(p => p.NgayDat).ToList();
 
             //ViewBag.CurrentFilter, provides the view with the current filter string.
             //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.
@@ -121,7 +121,7 @@ namespace Web_BanXeMoTo.Controllers
 
             ViewBag.Role = TempData["Role"];
 
-            var ModelList = database.HoaDons.Where(x => x.TrangThai == TrangThaiHoaDon.DaXacNhan).ToList();
+            var ModelList = database.HoaDons.Where(x => x.TrangThai == TrangThaiHoaDon.DaXacNhan).OrderByDescending(p => p.NgayDat).ToList();
 
             //ViewBag.CurrentFilter, provides the view with the current filter string.
             //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.

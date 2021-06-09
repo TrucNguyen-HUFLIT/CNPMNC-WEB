@@ -27,7 +27,7 @@ namespace Web_BanXeMoTo.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
 
-            var ModelList = database.HoaDons.Where(x=>x.TrangThai==TrangThaiHoaDon.DaThanhToan).ToList();
+            var ModelList = database.HoaDons.Where(x=>x.TrangThai==TrangThaiHoaDon.DaThanhToan).OrderByDescending(p => p.NgayDat).ToList();
 
             //ViewBag.CurrentFilter, provides the view with the current filter string.
             //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.
