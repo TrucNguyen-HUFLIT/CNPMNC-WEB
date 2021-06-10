@@ -31,7 +31,6 @@ namespace Web_BanXeMoTo.Models
 
         [Display(Name = "Tên xe")]
         [Required(ErrorMessage = "Không được bỏ trống")]
-
         public string TenXe { get; set; }
 
         [Display(Name = "Giá bán")]
@@ -66,14 +65,14 @@ namespace Web_BanXeMoTo.Models
         [NotMapped]
         [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UploadHinh1 { get; set; }
+
         [NotMapped]
         [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UploadHinh2 { get; set; }
+
         [NotMapped]
         [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UploadHinh3 { get; set; }
-
-
     }
     public enum TrangThaiMauXe
     {

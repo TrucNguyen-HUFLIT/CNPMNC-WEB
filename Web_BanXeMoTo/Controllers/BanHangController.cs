@@ -19,18 +19,15 @@ namespace Web_BanXeMoTo.Controllers
         {
             database = db;
         }
+
         public async Task<IActionResult> ChuaXacNhan(int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
             //  the paging links in order to keep the sort order the same while paging
-
             ViewBag.Role = TempData["Role"];
 
             var ModelList = database.HoaDons.Where(x=>x.TrangThai==TrangThaiHoaDon.ChuaXacNhan).OrderByDescending(p => p.NgayDat).ToList();
 
-            //ViewBag.CurrentFilter, provides the view with the current filter string.
-            //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.
-            //indicates the size of list
             int pageSize = 5;
             //set page to one is there is no value, ??  is called the null-coalescing operator.
             int pageNumber = (page ?? 1);
@@ -43,13 +40,16 @@ namespace Web_BanXeMoTo.Controllers
             };
             return View(modelv);
         }
+
         public async Task<IActionResult> XacNhan(string ID)
         {
             var hoaDon = await database.HoaDons.Where(x => x.Idhd == ID).FirstOrDefaultAsync();
             var khachHang = await database.KhachHangs.Where(x => x.Idkh == hoaDon.Idkh).Select(x => new { x.TenKh, x.Email }).FirstOrDefaultAsync();
+
             hoaDon.TrangThai = TrangThaiHoaDon.DaXacNhan;
             database.HoaDons.Update(hoaDon);
             await database.SaveChangesAsync();
+
             #region Gửi mail xác nhận
             MimeMessage message = new();
             MailboxAddress from = new("H2T Moto", "h2t.moto.huflit@gmail.com");
@@ -76,15 +76,19 @@ namespace Web_BanXeMoTo.Controllers
             await client.DisconnectAsync(true);
             client.Dispose();
             #endregion
+
             return RedirectToAction("DaXacNhan");
         }
+
         public async Task<IActionResult> ThanhToan(string ID)
         {
             var hoaDon = await database.HoaDons.Where(x => x.Idhd == ID).FirstOrDefaultAsync();
             var khachHang = await database.KhachHangs.Where(x => x.Idkh == hoaDon.Idkh).Select(x => new { x.TenKh, x.Email }).FirstOrDefaultAsync();
+
             hoaDon.TrangThai = TrangThaiHoaDon.DaThanhToan;
             database.HoaDons.Update(hoaDon);
             await database.SaveChangesAsync();
+
             #region Gửi mail xác nhận
             MimeMessage message = new();
             MailboxAddress from = new("H2T Moto", "h2t.moto.huflit@gmail.com");
@@ -112,20 +116,18 @@ namespace Web_BanXeMoTo.Controllers
             await client.DisconnectAsync(true);
             client.Dispose();
             #endregion
+
             return RedirectToAction("Index","HoaDon");
         }
+
         public async Task<IActionResult> DaXacNhan(int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
             //  the paging links in order to keep the sort order the same while paging
-
             ViewBag.Role = TempData["Role"];
 
             var ModelList = database.HoaDons.Where(x => x.TrangThai == TrangThaiHoaDon.DaXacNhan).OrderByDescending(p => p.NgayDat).ToList();
 
-            //ViewBag.CurrentFilter, provides the view with the current filter string.
-            //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.
-            //indicates the size of list
             int pageSize = 5;
             //set page to one is there is no value, ??  is called the null-coalescing operator.
             int pageNumber = (page ?? 1);
@@ -138,10 +140,12 @@ namespace Web_BanXeMoTo.Controllers
             };
             return View(modelv);
         }
+
         public async Task<IActionResult> Create()
         {
             var now = DateTime.Now;
             var date = now.AddMilliseconds(-now.Millisecond);
+
             var model = new HoaDonViewModel
             {
                 HoaDon = new HoaDon 
@@ -151,6 +155,7 @@ namespace Web_BanXeMoTo.Controllers
                 },
                 ListKhachHang = await database.KhachHangs.ToArrayAsync()
             };
+
             return View(model);
         }
 
@@ -164,8 +169,10 @@ namespace Web_BanXeMoTo.Controllers
                 await database.SaveChangesAsync();
                 return RedirectToAction("CTHD", new { ID = hoaDon.Idhd });
             }
+
             return View(hoaDon);
         }
+
         public async Task<IActionResult> Details(string ID)
         {
             var model = new HoaDonViewModel
@@ -174,8 +181,10 @@ namespace Web_BanXeMoTo.Controllers
                 ChiTietHd = new ChiTietHd { Idhd = ID },
                 ListChiTietHd = await database.ChiTietHds.Where(x => x.Idhd == ID).ToArrayAsync(),
             };
+
             return View(model);
         }
+
         public async Task<IActionResult> CTHD(string ID)
         {
             var model = new HoaDonViewModel
@@ -184,10 +193,12 @@ namespace Web_BanXeMoTo.Controllers
                 ListMauXe = database.MauXes.ToArray(),
                 ListXe = await database .Xes.Where(x => x.TrangThai == TrangThaiXe.ChuaBan).ToArrayAsync(),
             };
+
             foreach (var mauxe in model.ListMauXe)
             {
                 mauxe.IdhangNavigation = await database.Hangs.Where(x => x.Idhang == mauxe.Idhang).FirstOrDefaultAsync();
             }
+
             return View(model);
         }
 
@@ -207,24 +218,29 @@ namespace Web_BanXeMoTo.Controllers
                 chiTietHd.GiaBan = MauXe.GiaBan;
                 database.ChiTietHds.Add(chiTietHd);
                 await database.SaveChangesAsync();
+
                 return RedirectToAction("Details", new { ID = chiTietHd.Idhd });
             }
             catch
             {
                 ViewBag.Error = "Xe đã có trong hóa đơn!";
+
                 var model = new HoaDonViewModel
                 {
                     ChiTietHd = chiTietHd,
                     ListMauXe = database.MauXes.ToArray(),
                     ListXe = database.Xes.ToArray(),
                 };
+
                 foreach (var mauxe in model.ListMauXe)
                 {
                     mauxe.IdhangNavigation = await database.Hangs.Where(x => x.Idhang == mauxe.Idhang).FirstOrDefaultAsync();
                 }
+
                 return View(model);
             }
         }
+
         public async Task<IActionResult> DeleteCTHD(string idXe, string idHD)
         {
             var Xe = await database.Xes.Where(x => x.Idxe == idXe).FirstOrDefaultAsync();
@@ -235,6 +251,7 @@ namespace Web_BanXeMoTo.Controllers
 
             database.Remove(ChiTietHD);
             await database.SaveChangesAsync();
+
             return RedirectToAction("Details", new { ID = idHD });
         }
 

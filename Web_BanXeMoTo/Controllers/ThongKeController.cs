@@ -19,13 +19,13 @@ namespace Web_BanXeMoTo.Controllers
         {
             database = db;
         }
+
         public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
             //  the paging links in order to keep the sort order the same while paging
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-
 
             var ModelList = database.HoaDons.Where(x=>x.TrangThai==TrangThaiHoaDon.DaThanhToan).OrderByDescending(p => p.NgayDat).ToList();
 
@@ -41,7 +41,6 @@ namespace Web_BanXeMoTo.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-
 
             using (var context = new QLMTContext())
             {
@@ -69,7 +68,6 @@ namespace Web_BanXeMoTo.Controllers
                         ModelList = model.OrderBy(s => s.NgayDat).ToList();
                         break;
                 }
-
             }
             //indicates the size of list
             int pageSize = 10;
@@ -82,6 +80,7 @@ namespace Web_BanXeMoTo.Controllers
                 ListChiTietHd = database.ChiTietHds.ToArray(),
                 ListKhachHang = database.KhachHangs.ToArray()
             };
+
             return View(modelv);
         }
 
@@ -93,6 +92,7 @@ namespace Web_BanXeMoTo.Controllers
                 ChiTietHd = new ChiTietHd { Idhd = ID },
                 ListChiTietHd = await database.ChiTietHds.Where(x => x.Idhd == ID).ToArrayAsync(),
             };
+
             return View(model);
         }
     }

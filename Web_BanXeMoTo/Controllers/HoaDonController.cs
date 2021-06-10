@@ -17,6 +17,7 @@ namespace Web_BanXeMoTo.Controllers
         {
             database = db;
         }
+
         public IActionResult Index(int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
@@ -39,6 +40,7 @@ namespace Web_BanXeMoTo.Controllers
                 ListChiTietHd = database.ChiTietHds.ToArray(),
                 ListKhachHang = database.KhachHangs.ToArray()
             };
+
             return View(modelv);
         }
 
@@ -49,6 +51,7 @@ namespace Web_BanXeMoTo.Controllers
                 ChiTietHd = new ChiTietHd { Idhd = ID },
                 ListChiTietHd = database.ChiTietHds.Where(x => x.Idhd == ID).ToArray(),
             };
+
             return View(model);
         }
 

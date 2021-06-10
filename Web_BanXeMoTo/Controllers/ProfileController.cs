@@ -43,6 +43,7 @@ namespace Web_BanXeMoTo.Controllers
                                     .Where(x => x.Idtype == model.Idtype)
                                     .Select(x => x.Name)
                                     .FirstOrDefaultAsync();
+
             return View(model);
         }
 
@@ -53,6 +54,7 @@ namespace Web_BanXeMoTo.Controllers
             if (ModelState.IsValid)
             {
                 var model = await database.KhachHangs.Where(x => x.Idkh == khachHang.Idkh).FirstOrDefaultAsync();
+
                 if (model.Pass == Common.HashPassword.MD5Hash(khachHang.Pass))
                 {
                     model.TenKh = khachHang.TenKh;
@@ -85,14 +87,19 @@ namespace Web_BanXeMoTo.Controllers
                                             .Where(x => x.Idtype == model.Idtype)
                                             .Select(x => x.Name)
                                             .FirstOrDefaultAsync();
+
                     TempData["arlert-success"] = "Cập nhật thông tin thành công !!!";
+
                     return View(model);
                 }
+
                 khachHang.Avatar = StaticAcc.Avatar;
                 ViewBag.ErrorPass = "Mật khẩu sai!";
+
                 return View(khachHang);
             }
             khachHang.Avatar = StaticAcc.Avatar;
+
             return View(khachHang);
         }
 
@@ -100,9 +107,7 @@ namespace Web_BanXeMoTo.Controllers
         [HttpGet]
         public async Task<IActionResult> History(int? page)
         {
-            //A ViewBag property provides the view with the current sort order, because this must be included in 
-            //  the paging links in order to keep the sort order the same while paging
-
+            
 
             if (User.FindFirst(ClaimTypes.Email) == null)
             {
@@ -111,6 +116,8 @@ namespace Web_BanXeMoTo.Controllers
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var Idkh = await database.KhachHangs.Where(x => x.Email == email).Select(x => x.Idkh).FirstOrDefaultAsync();
 
+            //A ViewBag property provides the view with the current sort order, because this must be included in 
+            //  the paging links in order to keep the sort order the same while paging
             ViewBag.Role = TempData["Role"];
             var ModelList = database.HoaDons.Where(x => x.Idkh == Idkh).OrderByDescending(p => p.NgayDat).ToList();
 
@@ -122,12 +129,12 @@ namespace Web_BanXeMoTo.Controllers
             int pageNumber = (page ?? 1);
             //return the Model data with paged
 
-
             var modelv = new HoaDonViewModel
             {
                 ListHoaDon = ModelList.ToPagedList(pageNumber, pageSize),
                 ListChiTietHd = database.ChiTietHds.ToArray(),
             };
+
             return View(modelv);
         }
         [Authorize(Roles = "customer")]
@@ -138,6 +145,7 @@ namespace Web_BanXeMoTo.Controllers
                 ChiTietHd = new ChiTietHd { Idhd = ID },
                 ListChiTietHd = database.ChiTietHds.Where(x => x.Idhd == ID).ToArray(),
             };
+
             return View(model);
         }
 
@@ -149,6 +157,7 @@ namespace Web_BanXeMoTo.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
+
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var model = new NhanVien();
             model = database.NhanViens.Where(x => x.Email == email).FirstOrDefault();
@@ -170,11 +179,13 @@ namespace Web_BanXeMoTo.Controllers
             if (ModelState.IsValid)
             {
                 var model = await database.NhanViens.Where(x => x.Idnv == nhanVien.Idnv).FirstOrDefaultAsync();
+
                 if (model.Pass == Common.HashPassword.MD5Hash(nhanVien.Pass))
                 {
                     model.TenNv = nhanVien.TenNv;
                     model.DienThoai = nhanVien.DienThoai;
                     model.DiaChi = nhanVien.DiaChi;
+
                     #region Save Image from wwwroot/img
                     string wwwRootPath = hostEnvironment.WebRootPath;
 
@@ -202,17 +213,20 @@ namespace Web_BanXeMoTo.Controllers
                                             .Where(x => x.Idtype == model.Idtype)
                                             .Select(x => x.Name)
                                             .FirstOrDefaultAsync();
+
                     TempData["arlert-success"] = "Cập nhật thông tin thành công !!!";
+
                     return View(model);
                 }
                 nhanVien.Avatar = StaticAcc.Avatar;
                 ViewBag.ErrorPass = "Mật khẩu sai!";
+
                 return View(nhanVien);
             }
             nhanVien.Avatar = StaticAcc.Avatar;
+
             return View(nhanVien);
         }
-
 
         [HttpGet]
         [Authorize(Roles = "customer")]
@@ -224,19 +238,24 @@ namespace Web_BanXeMoTo.Controllers
             }
 
             string email = User.FindFirst(ClaimTypes.Email).Value;
-            var model = new ViewModelKH();
-            model.changePass = new ChangePassword();
-            model.khachHang = database.KhachHangs.Where(x => x.Email == email).FirstOrDefault();
-
+            var model = new ViewModelKH
+            {
+                changePass = new ChangePassword(),
+                khachHang = database.KhachHangs.Where(x => x.Email == email).FirstOrDefault()
+            };
             model.changePass.Email = model.khachHang.Email;
+
             return View(model);
         }
         [HttpPost]
         [Authorize(Roles = "customer")]
         public async Task<IActionResult> ChangePasswordKH(ChangePassword changepass)
         {
-            var model = new ViewModelKH();
-            model.khachHang = await database.KhachHangs.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync();
+            var model = new ViewModelKH
+            {
+                khachHang = await database.KhachHangs.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync()
+            };
+
             if (model.khachHang != null)
             {
                 if (model.khachHang.Pass == Common.HashPassword.MD5Hash(changepass.Password))
@@ -247,18 +266,23 @@ namespace Web_BanXeMoTo.Controllers
 
                         database.Update(model.khachHang);
                         await database.SaveChangesAsync();
+
                         TempData["result"] = "Đổi mật khẩu thành công !!!";
+
                         return View(model);
                     }
                 }
                 else
                 {
                     ViewBag.ErrorPass = "Sai mật khẩu";
+
                     return View(model);
                 }
             }
+
             return View();
         }
+
         [HttpGet]
         [Authorize(Roles = "admin, staff")]
         public IActionResult ChangePasswordNV()
@@ -269,19 +293,26 @@ namespace Web_BanXeMoTo.Controllers
             }
 
             string email = User.FindFirst(ClaimTypes.Email).Value;
-            var model = new ViewModelNV();
-            model.changePass = new ChangePassword();
-            model.nhanVien = database.NhanViens.Where(x => x.Email == email).FirstOrDefault();
 
+            var model = new ViewModelNV
+            {
+                changePass = new ChangePassword(),
+                nhanVien = database.NhanViens.Where(x => x.Email == email).FirstOrDefault()
+            };
             model.changePass.Email = model.nhanVien.Email;
+
             return View(model);
         }
+
         [HttpPost]
         [Authorize(Roles = "admin, staff")]
         public async Task<IActionResult> ChangePasswordNV(ChangePassword changepass)
         {
-            var model = new ViewModelNV();
-            model.nhanVien = await database.NhanViens.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync();
+            var model = new ViewModelNV
+            {
+                nhanVien = await database.NhanViens.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync()
+            };
+
             if (model.nhanVien != null)
             {
                 if (model.nhanVien.Pass == Common.HashPassword.MD5Hash(changepass.Password))
@@ -292,13 +323,16 @@ namespace Web_BanXeMoTo.Controllers
 
                         database.Update(model.nhanVien);
                         await database.SaveChangesAsync();
+
                         TempData["result"] = "Đổi mật khẩu thành công !!!";
+
                         return View(model);
                     }
                 }
                 else
                 {
                     ViewBag.ErrorPass = "Sai mật khẩu";
+
                     return View(model);
                 }
             }

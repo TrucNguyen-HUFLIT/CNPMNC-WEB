@@ -15,7 +15,6 @@ namespace Web_BanXeMoTo.Models
         public int Idnv { get; set; }
 
         [Display(Name = "ID LoạiTK")]
-
         public string Idtype { get; set; }
 
         [Display(Name = "Email")]

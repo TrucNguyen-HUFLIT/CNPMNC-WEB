@@ -22,6 +22,7 @@ namespace Web_BanXeMoTo.Models
         [Display(Name = "Ngày đặt")]
    
         public DateTime NgayDat { get; set; }
+
         [Display(Name = "Trạng thái")]
         public TrangThaiHoaDon TrangThai { get; set; }
 

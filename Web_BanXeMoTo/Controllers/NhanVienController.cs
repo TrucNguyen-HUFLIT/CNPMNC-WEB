@@ -23,6 +23,7 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
+
         public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
@@ -46,7 +47,6 @@ namespace Web_BanXeMoTo.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-
 
             using (var context = new QLMTContext())
             {
@@ -83,6 +83,7 @@ namespace Web_BanXeMoTo.Controllers
                 ListNhanViens = ModelList.ToPagedList(pageNumber, pageSize),
                 ListType = database.TypeAccs.ToArray()
             };
+
             return View(modelv);
         }
 
@@ -94,8 +95,10 @@ namespace Web_BanXeMoTo.Controllers
                 ListNhanVien = database.NhanViens.ToArray(),
                 ListType = database.TypeAccs.ToArray()
             };
+
             return View(model);
         }
+
         public IActionResult Create()
         {
             var model = new ViewModelNV
@@ -111,18 +114,19 @@ namespace Web_BanXeMoTo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NhanVien nhanVien)
         {
-
-
             var model = new ViewModelNV
             {
                 ListNhanVien = database.NhanViens.ToArray(),
                 ListType = database.TypeAccs.ToArray(),
                 nhanVien = nhanVien
             };
+
             model.nhanVien.Idnv = model.ListNhanVien[^1].Idnv + 1;
+
             if (database.NhanViens.Any(x => x.Email == nhanVien.Email))
             {
                 ViewBag.error = "Email nhân viên đã tồn tại";
+
                 return View(model);
             }
 
@@ -137,27 +141,38 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     await nhanVien.UpLoadAvt.CopyToAsync(fileStream);
                 }
+
                 database.Add(nhanVien);
                 await database.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
+
             return View(model);
         }
+
         public IActionResult Edit(int id)
         {
-            var model = new ViewModelNV();
-            model.nhanVien = database.NhanViens.Where(x => x.Idnv == id).FirstOrDefault();
-            model.ListType = database.TypeAccs.ToArray();
+            var model = new ViewModelNV
+            {
+                nhanVien = database.NhanViens.Where(x => x.Idnv == id).FirstOrDefault(),
+                ListType = database.TypeAccs.ToArray()
+            };
+
             return View(model);
 
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, NhanVien nhanVien)
         {
-            var model = new ViewModelNV();
-            model.ListType = database.TypeAccs.ToArray();
-            model.nhanVien = database.NhanViens.Where(x => x.Idnv == id).FirstOrDefault();
+            var model = new ViewModelNV
+            {
+                ListType = database.TypeAccs.ToArray(),
+                nhanVien = database.NhanViens.Where(x => x.Idnv == id).FirstOrDefault()
+            };
+
             if (nhanVien.TenNv != null && nhanVien.Email != null && nhanVien.Pass != null && nhanVien.Idtype != null)
             {
                 model.nhanVien.TenNv = nhanVien.TenNv;
@@ -182,10 +197,13 @@ namespace Web_BanXeMoTo.Controllers
                         await nhanVien.UpLoadAvt.CopyToAsync(fileStream);
                     }
                 }
+
                 database.Update(model.nhanVien);
                 await database.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
+
             return View(model);
         }
 
@@ -193,12 +211,13 @@ namespace Web_BanXeMoTo.Controllers
 
     public class ViewModelNV
     {
+        public ChangePassword changePass { get; set; }
         public NhanVien nhanVien { get; set; }
-        public IPagedList<NhanVien> ListNhanViens { get; set; }
+
         public NhanVien[] ListNhanVien { get; set; }
         public TypeAcc[] ListType { get; set; }
 
-        public ChangePassword changePass { get; set; }
+        public IPagedList<NhanVien> ListNhanViens { get; set; }
     }
 
 }

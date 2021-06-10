@@ -26,12 +26,14 @@ namespace Web_BanXeMoTo.Controllers
         private readonly string _clientId;
         private readonly string _secretKey;
         public double TyGiaUSD = 23300;
+
         public GioHangController(QLMTContext db, IConfiguration config)
         {
             database = db;
             _clientId = config["PaypalSettings:ClientId"];
             _secretKey = config["PaypalSettings:SecretKey"];
         }
+
         public List<CartModel> Carts
         {
             get
@@ -41,11 +43,11 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     data = new List<CartModel>();
                 }
+
                 return data;
             }
-
-
         }
+
         public IActionResult Index()
         {
             return View(Carts);
@@ -57,12 +59,14 @@ namespace Web_BanXeMoTo.Controllers
             var myCart = Carts;
             var item = myCart.SingleOrDefault(p => p.Idmau == id);
             var amount = database.Xes.Where(x => x.Idmau == id && x.TrangThai == TrangThaiXe.ChuaBan).ToArray().Length;
+
             int soLuong = item == null ? 0 : item.SoLuong;
             double tongTien = 0, thanhTien = item == null ? 0 : item.ThanhTien;
 
             if (item == null)
             {
                 var mauxe = await database.MauXes.SingleOrDefaultAsync(p => p.Idmau == id);
+
                 item = new CartModel
                 {
                     Idmau = id,
@@ -89,7 +93,9 @@ namespace Web_BanXeMoTo.Controllers
             {
                 tongTien += mauxe.ThanhTien;
             }
+
             HttpContext.Session.Set("GioHang", myCart);
+
             if (type == "ajax")
             {
                 return Json(new
@@ -101,21 +107,21 @@ namespace Web_BanXeMoTo.Controllers
                     total = Carts.Sum(c => c.SoLuong),
                 });
             }
+
             return RedirectToAction("Index");
         }
-
 
         [HttpGet]
         public IActionResult MinusFromCart(string id, string type = "Normal")
         {
             var myCart = Carts;
             var mauxe = database.MauXes.SingleOrDefault(p => p.Idmau == id);
+
             int soLuong = 0;
             double tongTien = 0, thanhTien = 0;
 
             foreach (var item in myCart)
             {
-
                 if (item.Idmau == mauxe.Idmau && item.SoLuong > 0)
                 {
                     item.SoLuong--;
@@ -131,6 +137,7 @@ namespace Web_BanXeMoTo.Controllers
             }
 
             HttpContext.Session.Set("GioHang", myCart);
+
             if (type == "ajax")
             {
                 return Json(new
@@ -142,6 +149,7 @@ namespace Web_BanXeMoTo.Controllers
                     total = Carts.Sum(c => c.SoLuong),
                 });
             }
+
             return RedirectToAction("Index");
         }
 
@@ -150,16 +158,18 @@ namespace Web_BanXeMoTo.Controllers
         {
             var myCart = Carts;
             var mauxe = database.MauXes.SingleOrDefault(p => p.Idmau == id);
+
             foreach (var item in myCart)
             {
-
                 if (item.Idmau == mauxe.Idmau)
                 {
                     myCart.Remove(item);
                     break;
                 }
             }
+
             HttpContext.Session.Set("GioHang", myCart);
+
             if (type == "ajax")
             {
                 return Json(new
@@ -167,17 +177,20 @@ namespace Web_BanXeMoTo.Controllers
                     SoLuong = Carts.Sum(c => c.SoLuong),
                 });
             }
+
             return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "customer")]
         public async Task<IActionResult> ThanhToan()
         {
-            var myCart = Carts;
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var Idkh = await database.KhachHangs.Where(x => x.Email == email).Select(x=>x.Idkh).FirstOrDefaultAsync();
+
+            var myCart = Carts;
             var now = DateTime.Now;
             var date = now.AddMilliseconds(-now.Millisecond);
+
             var hoaDon = new HoaDon
             {
                 Idhd = GetIDHD(),
@@ -192,7 +205,6 @@ namespace Web_BanXeMoTo.Controllers
             {
                 var Idkm = await database.MauXes.Where(x => x.Idmau == item.Idmau).Select(x => x.Idkm).FirstOrDefaultAsync();
                 var listXe = await database.Xes.Where(x => x.Idmau == item.Idmau && x.TrangThai == TrangThaiXe.ChuaBan).ToArrayAsync();
-
                 var khuyenMai = await database.KhuyenMais.Where(x => x.Idkm == Idkm).Select(x => x.GiaTri).FirstOrDefaultAsync();
 
                 for (int count = 0; count < item.SoLuong; count++)
@@ -206,13 +218,13 @@ namespace Web_BanXeMoTo.Controllers
 
                     });
                     listXe[count].TrangThai = TrangThaiXe.DaBan;
-
                     database.Xes.Update(listXe[count]);
                     await database.SaveChangesAsync();
-
                 }
             }
+
             HttpContext.Session.Remove("GioHang");
+
             return View("Notify");
         }
 
@@ -226,6 +238,7 @@ namespace Web_BanXeMoTo.Controllers
             {
                 Items = new List<Item>()
             };
+
             var total = Math.Round(Carts.Sum(p => p.ThanhTien) / TyGiaUSD, 2);
             foreach (var item in Carts)
             {
@@ -242,6 +255,7 @@ namespace Web_BanXeMoTo.Controllers
 
             var paypalOrderId = DateTime.Now.Ticks;
             var hostname = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+
             var payment = new Payment()
             {
                 Intent = "sale",
@@ -275,6 +289,7 @@ namespace Web_BanXeMoTo.Controllers
                     PaymentMethod = "paypal"
                 }
             };
+
             PaymentCreateRequest request = new PaymentCreateRequest();
             request.RequestBody(payment);
 
@@ -307,13 +322,16 @@ namespace Web_BanXeMoTo.Controllers
                 return Redirect("/GioHang/CheckoutFail");
             }
         }
+
         public async Task<IActionResult> CheckoutFail()
         {
             var myCart = Carts;
+
             if (User.FindFirst(ClaimTypes.Email) == null)
             {
                 return RedirectToAction("Login", "Login");
             }
+
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var khachHang = await database.KhachHangs.Where(x => x.Email == email).FirstOrDefaultAsync();
 
@@ -332,7 +350,6 @@ namespace Web_BanXeMoTo.Controllers
             {
                 var Idkm = await database.MauXes.Where(x => x.Idmau == item.Idmau).Select(x => x.Idkm).FirstOrDefaultAsync();
                 var listXe = await database.Xes.Where(x => x.Idmau == item.Idmau && x.TrangThai == TrangThaiXe.ChuaBan).ToArrayAsync();
-
                 var khuyenMai = await database.KhuyenMais.Where(x => x.Idkm == Idkm).Select(x => x.GiaTri).FirstOrDefaultAsync();
 
                 for (int count = 0; count < item.SoLuong; count++)
@@ -343,25 +360,26 @@ namespace Web_BanXeMoTo.Controllers
                         Idxe = listXe[count].Idxe,
                         KhuyenMai = khuyenMai,
                         GiaBan = (decimal)item.GiaBan,
-
                     });
                     listXe[count].TrangThai = TrangThaiXe.DaBan;
-
                     database.Xes.Update(listXe[count]);
                     await database.SaveChangesAsync();
-
                 }
             }
+
             HttpContext.Session.Remove("GioHang");
+
             return View();
         }
         public async Task<IActionResult> CheckoutSuccess()
         {
             var myCart = Carts;
+
             if (User.FindFirst(ClaimTypes.Email) == null)
             {
                 return RedirectToAction("Login", "Login");
             }
+
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var khachHang = await database.KhachHangs.Where(x => x.Email == email).FirstOrDefaultAsync();
 
@@ -380,7 +398,6 @@ namespace Web_BanXeMoTo.Controllers
             {
                 var Idkm = await database.MauXes.Where(x => x.Idmau == item.Idmau).Select(x => x.Idkm).FirstOrDefaultAsync();
                 var listXe = await database.Xes.Where(x => x.Idmau == item.Idmau && x.TrangThai == TrangThaiXe.ChuaBan).ToArrayAsync();
-
                 var khuyenMai = await database.KhuyenMais.Where(x => x.Idkm == Idkm).Select(x => x.GiaTri).FirstOrDefaultAsync();
 
                 for (int count = 0; count < item.SoLuong; count++)
@@ -391,17 +408,16 @@ namespace Web_BanXeMoTo.Controllers
                         Idxe = listXe[count].Idxe,
                         KhuyenMai = khuyenMai,
                         GiaBan = (decimal)item.GiaBan,
-
                     });
                     listXe[count].TrangThai = TrangThaiXe.DaBan;
-
                     database.Xes.Update(listXe[count]);
                     await database.SaveChangesAsync();
-
                 }
             }
             await SendEmailConfirm(hoaDon);
+
             HttpContext.Session.Remove("GioHang");
+
             return View();
         }
 
@@ -418,12 +434,14 @@ namespace Web_BanXeMoTo.Controllers
             message.To.Add(to);
 
             message.Subject = "Thanh toán thành công";
+
             BodyBuilder bodyBuilder = new()
             {
                 HtmlBody = $"<h1>Bạn đã thanh toán thành công hóa đơn {hoaDon.Idhd}, cảm ơn bạn đã đồng hành cùng chúng tôi  </h1>",
                 TextBody = "Đơn hàng của bạn đã được thanh toán "
             };
             message.Body = bodyBuilder.ToMessageBody();
+
             SmtpClient client = new();
             //connect (smtp address, port , true)
             await client.ConnectAsync("smtp.gmail.com", 465, true);

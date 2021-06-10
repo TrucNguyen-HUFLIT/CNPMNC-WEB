@@ -34,6 +34,7 @@ namespace Web_BanXeMoTo.Controllers
         {
             var modelNV = await database.NhanViens.Where(x => x.Email == loginModel.Email && x.Pass == Common.HashPassword.MD5Hash(loginModel.Password)).FirstOrDefaultAsync();
             var modelKH = await database.KhachHangs.Where(x => x.Email == loginModel.Email && x.Pass == Common.HashPassword.MD5Hash(loginModel.Password)).FirstOrDefaultAsync();
+
             if (modelNV != null)
             {
                 var claims = new List<Claim>
@@ -64,11 +65,12 @@ namespace Web_BanXeMoTo.Controllers
                 await HttpContext.SignInAsync(claimsPrincipal);
 
                 HttpContext.Session.SetString("email", loginModel.Email);
+
                 return RedirectToAction("Home", "Customer");
 
             }
-
             ViewBag.error = "Sai thông tin tài khoản";
+
             return View("Login");
         }
 
@@ -77,6 +79,7 @@ namespace Web_BanXeMoTo.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel registerModels)
         {
@@ -86,8 +89,10 @@ namespace Web_BanXeMoTo.Controllers
                 if (emailExisted)
                 {
                     ViewBag.error = "Email đã tồn tại!";
+
                     return View(registerModels);
                 }
+
                 var model = new KhachHang
                 {
                     Idkh = database.KhachHangs.ToArray()[^1].Idkh + 1,
@@ -100,13 +105,14 @@ namespace Web_BanXeMoTo.Controllers
                     Idtype = "type3",
                 };
                 ViewBag.success = "Đã đăng ký thành công!";
+
                 database.KhachHangs.Add(model);
                 await database.SaveChangesAsync();
+
                 return View("Login");
             }
             return View(registerModels);
         }
-
 
         [HttpGet]
         public IActionResult Reset()
@@ -117,7 +123,6 @@ namespace Web_BanXeMoTo.Controllers
         [HttpPost]
         public async Task<IActionResult> Reset(ResetModel resetModel)
         {
-
             if (ModelState.IsValid)
             {
                 var model = await database.KhachHangs.Where(x => x.Email == resetModel.Email).FirstOrDefaultAsync();
@@ -171,8 +176,11 @@ namespace Web_BanXeMoTo.Controllers
         {
             StaticAcc.Avatar = "";
             StaticAcc.Name = "";
+
             HttpContext.Session.Remove("email");
+
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
             if (StaticAcc.TypeAcc == "customer")
             {
                 StaticAcc.TypeAcc = "";

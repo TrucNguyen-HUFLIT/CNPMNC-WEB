@@ -11,6 +11,5 @@ namespace Web_BanXeMoTo.Models
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Không được để trống!")]
         public string Email { get; set; }
-
     }
 }

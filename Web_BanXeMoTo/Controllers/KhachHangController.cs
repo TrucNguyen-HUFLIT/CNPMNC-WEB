@@ -19,11 +19,13 @@ namespace Web_BanXeMoTo.Controllers
     {
         private readonly QLMTContext database;
         private readonly IWebHostEnvironment hostEnvironment;
+
         public KhachHangController(QLMTContext db, IWebHostEnvironment hostEnvironment)
         {
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
+
         public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
@@ -48,7 +50,6 @@ namespace Web_BanXeMoTo.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-
             using (var context = new QLMTContext())
             {
                 var model = from s in context.KhachHangs
@@ -69,7 +70,6 @@ namespace Web_BanXeMoTo.Controllers
                         ModelList = model.OrderBy(s => s.Idkh).ToList();
                         break;
                 }
-
             }
             //indicates the size of list
             int pageSize = 10;
@@ -80,19 +80,22 @@ namespace Web_BanXeMoTo.Controllers
             {
                 ListKhachHangs = ModelList.ToPagedList(pageNumber, pageSize)
             };
+
             return View(modelv);
         }
         public IActionResult Edit(int id)
         {
-            var model = new ViewModelKH();
+            var model = new ViewModelKH
+            {
+                ListType = database.TypeAccs.ToArray(),
+                khachHang = database.KhachHangs.Where(X => X.Idkh == id).FirstOrDefault()
+            };
 
-            model.ListType = database.TypeAccs.ToArray();
-            model.khachHang = database.KhachHangs.Where(X => X.Idkh == id).FirstOrDefault();
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Edit(int id, KhachHang khachHang)
         {
             var model = new ViewModelKH
@@ -127,23 +130,22 @@ namespace Web_BanXeMoTo.Controllers
                 }
                 database.Update(model.khachHang);
                 await database.SaveChangesAsync();
+
                 return RedirectToAction("Index", "NhanVien");
             }
             return View(model);
         }
-
     }
     public class ViewModelKH
     {
+        public ChangePassword changePass { get; set; }
+        public KhachHang khachHang { get; set; }
+        public LoaiXe loaiXe { get; set; }
+
         public MauXe[] ListMauXe { get; set; }
         public Hang[] ListHang { get; set; }
         public LoaiXe[] ListLoaiXe { get; set; }
-        public LoaiXe loaiXe { get; set; }
-
-        public KhachHang khachHang { get; set; }
         public KhachHang[] ListKhachHang { get; set; }
         public TypeAcc[] ListType { get; set; }
-
-        public ChangePassword changePass { get; set; }
     }
 }

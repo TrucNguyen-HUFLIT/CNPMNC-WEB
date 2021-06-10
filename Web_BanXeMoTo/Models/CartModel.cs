@@ -9,12 +9,9 @@ namespace Web_BanXeMoTo.Models
     {
         public string Idmau { get; set; }
         public string TenXe { get; set; }
-
         public string Hinh { get; set; }
         public double GiaBan { get; set; }
         public int SoLuong { get; set; }
         public double ThanhTien => (SoLuong * (double)GiaBan);
-       
-
     }
 }

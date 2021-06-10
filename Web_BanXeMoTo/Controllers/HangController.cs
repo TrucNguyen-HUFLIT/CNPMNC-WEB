@@ -19,6 +19,7 @@ namespace Web_BanXeMoTo.Controllers
         {
             database = db;
         }
+
         public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
@@ -43,7 +44,6 @@ namespace Web_BanXeMoTo.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-
             using (var context = new QLMTContext())
             {
                 var model = from s in context.Hangs
@@ -65,7 +65,6 @@ namespace Web_BanXeMoTo.Controllers
                         ModelList = model.OrderBy(s => s.Idhang).ToList();
                         break;
                 }
-
             }
             //indicates the size of list
             int pageSize = 10;
@@ -76,42 +75,48 @@ namespace Web_BanXeMoTo.Controllers
             {
                 ListHangs = ModelList.ToPagedList(pageNumber, pageSize),
                 ListMauXe = database.MauXes.ToArray(),
-
             };
+
             return View(modelv);
         }
 
         public IActionResult Create()
         {
             var model = new Hang();
-
+            
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Create(Hang hang)
         {
-
             if (ModelState.IsValid)
             {
                 if (database.Hangs.Any(x => x.Idhang == hang.Idhang || x.TenHang == hang.TenHang))
                 {
                     ViewBag.error = "Tên hãng hoặc ID hãng đã tồn tại";
+
                     return View(hang);
                 }
                 database.Add(hang);
                 database.SaveChanges();
+
                 return RedirectToAction("Index");
             }
+
             return View(hang);
         }
+
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            var model = new ViewModel();
-            model.hang = database.Hangs.Where(x => x.Idhang == id).FirstOrDefault();
+            var model = new ViewModel
+            {
+                hang = database.Hangs.Where(x => x.Idhang == id).FirstOrDefault()
+            };
             database.Remove(model.hang);
             database.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -119,26 +124,23 @@ namespace Web_BanXeMoTo.Controllers
         {
             var model = new Hang();
             model = database.Hangs.Where(x => x.Idhang == id).FirstOrDefault();
+
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Edit(Hang hang)
         {
-            //foreach (var item in model.ListMauXe)
-            //{
-            //    if(item.Idhang == hang.Idhang)
-            //    {
-            //        //
-            //    }
-            //}
             var model = hang;
+
             if (ModelState.IsValid)
             {
                 database.Update(model);
                 database.SaveChanges();
+
                 return RedirectToAction("Index");
             }
+
             return View(model);
         }
     }

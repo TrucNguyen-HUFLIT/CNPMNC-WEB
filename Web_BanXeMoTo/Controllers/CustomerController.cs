@@ -17,7 +17,8 @@ namespace Web_BanXeMoTo.Controllers
         public CustomerController(QLMTContext db)
         {
             database = db;
-        }
+        } 
+
         public IActionResult Home()
         {
             if (User.FindFirst(ClaimTypes.Email) == null)
@@ -27,28 +28,34 @@ namespace Web_BanXeMoTo.Controllers
                     ListHang = database.Hangs.ToArray(),
                     ListMauXe = database.MauXes.ToArray()
                 };
+
                 return View(model);
             }
             else
             {
                 var email = User.FindFirst(ClaimTypes.Email).Value;
                 var model = new CustomerViewModel();
+
                 if (email != null)
                 {
                     model.ListHang = database.Hangs.ToArray();
                     model.ListMauXe = database.MauXes.ToArray();
                     model.khachHang = database.KhachHangs.Where(x => x.Email == email).FirstOrDefault();
+
                     if (model.khachHang == null)
                     {
                         StaticAcc.Avatar = "";
                         StaticAcc.Name = "";
                         StaticAcc.TypeAcc = "";
+
                         return View(model);
                     }
+
                     StaticAcc.Avatar = model.khachHang.Avatar;
                     StaticAcc.Name = model.khachHang.TenKh;
                     StaticAcc.TypeAcc = database.TypeAccs.Where(x => x.Idtype == model.khachHang.Idtype).Select(x => x.Name).FirstOrDefault();
                 }
+
                 return View(model);
             }
         }
@@ -59,7 +66,6 @@ namespace Web_BanXeMoTo.Controllers
             //  the paging links in order to keep the sort order the same while paging
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-
 
             var ModelList = new List<MauXe>();
 
@@ -79,6 +85,7 @@ namespace Web_BanXeMoTo.Controllers
                         select s;
             var hang = new Hang();
             var loaiXe = new LoaiXe();
+
             if (idHang != null && idLoai != null)
             {
                 model = from s in database.MauXes
@@ -102,12 +109,12 @@ namespace Web_BanXeMoTo.Controllers
                 hang = await database.Hangs.Where(x => x.Idhang == idHang).FirstOrDefaultAsync();
             }
 
-
             //Search and match data, if search string is not null or empty
             if (!String.IsNullOrEmpty(searchString))
             {
                 model = model.Where(s => s.TenXe.Contains(searchString));
             }
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -133,6 +140,7 @@ namespace Web_BanXeMoTo.Controllers
                 ListXe = await database.Xes.ToArrayAsync(),
                 ListMauXes = ModelList.ToPagedList(pageNumber, pageSize),
             };
+
             return View(modelv);
         }
 
@@ -156,7 +164,6 @@ namespace Web_BanXeMoTo.Controllers
     }
     public class CustomerViewModel
     {
-
         public IPagedList<MauXe> ListMauXes { get; set; }
         public Xe[] ListXe { get; set; }
         public Hang Hang { get; set; }

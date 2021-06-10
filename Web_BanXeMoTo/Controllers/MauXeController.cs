@@ -22,13 +22,13 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
+
         public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
             //  the paging links in order to keep the sort order the same while paging
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-
 
             var ModelList = new List<MauXe>();
 
@@ -44,7 +44,6 @@ namespace Web_BanXeMoTo.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-
 
             using (var context = new QLMTContext())
             {
@@ -67,7 +66,6 @@ namespace Web_BanXeMoTo.Controllers
                         ModelList = model.OrderBy(s => s.TenXe).ToList();
                         break;
                 }
-
             }
             //indicates the size of list
             int pageSize = 10;
@@ -81,9 +79,9 @@ namespace Web_BanXeMoTo.Controllers
                 ListMauXes = ModelList.ToPagedList(pageNumber, pageSize),
                 ListKhuyenMai = database.KhuyenMais.ToArray()
             };
+
             return View(modelv);
         }
-
 
         public IActionResult Create()
         {
@@ -93,9 +91,9 @@ namespace Web_BanXeMoTo.Controllers
                 ListHang = database.Hangs.ToArray(),
                 ListKhuyenMai = database.KhuyenMais.ToArray()
             };
+
             return View(model);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(MauXe mauXe)
@@ -112,6 +110,7 @@ namespace Web_BanXeMoTo.Controllers
                 if (database.MauXes.Any(x => x.Idmau == mauXe.Idmau || x.TenXe == mauXe.TenXe))
                 {
                     ViewBag.error = "Tên xe hoặc ID mẫu đã tồn tại";
+
                     return View(model);
                 }
                 #region Save Image from wwwroot/img
@@ -150,8 +149,10 @@ namespace Web_BanXeMoTo.Controllers
 
                 database.Add(mauXe);
                 await database.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
+
             return View(model);
         }
 
@@ -164,6 +165,7 @@ namespace Web_BanXeMoTo.Controllers
                 ListKhuyenMai = database.KhuyenMais.ToArray(),
                 mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault()
             };
+
             return View(model);
         }
 
@@ -176,6 +178,7 @@ namespace Web_BanXeMoTo.Controllers
                 ListKhuyenMai = database.KhuyenMais.ToArray(),
                 mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault()
             };
+
             return View(model);
         }
 
@@ -185,6 +188,7 @@ namespace Web_BanXeMoTo.Controllers
             mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
             database.Remove(mauXe);
             database.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -198,6 +202,7 @@ namespace Web_BanXeMoTo.Controllers
                 ListKhuyenMai = database.KhuyenMais.ToArray(),
                 mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault()
             };
+
             return View(model);
         }
 
@@ -210,6 +215,7 @@ namespace Web_BanXeMoTo.Controllers
                 ListKhuyenMai = database.KhuyenMais.ToArray(),
                 mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault()
             };
+
             if (mauXe.TenXe != null && mauXe.MoTa != null && mauXe.BaoHanh > 0 && mauXe.GiaBan >= 1000)
             {
                 model.mauXe.TenXe = mauXe.TenXe;
@@ -263,11 +269,12 @@ namespace Web_BanXeMoTo.Controllers
                 #endregion
                 database.Update(model.mauXe);
                 await database.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
+
             return View(model);
         }
-
     }
     public class ViewModel
     {

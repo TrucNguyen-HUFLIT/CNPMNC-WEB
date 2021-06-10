@@ -15,7 +15,6 @@ namespace Web_BanXeMoTo.Controllers
     [Authorize(Roles = "admin, staff")]
     public class XeController : Controller
     {
-
         private readonly QLMTContext database;
         private readonly IWebHostEnvironment hostEnvironment;
 
@@ -49,7 +48,6 @@ namespace Web_BanXeMoTo.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-
             using (var context = new QLMTContext())
             {
                 var model = from s in context.Xes
@@ -68,6 +66,7 @@ namespace Web_BanXeMoTo.Controllers
                                            || s.Idmau.Contains(searchString)
                                            || s.TenXe.Contains(searchString));
                 }
+
                 switch (sortOrder)
                 {
                     case "name_desc":
@@ -95,6 +94,7 @@ namespace Web_BanXeMoTo.Controllers
                 ListXes = ModelList.ToPagedList(pageNumber, pageSize),
                 ListKhuyenMai = database.KhuyenMais.ToArray()
             };
+
             return View(modelv);
         }
 
@@ -106,6 +106,7 @@ namespace Web_BanXeMoTo.Controllers
             {
                 ListMauXe = await database.MauXes.ToArrayAsync()
             };
+
             return View(model);
         }
 
@@ -115,10 +116,12 @@ namespace Web_BanXeMoTo.Controllers
         {
             xe.TenXe = await database.MauXes.Where(s => s.Idmau == xe.Idmau).Select(x => x.TenXe).FirstOrDefaultAsync();
             int length = database.Xes.Where(s => s.Idmau == xe.Idmau).ToArray().Length + 1;
+
             xe.Idxe = xe.TenXe + "-" + length;
             xe.TrangThai = TrangThaiXe.ChuaBan;
             database.Add(xe);
             await database.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
 
