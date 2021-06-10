@@ -128,8 +128,9 @@ namespace Web_BanXeMoTo.Controllers
                 }
 
                 //model.pass đã được set new password
-                model.Pass = GetPasswordRandom();
-                database.KhachHangs.Update(model);
+                string newPass = GetPasswordRandom();
+                model.Pass = Common.HashPassword.MD5Hash(newPass);
+                database.Update(model);
                 await database.SaveChangesAsync();
 
                 #region Send mail
@@ -144,7 +145,7 @@ namespace Web_BanXeMoTo.Controllers
                 message.Subject = "Reset Mật khẩu thành công";
                 BodyBuilder bodyBuilder = new()
                 {
-                    HtmlBody = $"<h1>Mật khẩu của bạn đã được reset, mật khẩu mới: {model.Pass}  </h1>",
+                    HtmlBody = $"<h1>Mật khẩu của bạn đã được reset, mật khẩu mới: {newPass}  </h1>",
                     TextBody = "Mật Khẩu của bạn đã được thay đổi "
                 };
                 message.Body = bodyBuilder.ToMessageBody();
