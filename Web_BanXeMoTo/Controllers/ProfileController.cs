@@ -53,7 +53,7 @@ namespace Web_BanXeMoTo.Controllers
             if (ModelState.IsValid)
             {
                 var model = await database.KhachHangs.Where(x => x.Idkh == khachHang.Idkh).FirstOrDefaultAsync();
-                if (model.Pass == khachHang.Pass)
+                if (model.Pass == Common.HashPassword.MD5Hash(khachHang.Pass))
                 {
                     model.TenKh = khachHang.TenKh;
                     model.DienThoai = khachHang.DienThoai;
@@ -170,7 +170,7 @@ namespace Web_BanXeMoTo.Controllers
             if (ModelState.IsValid)
             {
                 var model = await database.NhanViens.Where(x => x.Idnv == nhanVien.Idnv).FirstOrDefaultAsync();
-                if (model.Pass == nhanVien.Pass)
+                if (model.Pass == Common.HashPassword.MD5Hash(nhanVien.Pass))
                 {
                     model.TenNv = nhanVien.TenNv;
                     model.DienThoai = nhanVien.DienThoai;
@@ -239,11 +239,11 @@ namespace Web_BanXeMoTo.Controllers
             model.khachHang = await database.KhachHangs.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync();
             if (model.khachHang != null)
             {
-                if (model.khachHang.Pass == changepass.Password)
+                if (model.khachHang.Pass == Common.HashPassword.MD5Hash(changepass.Password))
                 {
                     if (changepass.NewPassword == changepass.ConfirmPass)
                     {
-                        model.khachHang.Pass = changepass.NewPassword;
+                        model.khachHang.Pass = Common.HashPassword.MD5Hash(changepass.NewPassword);
 
                         database.Update(model.khachHang);
                         await database.SaveChangesAsync();
@@ -284,11 +284,11 @@ namespace Web_BanXeMoTo.Controllers
             model.nhanVien = await database.NhanViens.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync();
             if (model.nhanVien != null)
             {
-                if (model.nhanVien.Pass == changepass.Password)
+                if (model.nhanVien.Pass == Common.HashPassword.MD5Hash(changepass.Password))
                 {
                     if (changepass.NewPassword == changepass.ConfirmPass)
                     {
-                        model.nhanVien.Pass = changepass.NewPassword;
+                        model.nhanVien.Pass = Common.HashPassword.MD5Hash(changepass.NewPassword);
 
                         database.Update(model.nhanVien);
                         await database.SaveChangesAsync();

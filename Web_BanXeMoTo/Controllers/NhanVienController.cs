@@ -163,7 +163,7 @@ namespace Web_BanXeMoTo.Controllers
                 model.nhanVien.TenNv = nhanVien.TenNv;
                 model.nhanVien.Idtype = nhanVien.Idtype;
                 model.nhanVien.Email = nhanVien.Email;
-                model.nhanVien.Pass = nhanVien.Pass;
+                model.nhanVien.Pass = Common.HashPassword.MD5Hash(nhanVien.Pass);
                 model.nhanVien.DienThoai = nhanVien.DienThoai;
                 model.nhanVien.DiaChi = nhanVien.DiaChi;
                 model.nhanVien.Cmnd = nhanVien.Cmnd;

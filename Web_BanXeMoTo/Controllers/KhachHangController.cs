@@ -106,7 +106,7 @@ namespace Web_BanXeMoTo.Controllers
                 model.khachHang.TenKh = khachHang.TenKh;
                 model.khachHang.Idtype = khachHang.Idtype;
                 model.khachHang.Email = khachHang.Email;
-                model.khachHang.Pass = khachHang.Pass;
+                model.khachHang.Pass = Common.HashPassword.MD5Hash(khachHang.Pass);
                 model.khachHang.DienThoai = khachHang.DienThoai;
                 model.khachHang.DiaChi = khachHang.DiaChi;
 

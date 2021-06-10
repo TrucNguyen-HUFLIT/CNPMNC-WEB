@@ -32,8 +32,8 @@ namespace Web_BanXeMoTo.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var modelNV = await database.NhanViens.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefaultAsync();
-            var modelKH = await database.KhachHangs.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefaultAsync();
+            var modelNV = await database.NhanViens.Where(x => x.Email == loginModel.Email && x.Pass == Common.HashPassword.MD5Hash(loginModel.Password)).FirstOrDefaultAsync();
+            var modelKH = await database.KhachHangs.Where(x => x.Email == loginModel.Email && x.Pass == Common.HashPassword.MD5Hash(loginModel.Password)).FirstOrDefaultAsync();
             if (modelNV != null)
             {
                 var claims = new List<Claim>
@@ -93,7 +93,7 @@ namespace Web_BanXeMoTo.Controllers
                     Idkh = database.KhachHangs.ToArray()[^1].Idkh + 1,
                     TenKh = "Cập nhật tên",
                     Email = registerModels.Email,
-                    Pass = registerModels.Password,
+                    Pass = Common.HashPassword.MD5Hash(registerModels.Password),
                     DiaChi = "Hãy cập nhật địa chỉ của bạn",
                     DienThoai = "",
                     Avatar = "/img/Avatar/avt-default.png",
