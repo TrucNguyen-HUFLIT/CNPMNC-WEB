@@ -1,34 +1,39 @@
 # CNPMNC-WEB
-<h2>Website Bán xe mô tô: <h1>H2T Moto</h1></h2>
+<h2>Website Bán xe mô tô: H2T Moto</h2>
 
 Để đáp ứng nhu cầu người dùng mua bán trao đổi xe moto hiện nay. Trang web này được tạo ra để các cửa hàng có thể dễ dàng trao đổi và buôn bán các loại xe moto(PKL-PKN) <br/>
 Trang web thiết kế với mục đích cho người dùng dễ dàng sử dụng, quản lý, và trao đổi với khách hàng, bên cạnh đó còn đáp ứng đầy đủ các tính năng cần thiết như là lập hóa đơn, xem sản phẩm, thêm xóa sửa tài khoản, thay đổi thông tin cá nhân, xem lịch sử đơn hàng... 
 Và ngoài ra không thể thiếu đó là những thiết kế bắt mắt, hiện đại, dễ nhìn phù hợp với mọi người.
 
-## Người đóng góp
+## 🏍 Người đóng góp
 - Ngọc Trúc
 - Gia Huy
 - Minh Tâm
 
-## Bắt đầu
+## 🏍 Bắt đầu
 - Tải và thực thi file 'datacnpmnc.sql' trên SSMS của bạn
 - Thay đổi đường dẫn Server=[local của bạn] trong file 'Starup.cs' và file 'QLMTContext.cs'
 - Dùng VS để build Web
 
-## Công nghệ và kỹ thuật
-- C# .Net 5.0
+## 🏍 Công nghệ và kỹ thuật
+- C# .Net 5.0, Javascript, 
 - ASP.NET Core MVC
-- EF Core
+- EF Core (Database first)
+- Authorize(Roles)
 - SandBox PayPal
-- Hash Password MD5
+- Send mail (MailKit)
+- Hash Password (MD5)
 - Ajax
 
-## Thiết kế Figma với Prototype
+## 🏍 Thiết kế Figma với Prototype
 https://www.figma.com/proto/RCpclkHSvQwI5mWgqu6sj3/CNPMNC_WEB_BANXEMOTO?page-id=0%3A1&node-id=0%3A1&viewport=178%2C140%2C0.03578898310661316&scaling=min-zoom
 
-## ERD và thiết kế dữ liệu
+## 🏍 ERD và thiết kế dữ liệu
+
+## ERD
 <img src="https://res.cloudinary.com/web-banxemoto/image/upload/v1623306039/CNPMNC_WEB/erd_web_banxemoto.jpg" />
 
+## Thiết kế dữ liệu
 **NhanVien(_IDNV_, IDType, Email ,Pass TenNV, DienThoai, DiaChi, Cmnd, Avatar)**
 - Quản lý tạo tài khoản và thông tin cho nhân viên
 - Mỗi nhân viên sẽ thuộc 1 loại tài khoản nhất định và xác định qua IDType
