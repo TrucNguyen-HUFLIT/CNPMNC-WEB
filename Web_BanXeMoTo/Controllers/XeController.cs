@@ -54,10 +54,13 @@ namespace Web_BanXeMoTo.Controllers
             {
                 var model = from s in context.Xes
                             select s;
-                if (trangThai != null)
-                {
-                    model = model.Where(x => x.TrangThai == trangThai);
-                }
+
+                model = model.Where(x => x.TrangThai == trangThai);
+                if (trangThai == TrangThaiXe.ChuaBan)
+                    ViewBag.ChuaBan = "ChuaBan";
+                else
+                    ViewBag.DaBan = "DaBan";
+
                 //Search and match data, if search string is not null or empty
                 if (!String.IsNullOrEmpty(searchString))
                 {
@@ -75,7 +78,10 @@ namespace Web_BanXeMoTo.Controllers
                         ModelList = model.OrderBy(s => s.Idxe).ToList();
                         break;
                 }
-
+                if(ModelList.Count == 0)
+                {
+                    ViewBag.HetHang = "Sản phẩm hiện không có trong kho";
+                }
             }
             //indicates the size of list
             int pageSize = 10;
