@@ -255,32 +255,34 @@ namespace Web_BanXeMoTo.Controllers
             {
                 khachHang = await database.KhachHangs.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync()
             };
-
-            if (model.khachHang != null)
+            if (ModelState.IsValid)
             {
-                if (model.khachHang.Pass == Common.HashPassword.MD5Hash(changepass.Password))
+                if (model.khachHang != null)
                 {
-                    if (changepass.NewPassword == changepass.ConfirmPass)
+                    if (model.khachHang.Pass == Common.HashPassword.MD5Hash(changepass.Password))
                     {
-                        model.khachHang.Pass = Common.HashPassword.MD5Hash(changepass.NewPassword);
+                        if (changepass.NewPassword == changepass.ConfirmPass)
+                        {
+                            model.khachHang.Pass = Common.HashPassword.MD5Hash(changepass.NewPassword);
 
-                        database.Update(model.khachHang);
-                        await database.SaveChangesAsync();
+                            database.Update(model.khachHang);
+                            await database.SaveChangesAsync();
 
-                        TempData["result"] = "Đổi mật khẩu thành công !!!";
+                            TempData["result"] = "Đổi mật khẩu thành công !!!";
+
+                            return View(model);
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.ErrorPass = "Sai mật khẩu";
 
                         return View(model);
                     }
                 }
-                else
-                {
-                    ViewBag.ErrorPass = "Sai mật khẩu";
-
-                    return View(model);
-                }
             }
 
-            return View();
+            return View(model);
         }
 
         [HttpGet]
@@ -312,31 +314,34 @@ namespace Web_BanXeMoTo.Controllers
             {
                 nhanVien = await database.NhanViens.Where(x => x.Email == changepass.Email).FirstOrDefaultAsync()
             };
-
-            if (model.nhanVien != null)
+            if (ModelState.IsValid)
             {
-                if (model.nhanVien.Pass == Common.HashPassword.MD5Hash(changepass.Password))
+
+                if (model.nhanVien != null)
                 {
-                    if (changepass.NewPassword == changepass.ConfirmPass)
+                    if (model.nhanVien.Pass == Common.HashPassword.MD5Hash(changepass.Password))
                     {
-                        model.nhanVien.Pass = Common.HashPassword.MD5Hash(changepass.NewPassword);
+                        if (changepass.NewPassword == changepass.ConfirmPass)
+                        {
+                            model.nhanVien.Pass = Common.HashPassword.MD5Hash(changepass.NewPassword);
 
-                        database.Update(model.nhanVien);
-                        await database.SaveChangesAsync();
+                            database.Update(model.nhanVien);
+                            await database.SaveChangesAsync();
 
-                        TempData["result"] = "Đổi mật khẩu thành công !!!";
+                            TempData["result"] = "Đổi mật khẩu thành công !!!";
+
+                            return View(model);
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.ErrorPass = "Sai mật khẩu";
 
                         return View(model);
                     }
                 }
-                else
-                {
-                    ViewBag.ErrorPass = "Sai mật khẩu";
-
-                    return View(model);
-                }
             }
-            return View();
+            return View(model);
         }
     }
 }
